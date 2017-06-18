@@ -29,12 +29,13 @@ public abstract class BaseDao<T extends BasicEntity> {
     }
 
 
-    public void saveOne(T entityClass) {
+    public Long saveOne(T entityClass) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(entityClass);
+        Long result = (Long) session.save(entityClass);
         session.getTransaction().commit();
         session.close();
+        return result;
     }
 
     public void updateOneById(Long id) {
@@ -55,9 +56,9 @@ public abstract class BaseDao<T extends BasicEntity> {
         session.close();
     }
 
-    public List<T> findAll () {
+    public List<T> findAll() {
         Session session = sessionFactory.openSession();
-        return session.createQuery("FROM " + entityClass, entityClass).list();
+        return session.createQuery("FROM " + entityClass.getName(), entityClass).list();
     }
 
 

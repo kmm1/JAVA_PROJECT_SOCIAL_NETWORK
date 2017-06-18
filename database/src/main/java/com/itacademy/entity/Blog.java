@@ -9,7 +9,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "blogs")
-@ToString(callSuper = true, exclude = {"categories"})
+@ToString(callSuper = true, exclude = {"categories", "comments"})
 @NoArgsConstructor
 public class Blog extends BasicEntity{
 
@@ -50,10 +50,9 @@ public class Blog extends BasicEntity{
     @OneToMany(mappedBy = "blog")
     private Set<Comment> comments = new HashSet<>();
 
-    public Blog(String title, String text, Category category, User user) {
+    public Blog(String title, String text) {
         this.title = title;
         this.text = text;
-        this.user = user;
     }
 }
 

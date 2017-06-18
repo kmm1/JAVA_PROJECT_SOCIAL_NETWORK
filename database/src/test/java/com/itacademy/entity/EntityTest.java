@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.itacademy.entity.EnumCategory.BUSINESS;
+import static com.itacademy.entity.QAddress.address;
 import static org.junit.Assert.*;
 
 
@@ -32,6 +33,7 @@ public class EntityTest {
         user.setEmail("test@gmail.com");
         user.setPassword("test");
         user.setRole("user");
+        user.setRegistrationDate(LocalDateTime.now());
         Long id = (Long) session.save(user);
         User savedUser = session.find(User.class, id);
         assertEquals(savedUser.getName(), "Test");
@@ -40,7 +42,7 @@ public class EntityTest {
     }
 
     @Test
-    public void addProfileToUser() {
+    public void testSaveProfileToUser() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         User user = session.get(User.class, 1L);
@@ -52,12 +54,22 @@ public class EntityTest {
         profile.setBirthday(new Birthday(1990, 01, 01));
         profile.setUser(user);
         session.save(profile);
+        assertEquals(profile.getGender().toString(), "FEMALE");
+        assertEquals(profile.getHomeAddress().getCountry(), "USA");
+        assertEquals(profile.getHomeAddress().getCity(), "New York");
+        assertEquals(profile.getWorkAddress().getCountry(), "USA");
+        assertEquals(profile.getMaritalStatus().toString(), "SINGLE");
+        assertEquals(profile.getBirthday().getYearOfBirth(), 1990);
+        assertEquals(profile.getBirthday().getMonthOfBirth(), 01);
+        assertEquals(profile.getBirthday().getMonthOfBirth(), 01);
         session.getTransaction().commit();
         session.close();
     }
 
+
+
     @Test
-    public void addNewCommentToBlogToUser() {
+    public void testSaveNewCommentToBlogToUser() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Comment comment = new Comment();
@@ -73,7 +85,7 @@ public class EntityTest {
     }
 
     @Test
-    public void addCommentToExistingCommentBlogUser() {
+    public void testSaveCommentToExistingCommentBlogUser() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Comment comment = new Comment();
@@ -151,6 +163,34 @@ public class EntityTest {
     }
 
     @Test
+    public void testSaveBlogToCategory() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Category category = new Category();
+        category.setEnumCategory(BUSINESS);
+        Long id = (Long) session.save(category);
+        Blog blog = new Blog();
+        blog.getCategories().add(category);
+        session.save(blog);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Test
+    public void testSaveBlogToUser() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        User user = new User();
+        Long id = (Long) session.save(user);
+        Blog blog = new Blog("test title", "test text");
+        session.save(blog);
+        blog.getUser();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+
+    @Test
     public void testGetEventsFlashmobs() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -168,20 +208,6 @@ public class EntityTest {
         flashmobs.forEach(System.out::println);
         events.forEach(System.out::println);
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Test
-    public void addBlogToCategory() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Category category = new Category();
-        category.setEnumCategory(BUSINESS);
-        Long id = (Long) session.save(category);
-        Blog blog = new Blog();
-        blog.getCategories().add(category);
-        session.save(blog);
         session.getTransaction().commit();
         session.close();
     }

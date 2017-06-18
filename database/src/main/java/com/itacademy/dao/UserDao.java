@@ -17,12 +17,9 @@ public class UserDao extends BaseDao<User> {
     private static SessionFactory sessionFactory =
             new Configuration().configure().buildSessionFactory();
 
-    public List<User> findAll(Session session) {
-        QUser user = new QUser("myUser");
-        JPAQuery<User> query = new JPAQuery<>(session);
-        query.select(user).from(user);
-        return query.fetchResults().getResults();
-    }
+
+
+
 
 }
 

@@ -31,4 +31,9 @@ public class CategoryDao extends BaseDao<Category> {
         return query.fetchResults().getResults();
     }
 
+    /**
+     * Найти названия даты всех блогов в выбранной категории по ее id
+     */
+
+
 }

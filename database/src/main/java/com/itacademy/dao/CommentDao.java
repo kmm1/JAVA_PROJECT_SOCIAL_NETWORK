@@ -24,7 +24,7 @@ public class CommentDao extends BaseDao<Comment> {
      * Написать коментарий к блогу
      */
     public static Long writeCommentToBlog(
-            Long userId, Long blogId, String title, String myComment) {
+            Long userId, Long blogId, String myComment) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Blog blog = session.get(Blog.class, blogId);
@@ -36,15 +36,14 @@ public class CommentDao extends BaseDao<Comment> {
         Long commentId = (Long) session.save(comment);
         transaction.commit();
         session.close();
-        sessionFactory.close();
         return commentId;
     }
 
     /**
      * Написать коментарий к написанному коментарию
      */
-    public static Long writeCommentToExistingComment(Long userId, Long blogId, Long commentParentId,
-                                                     String title, String myComment) {
+    public static Long writeCommentToExistingComment(Long userId, Long blogId,
+                                                     Long commentParentId, String myComment) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Blog blog = session.get(Blog.class, blogId);
@@ -57,7 +56,6 @@ public class CommentDao extends BaseDao<Comment> {
         Long commentId = (Long) session.save(secondComment);
         transaction.commit();
         session.close();
-        sessionFactory.close();
         return commentId;
     }
 
@@ -77,7 +75,6 @@ public class CommentDao extends BaseDao<Comment> {
                 .orderBy(comment.blog.creationDate.asc());
         transaction.commit();
         session.close();
-        sessionFactory.close();
         return query.fetchResults().getResults();
     }
 

@@ -49,15 +49,17 @@ public class BlogDao extends BaseDao<Blog> {
         blog.getCategories().add(category);
         transaction.commit();
         session.close();
-        sessionFactory.close();
     }
+
+
+//TODO java.lang.NullPointerException
 
     /**
      * Достать все блоги у пользователя
      * SELECT b.title FROM blogs AS b LEFT JOIN users AS u ON user_id = u.id
      * WHERE u.id = 2 ORDER BY (b.creation_date);
      */
-    public List<Blog> findAll(Long userId) {
+    public List<Blog> findAllUsersBlogs(Long userId) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         QBlog blog = new QBlog("myBlog");
@@ -69,14 +71,11 @@ public class BlogDao extends BaseDao<Blog> {
                 .orderBy(blog.creationDate.asc());
         transaction.commit();
         session.close();
-        sessionFactory.close();
         return query.fetchResults().getResults();
     }
 
-    /**
-     * Найти названия даты всех блогов в выбранной категории по ее id
-     */
-    public List<Blog> findAllBlogsByCategory(Long categoryId, Session session) {
+    //TODO  Cannot create TypedQuery for query with more than one return using requested result type
+    public List<Blog> findAllBlogsByCategory(Session session, Long categoryId) {
         return session
                 .createQuery("select b.title, b.creationDate " +
                         "from Blog b join b.categories c " +
@@ -84,5 +83,6 @@ public class BlogDao extends BaseDao<Blog> {
                 .setParameter("categoryId", categoryId)
                 .getResultList();
     }
+
 
 }

@@ -19,11 +19,6 @@ public class FlashmobDao extends BaseDao<Flashmob> {
     private static SessionFactory sessionFactory =
             new Configuration().configure().buildSessionFactory();
 
-    public List<Flashmob> findAllFlashmobs(Session session) {
-        return session
-                .createQuery("from Flashmob", Flashmob.class)
-                .getResultList();
-    }
 
     public List<Event> findAllEvents(Session session) {
         return session

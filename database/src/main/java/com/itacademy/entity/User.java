@@ -48,13 +48,6 @@ public class User extends BasicEntity {
 //    @OneToMany(mappedBy = "user")
 //    private Set<Blog> blogs = new HashSet<Blog>();
 
-    public User(String name, String email, String password, String role, Profile profile) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.profile = profile;
-    }
 
     public User(String name, String email, String password, String role) {
         this.name = name;

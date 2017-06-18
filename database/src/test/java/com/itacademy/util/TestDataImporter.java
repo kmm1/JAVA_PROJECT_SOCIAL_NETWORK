@@ -88,17 +88,13 @@ public final class TestDataImporter {
     }
 
     //TODO kak prinyat na vxod category
-//    private Blog saveBlogToCategoryUser(Session session, String title, String text,
-//                                        Category categories, User user) {
-//        Blog blog = new Blog(title, text, categories, user );
+//    private Blog saveBlogToCategoryUser(Session session, String title, String text, User user) {
+//        Blog blog = new Blog(title, text, user );
 //        session.save(blog);
 //        return blog;
 //        INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 1', 'Vova Blog content 1', 2);
 //        INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 2', 'Vova Blog content 2', 2);
 //        INSERT INTO blogs (title, text, user_id) VALUES ('VerTravele1', 'Ver Blog content 1', 3);
-//        INSERT INTO blogs_categories (blog_id, category_id) VALUES (1, 2);
-//        INSERT INTO blogs_categories (blog_id, category_id) VALUES (2, 2);
-//        INSERT INTO blogs_categories (blog_id, category_id) VALUES (3, 3);
 //    }
 
 

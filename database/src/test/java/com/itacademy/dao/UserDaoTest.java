@@ -75,13 +75,9 @@ public class UserDaoTest {
         User user2 = new User("anotherName", "testName@gmail.com", "test", "user");
         userDao.saveOne(user);
         userDao.saveOne(user2);
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<User> results = userDao.findAll(session);
+        List<User> results = userDao.findAll();
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(results);
-        session.getTransaction().commit();
-        session.close();
     }
 
 

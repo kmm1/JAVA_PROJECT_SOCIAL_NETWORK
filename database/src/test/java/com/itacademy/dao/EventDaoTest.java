@@ -38,7 +38,7 @@ public class EventDaoTest {
         flashmobDao.saveOne(flashmob);
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<Flashmob> resultFl = flashmobDao.findAllFlashmobs(session);
+        List<Flashmob> resultFl = flashmobDao.findAll();
         List<Event> resultEv = flashmobDao.findAllEvents(session);
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(resultFl);
