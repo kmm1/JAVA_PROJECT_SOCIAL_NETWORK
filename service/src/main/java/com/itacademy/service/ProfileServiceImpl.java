@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ProfileServiceImpl implements ProfileService {
@@ -25,9 +27,20 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public void update(Profile profile) {
+         profileDao.update(profile);
+    }
+
+
+    @Override
     public Long save(Profile profile) {
         return profileDao.save(profile);
 
+    }
+
+    @Override
+    public List<Profile> findProfileByUserId(Long userId) {
+        return profileDao.findProfileByUserId(userId);
     }
 
 }

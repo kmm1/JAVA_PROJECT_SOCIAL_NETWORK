@@ -4,15 +4,19 @@ import com.itacademy.entity.User;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
 
-@SessionAttributes(names = {"userName", "userId"})
+@SessionAttributes( names = {"userName", "userId"})
 @Controller
 public class UserController {
+
 
     private final UserService userService;
 
@@ -26,21 +30,25 @@ public class UserController {
         return "login-form";
     }
 
-
     @PostMapping(path = "/enter")
     public String findUserByNamePassword(@RequestParam String name,
                                          @RequestParam String password, ModelMap model) {
-
+        if (name.equals("") || password.equals("")) {
+           return "login-form";
+        }
         List<User> user = userService.findUserByNamePassword(name, password);
-        model.put("userName", user.get(0).getName());
-        model.put("userId", user.get(0).getId());
         if (user.isEmpty()) {
             return "login-form";
         } else if (user.get(0).getRole().equals("user")) {
+            model.put("userName", user.get(0).getName());
+            model.put("userId", user.get(0).getId());
             return "main-page-user";
-        } else return "main-page-admin";
+        } else if (user.get(0).getRole().equals("admin")) {
+            model.put("userName", user.get(0).getName());
+            model.put("userId", user.get(0).getId());
+            return "main-page-admin";
+        } else return "login-form";
     }
-
 
     @GetMapping(path = "/registration")
     public String showRegistrationForm() {
@@ -55,8 +63,8 @@ public class UserController {
     }
 
     @GetMapping(path = "/logout")
-    public String logout() {
+    public String logout(SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
         return "login-form";
     }
-
 }

@@ -24,6 +24,8 @@ public class QProfile extends EntityPathBase<Profile> {
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
+    public final StringPath aboutMe = createString("aboutMe");
+
     public final QBirthday birthday;
 
     public final EnumPath<EnumGender> gender = createEnum("gender", EnumGender.class);

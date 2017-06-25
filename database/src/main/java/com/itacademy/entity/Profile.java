@@ -11,6 +11,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Profile extends BaseEntity {
 
+    @Column(name = "about_me")
+    @Getter
+    @Setter
+    private String aboutMe;
+
+
     @Column(name = "gender")
     @Getter
     @Setter
@@ -35,6 +41,7 @@ public class Profile extends BaseEntity {
     })
     private Address workAddress;
 
+
     @Column(name = "marital_status")
     @Getter
     @Setter
@@ -56,4 +63,9 @@ public class Profile extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Profile(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
 }

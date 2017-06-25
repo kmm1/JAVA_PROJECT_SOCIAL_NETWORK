@@ -96,6 +96,7 @@ CREATE TABLE friends (
 
 CREATE TABLE profiles (
   id             INT AUTO_INCREMENT,
+  about_me       TEXT,
   gender         VARCHAR(50),
   work_country   VARCHAR(50),
   work_city      VARCHAR(50),
