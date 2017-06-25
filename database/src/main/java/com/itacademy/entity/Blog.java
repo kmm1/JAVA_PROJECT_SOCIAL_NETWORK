@@ -11,7 +11,7 @@ import java.util.*;
 @Table(name = "blogs")
 @ToString(callSuper = true, exclude = {"categories", "comments"})
 @NoArgsConstructor
-public class Blog extends BasicEntity{
+public class Blog extends BaseEntity {
 
     @Column(name = "title")
     @Getter
@@ -38,7 +38,6 @@ public class Blog extends BasicEntity{
     private Set<Category> categories = new HashSet<>();
 
 
-
     @Getter
     @Setter
     @ManyToOne
@@ -53,6 +52,12 @@ public class Blog extends BasicEntity{
     public Blog(String title, String text) {
         this.title = title;
         this.text = text;
+    }
+
+    public Blog(String title, String text, User user) {
+        this.title = title;
+        this.text = text;
+        this.user = user;
     }
 }
 

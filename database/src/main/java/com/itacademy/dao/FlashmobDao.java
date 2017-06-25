@@ -1,29 +1,13 @@
 package com.itacademy.dao;
 
-import com.itacademy.entity.*;
-import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.itacademy.dao.common.BaseDao;
+import com.itacademy.entity.Event;
+import com.itacademy.entity.Flashmob;
 
-import java.util.*;
+import java.util.List;
 
-/**
- * Created by Tom on 16.06.2017.
- */
-public class FlashmobDao extends BaseDao<Flashmob> {
-    public FlashmobDao() {
-        super(Flashmob.class);
+
+public interface FlashmobDao extends BaseDao<Flashmob> {
+     List<Event> findAllEvents();
+
     }
-
-    private static SessionFactory sessionFactory =
-            new Configuration().configure().buildSessionFactory();
-
-
-    public List<Event> findAllEvents(Session session) {
-        return session
-                .createQuery("from Event ", Event.class)
-                .getResultList();
-    }
-
-}

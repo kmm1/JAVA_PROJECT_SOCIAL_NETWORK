@@ -19,22 +19,22 @@ public class Main {
 //        Session session = sessionFactory.openSession();
 //        Transaction transaction = session.beginTransaction();
 
-//BlogDao.addBlogToCategory(1L, 3L);
-//BlogDao.addNewBlogToExistingCategory(1L, 1L, "kkk", "cont");
+//BlogDaoImpl.addBlogToCategory(1L, 3L);
+//BlogDaoImpl.addNewBlogToExistingCategory(1L, 1L, "kkk", "cont");
 //        findAllFriendsByUserId
-//            FriendDao friendDao = new FriendDao();
+//            FriendDaoImpl friendDao = new FriendDaoImpl();
 //            List<Friend> results = friendDao.findAllFriendsByUserId(session, "vova", "fri");
 //            System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
 //            System.out.println(results);
 //            session.getTransaction().commit();
 //            session.close();
-//FriendDao.sendFriendRequest(session, 3L, 5L);
+//FriendDaoImpl.sendFriendRequest(session, 3L, 5L);
 //        session.getTransaction().commit();
 //            session.close();
 
-//        CategoryDao categoryDao = new CategoryDao();
+//        CategoryDaoImpl categoryDao = new CategoryDaoImpl();
 //        Category category = categoryDao.findOneById(1L);
-//        BlogDao blogDao = new BlogDao();
+//        BlogDaoImpl blogDao = new BlogDaoImpl();
 //        Blog blog = blogDao.findOneById(1L);
 //        category.getBlogs().add(blog);
 //        blog.getCategories().add(category);
@@ -45,7 +45,7 @@ public class Main {
 //        Category category = new Category();
 //        category.setEnumCategory(BUSINESS);
 //        Long id = (Long) session.save(category);
-//        BlogDao blogDao = new BlogDao();
+//        BlogDaoImpl blogDao = new BlogDaoImpl();
 //        Blog blog = blogDao.findOneById(1L);
 //        blog.getCategories().add(category);
 //        session.save(blog);
@@ -53,7 +53,7 @@ public class Main {
 //        session.close();
 
         // ChatRoom
-//            MessageDao messageDao = new MessageDao();
+//            MessageDaoImpl messageDao = new MessageDaoImpl();
 //            List<Message> results = messageDao.chatByTwoUsers(session, 2L, 4L);
 //            System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
 //            System.out.println(results);
@@ -77,17 +77,17 @@ public class Main {
 //        session.close();
 
 
-//   CategoryDao.addBlogToCategory(session, 1L, 5L);
+//   CategoryDaoImpl.addBlogToCategory(session, 1L, 5L);
 //        session.getTransaction().commit();
 //        session.close();
 
 //
-//        FriendDao.acceptFriendRequest(session, 9L);
+//        FriendDaoImpl.acceptFriendRequest(session, 9L);
 //        session.getTransaction().commit();
 //        session.close();
 
         //     naiti vsex user
-//            UserDao userDao = new UserDao();
+//            UserDaoImpl userDao = new UserDaoImpl();
 //            List<User> results = userDao.findAll(session);
 //            System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
 //            System.out.println(results);

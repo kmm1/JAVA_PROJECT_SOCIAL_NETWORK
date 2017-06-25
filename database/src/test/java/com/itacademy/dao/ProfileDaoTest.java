@@ -1,35 +1,33 @@
 package com.itacademy.dao;
 
 import com.itacademy.entity.*;
-import com.itacademy.util.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.*;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+public class ProfileDaoTest extends BaseTest {
 
-
-public class ProfileDaoTest {
-
-    private SessionFactory sessionFactory;
-    ProfileDao profileDao = new ProfileDao();
-    UserDao userDao = new UserDao();
-
-
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private ProfileDao profileDao;
 
     @Before
-    public void initDb() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
-        TestDataImporter.getInstance().importTestData(sessionFactory);
+    public void init() {
+        // ....
     }
 
     @Test
     public void saveProfileToUser() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
+        User user = new User();
+        Long userId = userDao.save(user);
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);
         profile.setHomeAddress(new Address("Belarus", "Minsk"));
@@ -37,62 +35,47 @@ public class ProfileDaoTest {
         profile.setMaritalStatus(EnumMaritalStatus.SINGLE);
         profile.setBirthday(new Birthday(1976, 07, 12));
         profile.setUser(user);
-        profileDao.saveOne(profile);
+        Long profileId = profileDao.save(profile);
+        assertEquals(profile.getId(), profileId);
         assertEquals(profile.getGender().toString(), "MALE");
-        profileDao.deleteOneById(1L);
-        userDao.deleteOneById(1L);
+        assertEquals(profile.getHomeAddress(), (new Address("Belarus", "Minsk")));
+        assertEquals(profile.getWorkAddress(), (new Address("Belarus", "Minsk")));
+        assertEquals(profile.getMaritalStatus().toString(), "SINGLE");
+        assertEquals(profile.getBirthday(), (new Birthday(1976, 07, 12)));
+        assertEquals(profile.getUser().getId(), userId);
     }
-
 
     @Test
     public void testGetProfileById() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
         Profile profile = new Profile();
-        profile.setGender(EnumGender.MALE);
-        profile.setUser(user);
-        profileDao.saveOne(profile);
-        Profile profile1 = profileDao.findOneById(1L);
+        Long profileId = profileDao.save(profile);
+        Profile profile1 = profileDao.findById(profileId);
         assertThat(profile1, notNullValue());
-        profileDao.deleteOneById(1L);
-        userDao.deleteOneById(1L);
     }
 
-
     @Test
-    public void updateOneById() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
+    public void testUpdateProfileById() {
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);
-        profile.setUser(user);
-        profileDao.saveOne(profile);
+        profileDao.save(profile);
         assertEquals(profile.getGender().toString(), "MALE");
         profile.setGender(EnumGender.FEMALE);
-        profileDao.updateOneById(1L);
+        profileDao.update(profile);
         assertEquals(profile.getGender().toString(), "FEMALE");
-        profileDao.deleteOneById(1L);
-        userDao.deleteOneById(1L);
     }
 
     @Test
     public void deleteOneById() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);
-        profile.setUser(user);
-        profileDao.saveOne(profile);
-        profileDao.deleteOneById(1L);
-        Profile profile1 = profileDao.findOneById(1L);
+        Long profileId = profileDao.save(profile);
+        profileDao.delete(profile);
+        Profile profile1 = profileDao.findById(profileId);
         assertThat(profile1, nullValue());
-        userDao.deleteOneById(1L);
     }
 
     @After
     public void finish() {
-        sessionFactory.close();
+        // ...
     }
-
 }
-

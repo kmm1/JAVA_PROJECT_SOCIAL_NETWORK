@@ -2,17 +2,13 @@ package com.itacademy.dao;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
-import com.itacademy.entity.Friend;
 import com.itacademy.entity.User;
-import com.itacademy.util.TestDataImporter;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -20,59 +16,67 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 
-public class CommentDaoTest {
+public class CommentDaoTest extends BaseTest {
+    @Autowired
+    private CommentDao commentDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private BlogDao blogDao;
 
-    private SessionFactory sessionFactory;
-    private UserDao userDao = new UserDao();
-    private BlogDao blogDao = new BlogDao();
-    private CommentDao commentDao = new CommentDao();
-    Comment comment = new Comment();
 
     @Before
-    public void initDb() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
-        TestDataImporter.getInstance().importTestData(sessionFactory);
+    public void init() {
+        // ....
     }
 
     @Test
-    public void testSaveOne() {
+    public void testSaveComment() {
+        User user = new User();
+        userDao.save(user);
+        Blog blog = new Blog();
+        blogDao.save(blog);
+        Comment comment = new Comment();
         comment.setComment("My first Comment");
-        commentDao.saveOne(comment);
-        assertThat(comment, notNullValue());
-        System.out.println(comment);
-        commentDao.deleteOneById(1L);
+        comment.setCreationDate(LocalDateTime.now());
+        comment.setUser(user);
+        comment.setBlog(blog);
+        commentDao.save(comment);
+        assertThat(comment.getCreationDate(), notNullValue());
+        assertEquals(comment.getBlog(), blog);
+        assertEquals(comment.getUser(), user);
+        assertEquals(comment.getComment(), "My first Comment");
     }
 
     @Test
-    public void testGetOne() {
-        comment.setComment("My first Comment");
-        commentDao.saveOne(comment);
-        Comment comment1 = commentDao.findOneById(1L);
+    public void testGetCommentById() {
+        Comment comment = new Comment();
+        Long commentId = commentDao.save(comment);
+        Comment comment1 = commentDao.findById(commentId);
         assertThat(comment1, notNullValue());
-        System.out.println(comment1);
-        commentDao.deleteOneById(1L);
     }
 
     @Test
     public void testDeleteOne() {
-        comment.setComment("My first Comment");
-        commentDao.saveOne(comment);
-        commentDao.deleteOneById(1L);
-        Comment comment1 = commentDao.findOneById(1L);
+        Comment comment = new Comment();
+        Long commentId = commentDao.save(comment);
+        assertThat(comment, notNullValue());
+        commentDao.delete(comment);
+        Comment comment1 = commentDao.findById(commentId);
         assertThat(comment1, nullValue());
     }
 
     @Test
     public void testWriteCommentToBlog() {
         User user = new User();
-        Long userId = (Long) userDao.saveOne(user);
+        Long userId = (Long) userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
-        Long blogId = (Long) blogDao.saveOne(blog);
+        Long blogId = (Long) blogDao.save(blog);
         Comment comment2 = new Comment();
         Long commentId = commentDao.writeCommentToBlog(userId, blogId,
                 "test");
-        comment = commentDao.findOneById(commentId);
+        Comment comment = commentDao.findById(commentId);
         assertEquals(comment.getComment(), "test");
     }
 
@@ -80,24 +84,23 @@ public class CommentDaoTest {
     @Test
     public void testWriteCommentToExistingComment() {
         User user = new User();
-        Long userId = (Long) userDao.saveOne(user);
+        Long userId = userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
-        Long blogId = (Long) blogDao.saveOne(blog);
+        Long blogId = blogDao.save(blog);
         Comment comment1 = new Comment();
         comment1.setBlog(blog);
         comment1.setUser(user);
-        Long commentParentId = (Long) commentDao.saveOne(comment1);
-        Comment comment2 = new Comment();
-        Long commentId = commentDao.writeCommentToExistingComment(userId, blogId, commentParentId,
-                "test");
-        comment = commentDao.findOneById(commentId);
+        Long commentParentId = commentDao.save(comment1);
+        Long commentId = commentDao.writeCommentToExistingComment(
+                userId, blogId, commentParentId, "test");
+        Comment comment = commentDao.findById(commentId);
         assertEquals(comment.getComment(), "test");
     }
 
 
     @After
     public void finish() {
-        sessionFactory.close();
+        // ...
     }
 }

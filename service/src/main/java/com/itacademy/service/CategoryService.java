@@ -1,7 +1,7 @@
 package com.itacademy.service;
 
 /**
- * Created by Tom on 18.06.2017.
+ * Created by Tom on 24.06.2017.
  */
-public class CategoryService {
+public interface CategoryService {
 }

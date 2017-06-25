@@ -22,7 +22,7 @@ public class QProfile extends EntityPathBase<Profile> {
 
     public static final QProfile profile = new QProfile("profile");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     public final QBirthday birthday;
 

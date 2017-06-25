@@ -9,7 +9,7 @@ import javax.persistence.*;
 @ToString(callSuper = true, exclude = {"user"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class Profile extends BasicEntity {
+public class Profile extends BaseEntity {
 
     @Column(name = "gender")
     @Getter

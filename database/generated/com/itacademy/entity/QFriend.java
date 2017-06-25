@@ -22,7 +22,7 @@ public class QFriend extends EntityPathBase<Friend> {
 
     public static final QFriend friend = new QFriend("friend");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

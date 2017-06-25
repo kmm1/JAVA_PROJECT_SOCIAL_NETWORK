@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "categories")
 @ToString(callSuper = true, exclude = {"blogs"})
 @NoArgsConstructor
-public class Category extends BasicEntity {
+public class Category extends BaseEntity {
 
     @Column(name = "name")
     @Getter

@@ -19,7 +19,7 @@ public class QEvent extends EntityPathBase<Event> {
 
     public static final QEvent event = new QEvent("event");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

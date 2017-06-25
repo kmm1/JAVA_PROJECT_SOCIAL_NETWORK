@@ -22,7 +22,7 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     public final StringPath email = createString("email");
 

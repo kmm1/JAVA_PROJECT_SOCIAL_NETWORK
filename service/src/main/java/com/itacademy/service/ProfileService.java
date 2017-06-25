@@ -1,7 +1,12 @@
 package com.itacademy.service;
 
-/**
- * Created by Tom on 18.06.2017.
- */
-public class ProfileService {
+import com.itacademy.entity.Profile;
+import com.itacademy.entity.User;
+
+
+public interface ProfileService {
+
+    Profile findById(Long id);
+
+    Long save(Profile profile);
 }

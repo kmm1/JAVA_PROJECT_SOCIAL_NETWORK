@@ -9,7 +9,7 @@ import java.time.*;
 @Table(name = "messages")
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class Message extends BasicEntity {
+public class Message extends BaseEntity {
 
     @Column(name = "text")
     @Getter

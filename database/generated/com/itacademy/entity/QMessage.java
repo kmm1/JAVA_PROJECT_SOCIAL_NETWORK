@@ -22,7 +22,7 @@ public class QMessage extends EntityPathBase<Message> {
 
     public static final QMessage message = new QMessage("message");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     public final DateTimePath<java.time.LocalDateTime> creationDate = createDateTime("creationDate", java.time.LocalDateTime.class);
 

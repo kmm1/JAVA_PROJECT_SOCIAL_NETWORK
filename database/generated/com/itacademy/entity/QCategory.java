@@ -20,7 +20,7 @@ public class QCategory extends EntityPathBase<Category> {
 
     public static final QCategory category = new QCategory("category");
 
-    public final QBasicEntity _super = new QBasicEntity(this);
+    public final QBaseEntity _super = new QBaseEntity(this);
 
     public final SetPath<Blog, QBlog> blogs = this.<Blog, QBlog>createSet("blogs", Blog.class, QBlog.class, PathInits.DIRECT2);
 

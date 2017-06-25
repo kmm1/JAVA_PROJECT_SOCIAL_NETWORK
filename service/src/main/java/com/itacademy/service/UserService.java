@@ -1,16 +1,17 @@
 package com.itacademy.service;
 
-public class UserService {
+import com.itacademy.entity.User;
 
-    public String getUserById() {
-         return "kate";
+import java.util.List;
 
-        // return new UserDao().getUserById();
-    }
+
+public interface UserService {
+
+    User findById(Long id);
+
+    Long save(User user);
+
+    List<User> findUserByNamePassword(String name, String password);
+
 }
 
-//public class UserDao {
-//    public String getUserById() {
-//        return "kate";
-//    }
-//}

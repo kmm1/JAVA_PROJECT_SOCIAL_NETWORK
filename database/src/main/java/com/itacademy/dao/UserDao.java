@@ -1,26 +1,14 @@
 package com.itacademy.dao;
 
-import com.itacademy.entity.*;
-import com.querydsl.jpa.impl.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.itacademy.dao.common.BaseDao;
+import com.itacademy.entity.User;
 
-import java.util.*;
+import java.util.List;
 
 
-public class UserDao extends BaseDao<User> {
-    public UserDao() {
-        super(User.class);
-    }
+public interface UserDao extends BaseDao<User> {
 
-    private static SessionFactory sessionFactory =
-            new Configuration().configure().buildSessionFactory();
-
-
-
+    List<User> findUserByNamePassword(String name, String password);
 
 
 }
-
-

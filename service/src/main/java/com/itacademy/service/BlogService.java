@@ -1,7 +1,10 @@
 package com.itacademy.service;
 
-/**
- * Created by Tom on 18.06.2017.
- */
-public class BlogService {
+
+import com.itacademy.entity.Blog;
+
+public interface BlogService {
+    Blog findById(Long id);
+
+    Long save(Blog blog);
 }

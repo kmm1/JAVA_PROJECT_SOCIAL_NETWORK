@@ -1,89 +1,89 @@
 package com.itacademy.dao;
 
-import com.itacademy.entity.*;
-import com.itacademy.util.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.*;
-import org.junit.*;
+import com.itacademy.entity.User;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import static java.util.stream.Collectors.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
-public class UserDaoTest {
+public class UserDaoTest extends BaseTest {
 
-    private SessionFactory sessionFactory;
-    UserDao userDao = new UserDao();
-
+    @Autowired
+    private UserDao userDao;
 
     @Before
-    public void initDb() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
-        TestDataImporter.getInstance().importTestData(sessionFactory);
+    public void init() {
+        // ....
     }
 
     @Test
-    public void saveOneUser() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
-        assertEquals(user.getName(), "testName");
-        userDao.deleteOneById(1L);
+    public void testSaveUser() {
+        User user = new User();
+        user.setName("testName");
+        user.setEmail("testName@gmail.com");
+        user.setPassword("test");
+        user.setRegistrationDate(LocalDateTime.now());
+        user.setRole("user");
+        Long userId = userDao.save(user);
+        User user1 = userDao.findById(userId);
+        assertEquals(user1.getName(), "testName");
+        assertEquals(user1.getEmail(), "testName@gmail.com");
+        assertEquals(user1.getPassword(), "test");
+        assertThat(user1.getRegistrationDate(), notNullValue());
+        assertEquals(user1.getRole(), "user");
     }
-
 
     @Test
     public void testGetUserById() {
-        User user = new User("testName", "testName@gmail.com",
-                "test", "user");
-        userDao.saveOne(user);
-        User user1 = userDao.findOneById(1L);
+        User user = new User();
+        Long userId = userDao.save(user);
+        User user1 = userDao.findById(userId);
         assertThat(user1, notNullValue());
-        System.out.println(user1);
-        userDao.deleteOneById(1L);
     }
 
-
     @Test
-    public void updateOneById() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
-        User user1 = userDao.findOneById(1L);
+    public void testUpdateUser() {
+        User user = new User();
+        user.setName("firstName");
+        Long userId = userDao.save(user);
+        assertEquals(user.getName(), "firstName");
+        User user1 = userDao.findById(userId);
         user1.setName("anotherName");
-        userDao.updateOneById(1L);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(user);
+        userDao.update(user1);
         assertEquals(user1.getName(), "anotherName");
-        userDao.deleteOneById(1L);
     }
 
     @Test
-    public void deleteOneById() {
-        User user = new User("testName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
-        userDao.deleteOneById(1L);
-        User user1 = userDao.findOneById(1L);
+    public void deleteUser() {
+        User user = new User();
+        Long userId = userDao.save(user);
+        userDao.delete(user);
+        User user1 = userDao.findById(userId);
         assertThat(user1, nullValue());
     }
 
     @Test
     public void testFindAll() {
-        User user = new User("oneName", "testName@gmail.com", "test", "user");
-        User user2 = new User("anotherName", "testName@gmail.com", "test", "user");
-        userDao.saveOne(user);
-        userDao.saveOne(user2);
+        User user1 = new User();
+        User user2 = new User();
+        userDao.save(user1);
+        userDao.save(user2);
         List<User> results = userDao.findAll();
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(results);
+        assertEquals(results.size(), 2);
     }
-
 
     @After
     public void finish() {
-        sessionFactory.close();
+        // ...
     }
 }
 

@@ -1,58 +1,56 @@
 package com.itacademy.dao;
 
-import com.itacademy.entity.*;
-import com.itacademy.util.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.*;
-import org.junit.*;
+import com.itacademy.entity.Category;
+import com.itacademy.entity.EnumCategory;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
-/**
- * Created by Tom on 14.06.2017.
- */
-public class CategoryDaoTest {
+public class CategoryDaoTest extends BaseTest {
 
-    private SessionFactory sessionFactory;
-    CategoryDao categoryDao = new CategoryDao();
+
+    @Autowired
+    private CategoryDao categoryDao;
 
 
     @Before
-    public void initDb() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
-        TestDataImporter.getInstance().importTestData(sessionFactory);
+    public void init() {
+        // ....
     }
 
     @Test
     public void saveCategory() {
         Category category = new Category();
         category.setEnumCategory(EnumCategory.DIFFERENT);
-        categoryDao.saveOne(category);
+        categoryDao.save(category);
         assertEquals(category.getEnumCategory().toString(), "DIFFERENT");
-        categoryDao.deleteOneById(1L);
     }
 
     @Test
     public void getCategoryById() {
         Category category = new Category();
         category.setEnumCategory(EnumCategory.DIFFERENT);
-        categoryDao.saveOne(category);
-        Category category1 = categoryDao.findOneById(1L);
+        Long categoryId = categoryDao.save(category);
+        Category category1 = categoryDao.findById(categoryId);
         assertThat(category1, notNullValue());
-        categoryDao.deleteOneById(1L);
+        categoryDao.delete(category1);
     }
 
     @Test
     public void deleteCategoryById() {
         Category category = new Category();
         category.setEnumCategory(EnumCategory.DIFFERENT);
-        categoryDao.saveOne(category);
-        categoryDao.deleteOneById(1L);
-        Category category1 = categoryDao.findOneById(1L);
+        Long categoryId = categoryDao.save(category);
+        categoryDao.delete(category);
+        Category category1 = categoryDao.findById(categoryId);
         assertThat(category1, nullValue());
     }
 
@@ -60,21 +58,16 @@ public class CategoryDaoTest {
     public void testFindAll() {
         Category category1 = new Category();
         Category category2 = new Category();
-        categoryDao.saveOne(category1);
-        categoryDao.saveOne(category2);
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Category> results = categoryDao.findAllCategories(session);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(results);
-        session.getTransaction().commit();
-        session.close();
+        categoryDao.save(category1);
+        categoryDao.save(category2);
+        List<Category> results = categoryDao.findAll();
+        assertEquals(results.size(), 2);
     }
 
 
     @After
     public void finish() {
-        sessionFactory.close();
+        // ...
     }
 }
 

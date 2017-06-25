@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @ToString(callSuper = true)
 public class Birthday {
 

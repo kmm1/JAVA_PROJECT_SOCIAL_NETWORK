@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public abstract class Event extends BasicEntity {
+public abstract class Event extends BaseEntity {
 
     @Column(name = "name")
     @Getter

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Friend extends BasicEntity {
+public class Friend extends BaseEntity {
 
     @Column(name = "status")
     @Getter
@@ -27,4 +27,10 @@ public class Friend extends BasicEntity {
     @ManyToOne
     @JoinColumn(name = "friend_two")
     private User userReceiver;
+
+    public Friend(User userSender, User userReceiver, String status) {
+        this.userSender = userSender;
+        this.userReceiver = userReceiver;
+        this.status = status;
+    }
 }

@@ -10,10 +10,10 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QBasicEntity is a Querydsl query type for BasicEntity
+ * QBasicEntity is a Querydsl query type for BaseEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QBasicEntity extends EntityPathBase<BasicEntity> {
+public class QBasicEntity extends EntityPathBase<BaseEntity> {
 
     private static final long serialVersionUID = 836135168L;
 
@@ -22,15 +22,15 @@ public class QBasicEntity extends EntityPathBase<BasicEntity> {
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public QBasicEntity(String variable) {
-        super(BasicEntity.class, forVariable(variable));
+        super(BaseEntity.class, forVariable(variable));
     }
 
-    public QBasicEntity(Path<? extends BasicEntity> path) {
+    public QBasicEntity(Path<? extends BaseEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QBasicEntity(PathMetadata metadata) {
-        super(BasicEntity.class, metadata);
+        super(BaseEntity.class, metadata);
     }
 
 }

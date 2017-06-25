@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 @ToString(callSuper = true, exclude = {"blogs"})
 @NoArgsConstructor
-public class Comment extends BasicEntity {
+public class Comment extends BaseEntity {
 
     @Column(name = "comment")
     @Getter

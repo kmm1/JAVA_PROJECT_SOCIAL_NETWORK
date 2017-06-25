@@ -8,8 +8,8 @@ import java.time.*;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@ToString(callSuper = true ,exclude = {"profile"/*, "blogs"*/})
-public class User extends BasicEntity {
+@ToString(callSuper = true, exclude = {"profile"/*, "blogs"*/})
+public class User extends BaseEntity {
 
     @Column(name = "name")
     @Getter
@@ -26,9 +26,9 @@ public class User extends BasicEntity {
     @Setter
     private String password;
 
-    @Column(name = "role")
+    @Column(name = "role",  columnDefinition = "user")
     @Getter
-    @Setter
+    @Setter ()
     private String role;
 
     @Column(name = "registration_date")
@@ -41,19 +41,5 @@ public class User extends BasicEntity {
     @Getter
     @Setter
     private Profile profile;
-
-// TODO mojet ybrat????
-//    @Getter
-//    @Setter
-//    @OneToMany(mappedBy = "user")
-//    private Set<Blog> blogs = new HashSet<Blog>();
-
-
-    public User(String name, String email, String password, String role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
 }
 
