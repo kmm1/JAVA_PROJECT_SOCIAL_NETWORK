@@ -2,18 +2,20 @@ package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDao;
 import com.itacademy.entity.Friend;
-import org.hibernate.Session;
 
 import java.util.List;
 
 
 public interface FriendDao extends BaseDao<Friend> {
 
-    List<Friend> findAllFriendsByUserName(String userName, String friendsStatus);
+    List<Friend> findAllFriendsByUserName(String userName);
 
-    Friend sendFriendRequest(Long senderId, Long reciverId);
+    List<Friend> findAllMyFriendRequestsSent(String userName);
+
+    List<Friend> findAllMyFriendRequestsResived(String userName);
 
     Friend acceptFriendRequest(Long friendId);
 
+    Friend sendFriendRequest(Long senderId, Long reciverId);
 
 }

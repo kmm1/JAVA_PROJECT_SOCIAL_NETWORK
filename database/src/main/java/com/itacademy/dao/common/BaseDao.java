@@ -10,6 +10,8 @@ public interface BaseDao<T extends BaseEntity> {
 
     T findById(Long id);
 
+    T findByName(String name);
+
     void update(T entity);
 
     void delete(T entity);

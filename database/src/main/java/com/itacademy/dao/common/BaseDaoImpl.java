@@ -44,6 +44,11 @@ public class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
         return sessionFactory.getCurrentSession().get(modelClass, id);
     }
 
+    @Override
+    public T findByName(String name) {
+        return sessionFactory.getCurrentSession().get(modelClass, name);
+    }
+
 
     @Override
     public List<T> findAll() {

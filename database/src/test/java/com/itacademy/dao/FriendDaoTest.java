@@ -85,8 +85,19 @@ public class FriendDaoTest extends BaseTest {
         Friend friend2 = new Friend("fri", user1, user3);
         friendDao.save(friend1);
         friendDao.save(friend2);
-        List<Friend> results = friendDao.findAllFriendsByUserName("senderName", "fri");
+        List<Friend> results = friendDao.findAllFriendsByUserName("senderName");
         assertEquals(results.size(), 2);
+    }
+
+    @Test
+    public void TestSendFriendRequest() {
+        User user1 = new User();
+        user1.setName("senderName");
+        User user2 = new User();
+        user1.setName("reciverName");
+        Long userId1 = userDao.save(user1);
+        Long userId2 = userDao.save(user2);
+       // friendDao.sendFriendRequest(userId1, userId2);
     }
 
 

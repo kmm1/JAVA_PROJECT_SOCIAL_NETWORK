@@ -8,7 +8,7 @@ import java.time.*;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = {"profile"/*, "blogs"*/})
+@ToString(callSuper = true, exclude = {"profile"})
 public class User extends BaseEntity {
 
     @Column(name = "name")

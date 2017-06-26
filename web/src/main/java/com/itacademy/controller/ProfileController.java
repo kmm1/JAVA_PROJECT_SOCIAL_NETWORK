@@ -59,20 +59,18 @@ public class ProfileController {
         return "profile";
     }
 
-//    @PostMapping(path = "/updateProfile")
-//    public String profileUpdate(Profile profile, Model model, HttpServletRequest req) {
-//        Long userId = (Long) req.getSession().getAttribute("userId");
-//        String userName = (String) req.getSession().getAttribute("userName");
-//        List<Profile> profile = profileService.findProfileByUserId(userId);
-//      //  profileService.update(profile.get(0));
-//        System.out.println(profile.get(0));
-//        System.out.println(profile);
-//
-////        List<Profile> profile2 = profileService.findProfileByUserId(userId);
-////        model.addAttribute("profile", profile2);
-////        model.addAttribute("userName", userName);
-//        return "profile-form-update";
-//    }
+    //TODO
+    @PostMapping(path = "/updateProfile")
+    public String updateProfile(Model model, HttpServletRequest req) {
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        String userName = (String) req.getSession().getAttribute("userName");
+        List<Profile> profile = profileService.findProfileByUserId(userId);
+        model.addAttribute("profile", profile);
+        model.addAttribute("userName", userName);
+        if (profile.isEmpty()) {
+            return "profile-form-save";
+        } else return "profile";
+    }
 
 
 }

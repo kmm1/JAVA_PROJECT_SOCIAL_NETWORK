@@ -5,7 +5,6 @@ import com.itacademy.entity.Friend;
 import com.itacademy.entity.QFriend;
 import com.itacademy.entity.User;
 import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,13 +20,13 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
      * ORDER BY (u.name);
      */
     @Override
-    public List<Friend> findAllFriendsByUserName(String userName, String friendsStatus) {
+    public List<Friend> findAllFriendsByUserName(String userName) {
         QFriend friend = new QFriend("myFriend");
         JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(friend.userReceiver.name, friend.status)
+        query.select(friend.userReceiver.id, friend.userReceiver.name)
                 .from(friend)
                 .join(friend.userReceiver)
-                .where(friend.status.eq(friendsStatus))
+                .where(friend.status.eq("fri"))
                 .where(friend.userSender.name.eq(userName))
                 .orderBy(friend.userReceiver.name.asc());
         return query.fetchResults().getResults();
@@ -36,10 +35,38 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
     /**
      * Возвращает имена всех друзей которым отправлен запрос на добавления в друзья со статусом "req""
      */
+    @Override
+    public List<Friend> findAllMyFriendRequestsSent(String userName) {
+        QFriend friend = new QFriend("myFriend");
+        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(friend.userReceiver.id, friend.userReceiver.name)
+                .from(friend)
+                .join(friend.userReceiver)
+                .where(friend.status.eq("req"))
+                .where(friend.userSender.name.eq(userName))
+                .orderBy(friend.userReceiver.name.asc());
+        return query.fetchResults().getResults();
+    }
 
     /**
      * Возвращает имена всех друзей от которых пришел запрос на добавления в друзья со статусом "req""
+     * SELECT u.name, u.id FROM users AS u
+     * JOIN friends AS f ON u.id = f.friend_one
+     * WHERE f.friend_two = '2' AND f.status = 'req'
+     * ORDER BY (u.name);
      */
+    @Override
+    public List<Friend> findAllMyFriendRequestsResived(String userName) {
+        QFriend friend = new QFriend("myFriend");
+        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(friend.userReceiver.id, friend.userReceiver.name)
+                .from(friend)
+                .join(friend.userSender)
+                .where(friend.status.eq("req"))
+                .where(friend.userReceiver.name.eq(userName))
+                .orderBy(friend.userSender.name.asc());
+        return query.fetchResults().getResults();
+    }
 
 
     /**

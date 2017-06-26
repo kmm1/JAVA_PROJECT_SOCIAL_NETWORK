@@ -50,6 +50,8 @@ public class UserController {
         } else return "login-form";
     }
 
+    
+
     @GetMapping(path = "/registration")
     public String showRegistrationForm() {
         return "registration-form";

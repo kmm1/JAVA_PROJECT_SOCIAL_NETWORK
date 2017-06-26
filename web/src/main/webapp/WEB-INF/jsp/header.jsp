@@ -6,6 +6,8 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/blog">Блог</a></li>
         <li><a href="${pageContext.request.contextPath}/profile">Профайл</a></li>
+        <li><a href="${pageContext.request.contextPath}/friend">Друзья</a></li>
+
 
     </ul>
 </nav>
