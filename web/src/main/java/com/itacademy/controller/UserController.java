@@ -50,7 +50,7 @@ public class UserController {
         } else return "login-form";
     }
 
-    
+
 
     @GetMapping(path = "/registration")
     public String showRegistrationForm() {
@@ -59,7 +59,6 @@ public class UserController {
 
     @PostMapping(path = "/registration")
     public String saveUser(User user) {
-        user.setRole("user");
         userService.save(user);
         return "login-form";
     }

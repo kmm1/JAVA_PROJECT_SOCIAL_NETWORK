@@ -26,9 +26,9 @@ public class User extends BaseEntity {
     @Setter
     private String password;
 
-    @Column(name = "role",  columnDefinition = "user")
+    @Column(name = "role")
     @Getter
-    @Setter ()
+    @Setter
     private String role;
 
     @Column(name = "registration_date")
