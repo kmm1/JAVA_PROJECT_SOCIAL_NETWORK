@@ -1,8 +1,10 @@
 package com.itacademy.service;
 
 import com.itacademy.entity.Friend;
+import com.itacademy.entity.Profile;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FriendService {
 
@@ -20,7 +22,13 @@ public interface FriendService {
 
     List<Friend> findAllMyFriendRequestsResived(String userName);
 
-    Friend acceptFriendRequest(Long friendId);
+    Friend findOneFriendByUsersNames(String name1, String name2);
 
-    Friend sendFriendRequest(Long senderId, Long reciverId);
+    void update(Friend friend);
+
+
+
+
+
+
 }

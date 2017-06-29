@@ -24,6 +24,8 @@ public class InternationalizationConfig extends WebMvcConfigurerAdapter {
         return resourceBundleMessageSource;
     }
 
+
+
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();

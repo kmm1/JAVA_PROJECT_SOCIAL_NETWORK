@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -60,12 +61,13 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
-    public Friend sendFriendRequest(Long senderId, Long reciverId) {
-        return friendDao.sendFriendRequest(senderId, reciverId);
+    public Friend findOneFriendByUsersNames(String name1, String name2) {
+        return friendDao.findOneFriendByUsersNames(name1, name2);
     }
 
     @Override
-    public Friend acceptFriendRequest(Long friendId) {
-        return friendDao.acceptFriendRequest(friendId);
+    public void update(Friend friend) {
+        friendDao.update(friend);
     }
+
 }

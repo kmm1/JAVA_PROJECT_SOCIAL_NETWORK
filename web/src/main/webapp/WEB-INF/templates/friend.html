@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="header"></div>
+
+
+<center>
+
+
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="5"><p>Мои друзья:</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="myFriends : ${myFriends1}">
+            <td th:text="${myFriends}"
+                th:if="${not myFriends.empty}">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'нет информации'"
+                th:if="${myFriends1.empty}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="5"><p> Отправленные запросы на добавления в друзья:</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="myFriends : ${myFriends2}">
+            <td th:text="${myFriends}"
+                th:if="${not myFriends.empty}">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'нет информации'"
+                th:if="${myFriends2.empty}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="5"><p>Полученные запросы на добавления в друзья:</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="myFriends : ${myFriends3}">
+            <td th:text="${myFriends}"
+                th:if="${not myFriends.empty}">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'нет информации'"
+                th:if="${myFriends3.empty}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table border="1" width="30%" cellpadding="5">
+        <form th:action="@{/sendFriendRequest}" method="post" th:object="${friend}">
+            <thead>
+            <tr>
+                <th colspan="2">Отправить запрос на добавления в друзья</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Введите имя друга</td>
+                <td>
+                    <select th:field="*{userReceiver}">
+                        <option th:each="a : ${users}"
+                                th:value="${a}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr th:if="${not users.empty}">
+                <td>Отправить запрос</td>
+                <td><input type="submit" value="Отправить запрос"/></td>
+            </tr>
+            </tbody>
+        </form>
+    </table>
+
+    <table border="1" width="30%" cellpadding="5">
+        <form th:action="@{/acceptFriendRequest}" method="post" th:object="${friend}">
+
+            <thead>
+            <tr>
+                <th colspan="2">Подтвердить запрос от друга</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Введите имя друга</td>
+                <td>
+                    <select th:field="*{userReceiver}">
+                        <option th:each="a : ${myFriends3}"
+                                th:value="${a}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr th:if="${not myFriends3.empty}">
+                <td>Отправить запрос</td>
+                <td><input type="submit" value="Отправить запрос"/></td>
+            </tr>
+            </tbody>
+        </form>
+    </table>
+
+
+</center>
+</body>
+</html>
+

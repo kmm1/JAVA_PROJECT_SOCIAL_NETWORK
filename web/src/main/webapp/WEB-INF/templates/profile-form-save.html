@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="header"></div>
+
+<center>
+    <table border="1" width="30%" cellpadding="5">
+        <form th:action="@{/saveProfile}" method="post" th:object="${profile}">
+            <thead>
+            <tr>
+                <th colspan="2">Введите информацию</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Обо мне</td>
+                <td><input type="text" th:field="*{aboutMe}"></td>
+            </tr>
+
+
+            <tr>
+                <td>День рождения</td>
+                <td><input type="text" th:field="*{birthday.dayOfBirth}"></td>
+            </tr>
+
+            <tr>
+                <td>Месяц рождения</td>
+                <td><input type="text" th:field="*{birthday.monthOfBirth}"></td>
+            </tr>
+
+            <tr>
+                <td>Год рождения</td>
+                <td><input type="text" th:field="*{birthday.yearOfBirth}"></td>
+            </tr>
+
+
+            <tr>
+                <td>Пол</td>
+                <td>
+                    <select th:field="*{gender}">
+                        <option th:each="a : ${allEnumGender}"
+                                th:value="${a}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
+                    </select>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>Адрес проживания: cтрана</td>
+                <td><input type="text" th:field="*{homeAddress.city}"></td>
+            </tr>
+
+            <tr>
+                <td>Адрес проживания: город</td>
+                <td><input type="text" th:field="*{homeAddress.country}"></td>
+            </tr>
+
+            <tr>
+                <td>Семья и отношения</td>
+                <td>
+                    <select th:field="*{maritalStatus}">
+                        <option th:each="a : ${allEnumMaritalStatus}"
+                                th:value="${a}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Адрес работы: cтрана</td>
+                <td><input type="text" th:field="*{workAddress.country}"></td>
+            </tr>
+            <tr>
+                <td>Адрес работы: город</td>
+                <td><input type="text" th:field="*{workAddress.city}"></td>
+            </tr>
+
+            <tr>
+                <td>Сохранить изменения</td>
+                <td><input type="submit" value=сохранить изменения></td>
+            </tr>
+            </tbody>
+        </form>
+    </table>
+
+
+</center>
+
+</body>
+</html>

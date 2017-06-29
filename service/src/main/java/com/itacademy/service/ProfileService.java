@@ -17,4 +17,6 @@ public interface ProfileService {
 
     List<Profile> findProfileByUserId(Long userId);
 
+    Profile findOneProfileByUserId(Long userId);
+
 }

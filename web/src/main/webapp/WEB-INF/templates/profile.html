@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="header"></div>
+
+
+<center>
+
+    <table border="1" width="50%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="1">Профиль:
+            </td>
+            <td th:text="${userName}"></td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>Обо мне:</td>
+            <td th:text="${profile.get(0).aboutMe}"></td>
+        </tr>
+
+        <tr>
+            <td> День рождения:</td>
+            <td th:text="${profile.get(0).birthday.dayOfBirth}"></td>
+        </tr>
+
+        <tr>
+            <td> Месяц рождения:</td>
+            <td th:text="${profile.get(0).birthday.monthOfBirth}"></td>
+        </tr>
+
+        <tr>
+            <td> Год рождения:</td>
+            <td th:text="${profile.get(0).birthday.yearOfBirth}"></td>
+        </tr>
+
+        <tr>
+            <td>Пол:</td>
+            <td th:text="${profile.get(0).gender}"></td>
+        </tr>
+
+        <tr>
+            <td> Я живу в стране:</td>
+            <td th:text="${profile.get(0).homeAddress.country}"></td>
+        </tr>
+
+        <tr>
+            <td> Я живу в городе:</td>
+            <td th:text="${profile.get(0).homeAddress.city}"></td>
+        </tr>
+
+        </tr>
+        <tr>
+            <td> Я работаю в стране:</td>
+            <td th:text="${profile.get(0).workAddress.country}"></td>
+        </tr>
+
+        <tr>
+            <td> Я работаю в городе:</td>
+            <td th:text="${profile.get(0).workAddress.city}"></td>
+        </tr>
+
+        <tr>
+            <td> Семья и отношения:</td>
+            <td th:text="${profile.get(0).maritalStatus}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{/addProfile}" method="get">
+        <tr>
+            <td><input type="submit" value=редактировать профиль></td>
+        </tr>
+    </form>
+
+</center>
+
+
+</body>
+</html>

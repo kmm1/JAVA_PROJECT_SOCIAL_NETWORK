@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface ProfileDao extends BaseDao<Profile> {
 
-     List<Profile> findProfileByUserId(Long userId);
+    List<Profile> findProfileByUserId(Long userId);
 
-    }
+    Profile findOneProfileByUserId(Long userId);
+
+
+}

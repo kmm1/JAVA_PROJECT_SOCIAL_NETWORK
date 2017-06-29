@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.spring4.webflow.view.AjaxThymeleafViewResolver;
 
 
 @Configuration
@@ -16,9 +17,12 @@ public class ThymeleafConfig {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setCharacterEncoding("UTF-8");
         resolver.setPrefix("/WEB-INF/templates/");
+        resolver.setTemplateMode("HTML5"); //added
         resolver.setSuffix(".html");
         return resolver;
     }
+
+
 
     @Bean
     public SpringTemplateEngine templateEngine() {
@@ -33,6 +37,15 @@ public class ThymeleafConfig {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
+        resolver.setContentType("text/html; charset=UTF-8"); //added
         return resolver;
     }
+
+
+
+
+
+
 }
+
+

@@ -5,18 +5,16 @@ import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-@SessionAttributes( names = {"userName", "userId"})
+@SessionAttributes(names = {"userName", "userId"})
 @Controller
 public class UserController {
-
 
     private final UserService userService;
 
@@ -24,6 +22,12 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @ModelAttribute("user")
+    public User user() {
+        return new User();
+    }
+
 
     @GetMapping(path = "/enter")
     public String enterSite() {
@@ -34,7 +38,7 @@ public class UserController {
     public String findUserByNamePassword(@RequestParam String name,
                                          @RequestParam String password, ModelMap model) {
         if (name.equals("") || password.equals("")) {
-           return "login-form";
+            return "login-form";
         }
         List<User> user = userService.findUserByNamePassword(name, password);
         if (user.isEmpty()) {
@@ -51,14 +55,18 @@ public class UserController {
     }
 
 
-
     @GetMapping(path = "/registration")
     public String showRegistrationForm() {
         return "registration-form";
     }
 
     @PostMapping(path = "/registration")
-    public String saveUser(User user) {
+    public String saveUser(User user, @RequestParam String name,
+                           @RequestParam String password, @RequestParam String email,
+                           ModelMap model) throws UnsupportedEncodingException {
+        if (name.equals("") || password.equals("") || email.equals("")) {
+            return "registration-form";
+        }
         userService.save(user);
         return "login-form";
     }

@@ -4,6 +4,7 @@ import com.itacademy.dao.common.BaseDao;
 import com.itacademy.entity.Friend;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface FriendDao extends BaseDao<Friend> {
@@ -14,8 +15,7 @@ public interface FriendDao extends BaseDao<Friend> {
 
     List<Friend> findAllMyFriendRequestsResived(String userName);
 
-    Friend acceptFriendRequest(Long friendId);
+    Friend findOneFriendByUsersNames(String name1, String name2);
 
-    Friend sendFriendRequest(Long senderId, Long reciverId);
 
 }

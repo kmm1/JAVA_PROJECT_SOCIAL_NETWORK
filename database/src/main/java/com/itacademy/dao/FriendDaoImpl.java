@@ -1,51 +1,53 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
-import com.itacademy.entity.Friend;
-import com.itacademy.entity.QFriend;
-import com.itacademy.entity.User;
+import com.itacademy.entity.*;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
 
     /**
      * Возвращает имена всех друзей у указанного пользователя со статусом "fri"
-     * SELECT u.name, u.email FROM users AS u
-     * JOIN friends AS f ON u.id = f.friend_two
-     * WHERE f.friend_one = '2' AND f.status = 'fri'
-     * ORDER BY (u.name);
      */
     @Override
     public List<Friend> findAllFriendsByUserName(String userName) {
-        QFriend friend = new QFriend("myFriend");
-        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(friend.userReceiver.id, friend.userReceiver.name)
-                .from(friend)
-                .join(friend.userReceiver)
-                .where(friend.status.eq("fri"))
-                .where(friend.userSender.name.eq(userName))
-                .orderBy(friend.userReceiver.name.asc());
-        return query.fetchResults().getResults();
+        return getSessionFactory().getCurrentSession()
+                .createQuery("select f from Friend f join f.userReceiver u join f.userSender us " +
+                        "where f.userSender.name=:userName and f.status=:status or f.userReceiver.name=:userName and f.status=:status", Friend.class)
+                .setParameter("userName", userName)
+                .setParameter("status", "fri")
+                .getResultList();
     }
+
 
     /**
      * Возвращает имена всех друзей которым отправлен запрос на добавления в друзья со статусом "req""
      */
+//    @Override
+//    public List<Friend> findAllMyFriendRequestsSent(String userName) {
+//        QFriend friend = new QFriend("myFriend");
+//        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+//        query.select(friend.userReceiver.id, friend.userReceiver.name)
+//                .from(friend)
+//                .join(friend.userReceiver)
+//                .where(friend.status.eq("req"))
+//                .where(friend.userSender.name.eq(userName))
+//                .orderBy(friend.userReceiver.name.asc());
+//        return query.fetchResults().getResults();
+//    }
     @Override
     public List<Friend> findAllMyFriendRequestsSent(String userName) {
-        QFriend friend = new QFriend("myFriend");
-        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(friend.userReceiver.id, friend.userReceiver.name)
-                .from(friend)
-                .join(friend.userReceiver)
-                .where(friend.status.eq("req"))
-                .where(friend.userSender.name.eq(userName))
-                .orderBy(friend.userReceiver.name.asc());
-        return query.fetchResults().getResults();
+        return getSessionFactory().getCurrentSession()
+                .createQuery("select f from Friend f join f.userReceiver u where f.userSender.name=:userName and f.status=:status order by f.userReceiver.name", Friend.class)
+                .setParameter("userName", userName)
+                .setParameter("status", "req")
+                .getResultList();
     }
 
     /**
@@ -57,43 +59,28 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
      */
     @Override
     public List<Friend> findAllMyFriendRequestsResived(String userName) {
+        return getSessionFactory().getCurrentSession()
+                .createQuery("select f from Friend f join f.userSender u where f.userReceiver.name=:userName and f.status=:status order by f.userSender.name", Friend.class)
+                .setParameter("userName", userName)
+                .setParameter("status", "req")
+                .getResultList();
+    }
+
+    @Override
+    public Friend findOneFriendByUsersNames(String name1, String name2) {
         QFriend friend = new QFriend("myFriend");
         JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(friend.userReceiver.id, friend.userReceiver.name)
+        query.select(friend)
                 .from(friend)
                 .join(friend.userSender)
-                .where(friend.status.eq("req"))
-                .where(friend.userReceiver.name.eq(userName))
-                .orderBy(friend.userSender.name.asc());
-        return query.fetchResults().getResults();
+                .join(friend.userReceiver)
+                .where(friend.userSender.name.eq(name1)
+                        .and(friend.userReceiver.name.eq(name2)
+                                .and(friend.status.eq("req")))
+                        .or(friend.userSender.name.eq(name2)
+                                .and(friend.userReceiver.name.eq(name1)
+                                        .and(friend.status.eq("req")))));
+        return query.fetchOne();
     }
-
-
-    /**
-     * Отправить запрос на добавления в друзья
-     * INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 3, 'req');
-     */
-    @Override
-    public Friend sendFriendRequest(Long senderId, Long reciverId) {
-        UserDaoImpl userDao = new UserDaoImpl();
-        User sender = userDao.findById(senderId);
-        User reciver = userDao.findById(reciverId);
-        Friend friend = new Friend(sender, reciver, "req");
-        getSessionFactory().getCurrentSession().save(friend);
-        return friend;
-    }
-
-    /**
-     * Принять запрос на добавления в друзья
-     */
-    @Override
-    public Friend acceptFriendRequest(Long friendId) {
-        FriendDaoImpl friendDao = new FriendDaoImpl();
-        Friend friend = friendDao.findById(friendId);
-        friend.setStatus("fri");
-        getSessionFactory().getCurrentSession().update(friend);
-        return friend;
-    }
-
 
 }

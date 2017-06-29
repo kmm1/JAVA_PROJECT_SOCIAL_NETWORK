@@ -28,9 +28,4 @@ public class Friend extends BaseEntity {
     @JoinColumn(name = "friend_two")
     private User userReceiver;
 
-    public Friend(User userSender, User userReceiver, String status) {
-        this.userSender = userSender;
-        this.userReceiver = userReceiver;
-        this.status = status;
-    }
 }

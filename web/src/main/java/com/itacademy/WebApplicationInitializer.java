@@ -4,6 +4,8 @@ import com.itacademy.config.RootConfig;
 import com.itacademy.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
 
 public class WebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,5 +19,10 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] {new EncodingFilter()};
     }
 }

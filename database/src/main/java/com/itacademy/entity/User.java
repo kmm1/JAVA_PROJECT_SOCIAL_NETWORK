@@ -29,7 +29,7 @@ public class User extends BaseEntity {
     @Column(name = "role")
     @Getter
     @Setter
-    private String role;
+    private String role = "user";
 
     @Column(name = "registration_date")
     @Getter

@@ -45,8 +45,18 @@ public class UserDaoTest extends BaseTest {
     @Test
     public void testGetUserById() {
         User user = new User();
+        user.setName("name");
         Long userId = userDao.save(user);
         User user1 = userDao.findById(userId);
+        assertThat(user1, notNullValue());
+    }
+
+    @Test
+    public void testGetUserByName() {
+        User user = new User();
+        user.setName("name");
+        Long userId = userDao.save(user);
+        User user1 = userDao.findOneUserByName("name");
         assertThat(user1, notNullValue());
     }
 

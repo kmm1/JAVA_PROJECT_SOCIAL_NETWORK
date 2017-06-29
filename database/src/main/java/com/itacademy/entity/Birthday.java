@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Embeddable
 @NoArgsConstructor
@@ -26,4 +28,5 @@ public class Birthday {
     @Getter
     @Setter
     private int dayOfBirth;
+
 }

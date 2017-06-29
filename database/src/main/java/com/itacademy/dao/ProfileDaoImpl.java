@@ -28,4 +28,15 @@ public class ProfileDaoImpl extends BaseDaoImpl<Profile> implements ProfileDao {
         return query.fetchResults().getResults();
     }
 
+    @Override
+    public Profile findOneProfileByUserId(Long userId) {
+        QProfile profile = new QProfile("myProfile");
+        JPAQuery<Profile> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(profile)
+                .from(profile)
+                .join(profile.user)
+                .where(profile.user.id.eq(userId));
+        return query.fetchOne();
+    }
+
 }

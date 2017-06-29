@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+<center>
+    <table border="1" width="30%" cellpadding="5">
+        <form th:action="@{/registration}" method="post" th:object="${user}" th:form>
+            <thead>
+            <tr>
+                <th colspan="2">Введите информацию</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><label th:for="name">Имя</label></td>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="email">E-mail</label></td>
+                <td><input type="text" th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="password">Пароль</label></td>
+                <td><input type="password" th:field="*{password}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="password">Пароль еще раз</label></td>
+                <td><input type="password" name="passwordRepeat" value=""/></td>
+            </tr>
+            <tr>
+                <td>зарегистрироваться</td>
+                <td><input type="submit" value="зарегистрироваться"/></td>
+            </tr>
+            </tbody>
+        </form>
+    </table>
+
+    <form th:action="@{/enter}" method="get">
+        <tr>
+            <td>уже зарегистрированы?</td>
+            <td><input type="submit" value="вход"></td>
+        </tr>
+    </form>
+</center>
+
+</body>
+</html>
