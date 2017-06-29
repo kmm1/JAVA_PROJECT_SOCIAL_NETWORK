@@ -1,7 +1,10 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
 </head>
 <body>
@@ -26,7 +29,7 @@
         </tr>
 
         <tr>
-            <td> День рождения:</td>
+            <td>День рождения:</td>
             <td th:text="${profile.get(0).birthday.dayOfBirth}"></td>
         </tr>
 
@@ -42,7 +45,9 @@
 
         <tr>
             <td>Пол:</td>
-            <td th:text="${profile.get(0).gender}"></td>
+            <td th:each="a : ${profile.get(0).gender}"
+                th:value="${a}"
+                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></td>
         </tr>
 
         <tr>
@@ -68,7 +73,9 @@
 
         <tr>
             <td> Семья и отношения:</td>
-            <td th:text="${profile.get(0).maritalStatus}"></td>
+            <td th:each="a : ${profile.get(0).maritalStatus}"
+                th:value="${a}"
+                th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></td>
         </tr>
         </tbody>
     </table>

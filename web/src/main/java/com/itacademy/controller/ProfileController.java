@@ -89,7 +89,7 @@ public class ProfileController {
                                 @RequestParam String aboutMe,
                                 @RequestParam String maritalStatus,
                                 @RequestParam String gender) {
-        Long userId = (Long) req.getSession().getAttribute(" ]0userId");
+        Long userId = (Long) req.getSession().getAttribute("userId");
         String userName = (String) req.getSession().getAttribute("userName");
         List<Profile> profile2 = profileService.findProfileByUserId(userId);
         Profile profile = profile2.get(0);
