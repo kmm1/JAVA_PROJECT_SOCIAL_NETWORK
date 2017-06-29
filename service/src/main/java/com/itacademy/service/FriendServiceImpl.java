@@ -66,6 +66,12 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
+    public Friend findOneFriendByUsersNames2(String name1, String name2) {
+        return friendDao.findOneFriendByUsersNames2(name1, name2);
+    }
+
+
+    @Override
     public void update(Friend friend) {
         friendDao.update(friend);
     }

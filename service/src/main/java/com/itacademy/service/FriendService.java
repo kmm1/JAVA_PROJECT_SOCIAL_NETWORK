@@ -26,9 +26,7 @@ public interface FriendService {
 
     void update(Friend friend);
 
-
-
-
+    Friend findOneFriendByUsersNames2(String name1, String name2);
 
 
 }

@@ -31,11 +31,13 @@ public class Main {
 //        List<String> list = new ArrayList<String>();
 //        ArrayList<String> list2 = new ArrayList<>();
 
-Friend f = friendService.findOneFriendByUsersNames("kate", "vova");
-f.setStatus("JJ");
-friendService.update(f);
+//friendService.delete(f);
+        Friend f = friendService.findById(40L);
         System.out.println(f);
+        Friend ff = friendService.findOneFriendByUsersNames2("vova", "kate");
+        System.out.println(ff);
 
+        friendService.delete(ff);
 
 
 //        System.out.println(list);

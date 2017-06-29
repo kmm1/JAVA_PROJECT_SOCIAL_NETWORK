@@ -126,9 +126,18 @@ public class FriendController {
         friendService.update(friend);
         System.out.println("JJJJJJJJJJJJJJJJJJ");
         System.out.println(friend);
-
         return "redirect:/friend";
     }
 
+    @PostMapping(path = "/deliteFriend")
+    public String deliteFriend(Model model, HttpServletRequest req,
+                               @RequestParam String userReceiver) {
+        String userName = (String) req.getSession().getAttribute("userName");
+        Friend friend = friendService.findOneFriendByUsersNames2(userReceiver, userName);
+        friendService.delete(friend);
+        System.out.println("JJJJJJJJJJJJJJJJJJ");
+        System.out.println(friend);
+        return "redirect:/friend";
+    }
 
 }

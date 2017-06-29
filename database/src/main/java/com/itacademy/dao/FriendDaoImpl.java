@@ -83,4 +83,21 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
         return query.fetchOne();
     }
 
+    @Override
+    public Friend findOneFriendByUsersNames2(String name1, String name2) {
+        QFriend friend = new QFriend("myFriend");
+        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(friend)
+                .from(friend)
+                .join(friend.userSender)
+                .join(friend.userReceiver)
+                .where(friend.userSender.name.eq(name1)
+                        .and(friend.userReceiver.name.eq(name2)
+                                .and(friend.status.eq("fri")))
+                        .or(friend.userSender.name.eq(name2)
+                                .and(friend.userReceiver.name.eq(name1)
+                                        .and(friend.status.eq("fri")))));
+        return query.fetchOne();
+    }
+
 }
