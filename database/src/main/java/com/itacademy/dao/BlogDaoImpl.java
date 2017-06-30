@@ -49,7 +49,7 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
     public List<Blog> findAllUsersBlogs(Long userId) {
         QBlog blog = new QBlog("myBlog");
         JPAQuery<Blog> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(blog.title)
+        query.select (blog)
                 .from(blog)
                 .join(blog.user)
                 .where(blog.user.id.eq(userId))

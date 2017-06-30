@@ -100,6 +100,8 @@ public class ProfileController {
         List<Profile> profile3 = profileService.findProfileByUserId(userId);
         model.addAttribute("profile", profile3);
         model.addAttribute("userName", userName);
+//        System.out.println("JJJJJJJJJJJJJJJJ");
+//        System.out.println(dayOfBirth);
         return "profile";
     }
 

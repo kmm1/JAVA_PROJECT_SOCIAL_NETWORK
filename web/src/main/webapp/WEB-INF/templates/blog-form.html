@@ -1,12 +1,34 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
 </head>
 <body>
 <div th:insert="header"></div>
 
+<center>
 
+<h2>Новый блог</h2>
+<form th:action="@{/saveBlog}" method="post" th:object="${blog}">
+
+    <p><b>Название:</b></p>
+    <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
+    <p><b>Содержание:</b></p>
+    <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
+    <!--<input type="hidden" th:field="*{user}" th:value="${myUser}">-->
+    <!--<p> <input type="datetime-local" th:field="*{creationDate}" > </p>-->
+    <!--<p th:text="${#temporals.formatISO(localDateTime)}"></p>-->
+
+    <p><input type="submit" value="Сохранить блог"/></p>
+
+</form>
+
+</center>
 </body>
+
 </html>

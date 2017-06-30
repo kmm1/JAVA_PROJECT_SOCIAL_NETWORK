@@ -3,10 +3,10 @@ package com.itacademy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.spring4.webflow.view.AjaxThymeleafViewResolver;
 
 
 @Configuration
@@ -23,11 +23,11 @@ public class ThymeleafConfig {
     }
 
 
-
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
+        engine.addDialect(new Java8TimeDialect()); //TODO added
         engine.setTemplateResolver(templateResolver());
         return engine;
     }
@@ -40,10 +40,6 @@ public class ThymeleafConfig {
         resolver.setContentType("text/html; charset=UTF-8"); //added
         return resolver;
     }
-
-
-
-
 
 
 }

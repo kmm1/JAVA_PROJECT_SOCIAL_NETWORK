@@ -28,14 +28,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void update(Profile profile) {
-         profileDao.update(profile);
+        profileDao.update(profile);
     }
-
 
     @Override
     public Long save(Profile profile) {
         return profileDao.save(profile);
-
     }
 
     @Override

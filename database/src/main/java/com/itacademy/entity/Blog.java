@@ -1,6 +1,7 @@
 package com.itacademy.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.*;
