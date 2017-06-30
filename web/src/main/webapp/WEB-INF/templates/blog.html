@@ -37,7 +37,7 @@
             <td th:text="${a.getTitle()}"></td>
             <td th:text="${a.getCreationDate()}"></td>
             <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}">Читать блог</a></td>
-            <td><a th:href="@{/changeBlog/{blogId}(blogId=${a.getId()})}">Редактировать блог</a></td>
+            <td><a th:href="@{/addBlog/{blogId}(blogId=${a.getId()})}">Редактировать блог</a></td>
             <td><a th:href="@{/deliteBlog/{blogId}(blogId=${a.getId()})}">Удалить блог</a></td>
 
         </tr>

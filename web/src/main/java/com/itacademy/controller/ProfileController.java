@@ -66,9 +66,6 @@ public class ProfileController {
         return "profile-form-update";
     }
 
-
-
-
     @PostMapping(path = "/saveProfile")
     public String profileSave(Profile profile, Model model, HttpServletRequest req) {
         Long userId = (Long) req.getSession().getAttribute("userId");

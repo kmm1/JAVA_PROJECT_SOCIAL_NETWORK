@@ -13,4 +13,7 @@ public interface UserDao extends BaseDao<User> {
 
     User findOneUserByName(String name);
 
-}
+     List<User> findOneUserByName2 (String name);
+
+
+    }

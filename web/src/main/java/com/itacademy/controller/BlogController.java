@@ -2,6 +2,7 @@ package com.itacademy.controller;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Friend;
+import com.itacademy.entity.Profile;
 import com.itacademy.entity.User;
 import com.itacademy.service.BlogService;
 import com.itacademy.service.UserService;
@@ -52,7 +53,6 @@ public class BlogController {
             return "blog-form";
         }
         ArrayList<Blog> findAllBlogsByUserName = (ArrayList<Blog>) blogService.findAllUsersBlogs(userId);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         model.addAttribute("findAllBlogsByUserName", findAllBlogsByUserName);
         return "blog";
     }
@@ -71,20 +71,31 @@ public class BlogController {
     public String showMovieInfo(@PathVariable("blogId") Long blogId, Model model) {
         Blog myBlog = blogService.findById(blogId);
         blogService.delete(myBlog);
-        model.addAttribute("myBlog", myBlog);
-        System.out.println(blogId);
-        System.out.println(myBlog);
         return "redirect:/blog";
     }
 
-    @GetMapping(path = "/changeBlog/{blogId}")
-    public String changeBlog(@PathVariable("blogId") Long blogId, Model model) {
-        Blog myBlog = blogService.findById(blogId);
-        blogService.update(myBlog);
+    @GetMapping(path = "/addBlog/{blogId}")
+    public String changeBlog1(@PathVariable("blogId") Long blogId, Model model) {
+        Blog blog = blogService.findById(blogId);
+        model.addAttribute("blog", blog);
         model.addAttribute("blogId", blogId);
-        System.out.println(blogId);
-        System.out.println(myBlog);
+        return "/blog-form-update";
+    }
+
+    @PostMapping(path = "/addBlog/{blogId}")
+    public String changeBlog2(@PathVariable("blogId") Long blogId, Model model,
+                              @RequestParam String title,
+                              @RequestParam String text) {
+        Blog blog2 = blogService.findById(blogId);
+        System.out.println("title"+title);
+        System.out.println("text"+text);
+
+        blog2.setTitle(title);
+        blog2.setText(text);
+        blogService.update(blog2);
+        model.addAttribute("blogId", blogId);
         return "redirect:/readBlog/{blogId}";
+
     }
 
     @GetMapping(path = "/saveBlog")

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="header"></div>
+
+<center>
+
+    <h2>Редактировать блог:</h2>
+    <form th:action="@{/addBlog/{blogId}/(blogId=${blog.getId()})}" method="post" th:object="${blog}">
+        <p><b>Название:</b></p>
+        <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
+        <p><b>Содержание:</b></p>
+        <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
+
+        <p><input type="submit" value="Редактировать блог"/></p>
+
+    </form>
+
+</center>
+</body>
+
+</html>

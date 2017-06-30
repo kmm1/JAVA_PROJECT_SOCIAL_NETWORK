@@ -14,17 +14,17 @@
 <center>
 
     <a th:href="@{/saveBlog}">Создать новый блог</a>
-    <a th:href="@{/changeBlog/{blogId}(blogId=${myBlog.getId()})}">Редактировать блог</a>
+    <a th:href="@{/addBlog/{blogId}(blogId=${myBlog.getId()})}">Редактировать блог</a>
     <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}">Удалить блог</a>
     <p></p>
 
     <p><b>Название:</b></p>
-    <p><textarea rows="1" cols="90" th:text="${myBlog.getTitle()}"></textarea></p>
+    <p><textarea rows="1" cols="90" disabled th:text="${myBlog.getTitle()}"></textarea></p>
     <p><b>Содержание:</b></p>
-    <p><textarea rows="20" cols="90" th:text="${myBlog.getTitle()}"></textarea></p>
+    <p><textarea rows="20" cols="90" disabled th:text="${myBlog.getText()}"></textarea></p>
 
     <p><b>Дата:</b></p>
-    <p><textarea rows="1" cols="20" th:text="${myBlog.getCreationDate()}"></textarea></p>
+    <p><textarea rows="1" cols="20" disabled th:text="${myBlog.getCreationDate()}"></textarea></p>
 
 </center>
 

@@ -29,8 +29,8 @@ public class Main {
         BlogService blogService = context.getBean((BlogService.class));
 
 
-        List<Blog> findAllBlogsByUserName = blogService.findAllUsersBlogs(1L);
-        System.out.println(findAllBlogsByUserName);
+        List<User> user =  userService.findOneUserByName2("4");
+        System.out.println(user);
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");
