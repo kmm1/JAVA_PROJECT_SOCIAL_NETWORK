@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:border="http://www.w3.org/1999/xhtml"
+      xmlns:border-collapse="http://java.sun.com/xml/ns/persistence/orm" xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
+    <style type="text/css">
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px solid white; /* Параметры рамки */
+        }
+
+        p {
+            margin-top: 0.0em; /* Отступ сверху */
+            margin-bottom: 0.0em; /* Отступ снизу */
+        }
+    </style>
+</head>
+<body>
+<div th:insert="header"></div>
+
+<center>
+
+    <table border="1" width="30%" cellpadding="5">
+        <tbody>
+        <tr>
+            <td><br th:text="${name2}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table border="1" width="30%" cellpadding="5">
+        <tbody>
+        <tr th:each="x : ${messages}">
+            <td align="left">
+                <p th:text="${x.getUserSender().name}"
+                   th:if="${not x.userSender.name.equals(userName)}">
+                </p>
+                <p th:text="${x.creationDate}"
+                   th:if="${not x.userSender.name.equals(userName)}">
+                </p>
+                <p th:text="${x.getText()}"
+                   th:if="${not x.userSender.name.equals(userName)}"></p>
+            </td>
+            <td align="right">
+                <p th:text="${x.getUserSender().name}"
+                   th:if="${not x.userSender.name.equals(name2)}">
+                </p>
+                <p th:text="${x.creationDate}"
+                   th:if="${not x.userSender.name.equals(name2)}">
+                </p>
+                <p th:text="${x.getText()}"
+                   th:if="${not x.userSender.name.equals(name2)}"></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Написать сообшение:</p>
+    <form th:action="@{/saveMessage/{userReceiverName}/(userReceiverName=${name2})}" method="post">
+        <p><b>Сообшение:</b></p>
+        <p><textarea rows="3" cols="60" input type="text" id="text" name="text"></textarea></p>
+        <p><input type="submit" value="Отправить сообшение"/></p>
+    </form>
+
+</center>
+</body>
+</html>
+

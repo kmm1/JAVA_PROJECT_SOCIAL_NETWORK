@@ -89,7 +89,6 @@ public class BlogController {
         Blog blog2 = blogService.findById(blogId);
         System.out.println("title"+title);
         System.out.println("text"+text);
-
         blog2.setTitle(title);
         blog2.setText(text);
         blogService.update(blog2);

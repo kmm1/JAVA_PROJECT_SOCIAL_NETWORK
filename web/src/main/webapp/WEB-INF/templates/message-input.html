@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
 </head>
 <body>
+<div th:insert="header"></div>
 
+<center>
+
+    <a th:href="@{/saveMessage}">Написать сообщение</a>
+    <p></p>
+
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="5"><p>Мои переписки:</p></th>
+        </tr>
+
+        <tbody>
+        <tr th:each="x : ${names}">
+            <td><a th:href="@{/openChat/{name}(name=${x})}">Открыть переписку с:</a></td>
+            <td th:text="${x}"
+                th:if="${not x.empty}">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'нет информации'"
+                th:if="${names.empty}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{/openChat/{name}}" method="get">
+        <p><b>Открыть переписку с:</b></p>
+        <p><textarea rows="1" cols="20" input type="text" id="userReceiverName" name="userReceiverName"></textarea></p>
+        <p><input type="submit" value="Открыть переписку"/></p>
+    </form>
+
+
+</center>
 </body>
 </html>
+

@@ -7,7 +7,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
@@ -23,10 +23,10 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
      * OR user_sender_id=4 AND user_receiver_id = 2 ORDER BY (m.creation_date);
      */
     @Override
-    public List<Message> chatByTwoUsers( Long firstUserId, Long secondUserId) {
+    public List<Message> chatByTwoUsers(Long firstUserId, Long secondUserId) {
         QMessage message = new QMessage("myMessage");
         JPAQuery<Message> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(message.userSender.name, message.text, message.creationDate)
+        query.select(message/*.userSender.name, message.text, message.creationDate*/)
                 .from(message)
                 .join(message.userReceiver)
                 .join(message.userSender)
@@ -37,5 +37,36 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
                 .orderBy(message.creationDate.asc());
         return query.fetchResults().getResults();
     }
+
+    //TODO vspomogatelnii metod
+    @Override
+    public List<Message> findMessagesByUserName(Long userId) {
+        QMessage message = new QMessage("myMessage");
+        JPAQuery<Message> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(message)
+                .from(message)
+                .join(message.userReceiver)
+                .join(message.userSender)
+                .where(message.userSender.id.eq(userId)
+                        .or(message.userReceiver.id.eq(userId)))
+                .orderBy(message.creationDate.asc());
+        return query.fetchResults().getResults();
+    }
+
+    @Override
+    public List<String> names(Long userId, String userName) {
+        List<Message> messages = findMessagesByUserName(userId);
+        Set<String> z = new TreeSet<>();
+        for (int i = 0; i < messages.size(); i++) {
+            z.add(messages.get(i).getUserReceiver().getName());
+            z.add(messages.get(i).getUserSender().getName());
+        }
+        while (z.contains(userName)) {
+            z.remove(userName);
+        }
+        List<String> list = new ArrayList<>(z);
+        return list;
+    }
+
 
 }

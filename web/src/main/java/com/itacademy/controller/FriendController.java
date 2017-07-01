@@ -91,7 +91,6 @@ public class FriendController {
         }
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(users);
-        //
         model.addAttribute("myFriends1", myFriends1);
         model.addAttribute("myFriends2", myFriends2);
         model.addAttribute("myFriends3", myFriends3);
@@ -112,7 +111,6 @@ public class FriendController {
         System.out.println("JJJJJJJJJJJJJJJJJJ");
         System.out.println(sender);
         System.out.println(reciver);
-
         return "redirect:/friend";
     }
 

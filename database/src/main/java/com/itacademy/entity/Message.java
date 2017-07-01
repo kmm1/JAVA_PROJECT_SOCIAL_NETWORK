@@ -19,7 +19,7 @@ public class Message extends BaseEntity {
     @Column(name = "creation_date")
     @Getter
     @Setter
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate= LocalDateTime.now();
 
     @Getter
     @Setter

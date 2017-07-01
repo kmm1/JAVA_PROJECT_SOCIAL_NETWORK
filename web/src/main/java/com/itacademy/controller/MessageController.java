@@ -66,10 +66,65 @@ public class MessageController {
         return "redirect:/message";
     }
 
+    @PostMapping(path = "/saveMessage/{userReceiverName}")
+    public String saveMessage3(@PathVariable("userReceiverName") String userReceiverName,
+                               ModelMap model, HttpServletRequest req,
+                               @RequestParam String text) {
+        String userName = (String) req.getSession().getAttribute("userName");
+        User userSender = userService.findOneUserByName(userName);
+        if (userReceiverName.equals("") || userReceiverName.equals(null)) {
+            return "message-error";
+        }
+        System.out.println("JJJJJJJJJJJJJJJJJ");
+        System.out.println(userReceiverName);
+        List<User> user = userService.findOneUserByName2(userReceiverName);
+        System.out.println(user);
+        if (user.size() == 0) {
+            return "message-error";
+        }
+        Message message = new Message();
+        message.setUserSender(userSender);
+        message.setUserReceiver(user.get(0));
+        message.setText(text);
+        message.setCreationDate(LocalDateTime.now());
+        messageService.save(message);
+        model.addAttribute("name", userReceiverName);
+        return "redirect:/openChat/{name}";
+    }
+
 
     @GetMapping(path = "/messageInput")
-    public String messageInput1(ModelMap model, HttpServletRequest req) {
-        return "redirect:/message-input";
+    public String messageInput1(Message message, ModelMap model, HttpServletRequest req) {
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        String userName = (String) req.getSession().getAttribute("userName");
+        List<String> names = messageService.names(userId, userName);
+        model.addAttribute("names", names);
+        System.out.println(names);
+        System.out.println(model);
+        return "/message-input";
+    }
+
+    @GetMapping(path = "/openChat/{name}")
+    public String messageChat1(@PathVariable("name") String name,
+                               Message message, ModelMap model, HttpServletRequest req) {
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        String userName = (String) req.getSession().getAttribute("userName");
+        if (name.equals("") || name.equals(null)) {
+            return "message-error";
+        }
+
+        List<User> oneUserByName2 = userService.findOneUserByName2(name);
+        if (oneUserByName2.size() == 0) {
+            return "message-error";
+        }
+        Long id = oneUserByName2.get(0).getId();
+        List<Message> messages = messageService.chatByTwoUsers(userId, id);
+        model.addAttribute("messages", messages);
+        model.addAttribute("userName", userName);
+        model.addAttribute("name2", name);
+        System.out.println(messages);
+        System.out.println(name);
+        return "/message-chat";
     }
 
 
