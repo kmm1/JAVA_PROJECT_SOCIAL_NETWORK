@@ -66,7 +66,7 @@ public class MessageController {
         return "redirect:/message";
     }
 
-    @PostMapping(path = "/saveMessage/{userReceiverName}")
+    @GetMapping(path = "/saveMessage/{userReceiverName}")
     public String saveMessage3(@PathVariable("userReceiverName") String userReceiverName,
                                ModelMap model, HttpServletRequest req,
                                @RequestParam String text) {
@@ -104,6 +104,7 @@ public class MessageController {
         return "/message-input";
     }
 
+
     @GetMapping(path = "/openChat/{name}")
     public String messageChat1(@PathVariable("name") String name,
                                Message message, ModelMap model, HttpServletRequest req) {
@@ -112,7 +113,8 @@ public class MessageController {
         if (name.equals("") || name.equals(null)) {
             return "message-error";
         }
-
+        System.out.println("JJJJJJJJJJJJJJJJJJJJJJ");
+        System.out.println(name);
         List<User> oneUserByName2 = userService.findOneUserByName2(name);
         if (oneUserByName2.size() == 0) {
             return "message-error";
@@ -124,6 +126,30 @@ public class MessageController {
         model.addAttribute("name2", name);
         System.out.println(messages);
         System.out.println(name);
+        return "/message-chat";
+    }
+
+    @PostMapping(path = "/openChat")
+    public String messageChat2(@RequestParam String userReceiverName,
+                               ModelMap model, HttpServletRequest req) {
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        String userName = (String) req.getSession().getAttribute("userName");
+        if (userReceiverName.equals("") || userReceiverName.equals(null)) {
+            System.out.println("jjj"+userReceiverName);
+            return "message-error";
+        }
+        List<User> oneUserByName2 = userService.findOneUserByName2(userReceiverName);
+        if (oneUserByName2.size() == 0) {
+            System.out.println("kkk"+userReceiverName);
+            return "message-error";
+        }
+        Long id = oneUserByName2.get(0).getId();
+        List<Message> messages = messageService.chatByTwoUsers(userId, id);
+        model.addAttribute("messages", messages);
+        model.addAttribute("userName", userName);
+        model.addAttribute("name2", userReceiverName);
+        System.out.println(messages);
+        System.out.println(userReceiverName);
         return "/message-chat";
     }
 

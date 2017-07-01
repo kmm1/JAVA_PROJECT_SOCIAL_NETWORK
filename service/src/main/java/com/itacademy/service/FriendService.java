@@ -1,10 +1,8 @@
 package com.itacademy.service;
 
 import com.itacademy.entity.Friend;
-import com.itacademy.entity.Profile;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface FriendService {
 

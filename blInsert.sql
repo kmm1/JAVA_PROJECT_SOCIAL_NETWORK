@@ -35,8 +35,10 @@ INSERT INTO comments (comment, user_id, blog_id) VALUES ('Keep writing', 3, 1);
 INSERT INTO comments (comment, user_id, blog_id, parent_id) VALUES ('Thanks', 2, 1, 1);
 INSERT INTO comments (comment, user_id, blog_id, parent_id) VALUES ('My pleasure', 2, 1, 2);
 
-INSERT INTO events (id, name) VALUES (1, 'ice bucket challenge');
-INSERT INTO flashmobs (type, event_id) VALUES ('flashmob', 1);
+
+INSERT INTO events (id, name, bl.events.holding_date) VALUES (1, 'ice bucket challenge', 'tomorrow');
+INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB','info about this event', 1);
+
 
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Вероника, прив', 2, 4);
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Вова, привет', 4, 2);

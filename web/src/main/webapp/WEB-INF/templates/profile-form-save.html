@@ -12,7 +12,7 @@
 
 <center>
     <table border="1" width="30%" cellpadding="5">
-        <form th:action="@{/saveProfile}" method="post" th:object="${profile}">
+        <form th:action="@{/saveProfile}" method="post">
             <thead>
             <tr>
                 <th colspan="2">Введите информацию</th>
@@ -21,29 +21,43 @@
             <tbody>
             <tr>
                 <td>Обо мне</td>
-                <td><input type="text" th:field="*{aboutMe}"></td>
+                <td><input type="text" id="aboutMe" name="aboutMe"></td>
             </tr>
 
             <tr>
                 <td>День рождения</td>
-                <td><input type="text" th:field="*{birthday.dayOfBirth}"></td>
+                <td>
+                    <select id="dayOfBirth" name="dayOfBirth">
+                        <option th:each="a : ${days}"
+                                th:value="${a}"
+                                th:text="${(a)}"></option>
+                    </select>
+                </td>
             </tr>
 
             <tr>
                 <td>Месяц рождения</td>
-                <td><input type="text" th:field="*{birthday.monthOfBirth}"></td>
+                <td><select id="monthOfBirth" name="monthOfBirth">
+                    <option th:each="a : ${months}"
+                            th:value="${a}"
+                            th:text="${(a)}"></option>
+                </select></td>
             </tr>
 
             <tr>
                 <td>Год рождения</td>
-                <td><input type="text" th:field="*{birthday.yearOfBirth}"></td>
+                <td><select id="yearOfBirth" name="yearOfBirth">
+                    <option th:each="a : ${years}"
+                            th:value="${a}"
+                            th:text="${(a)}"></option>
+                </select></td>
             </tr>
 
 
             <tr>
                 <td>Пол</td>
                 <td>
-                    <select th:field="*{gender}">
+                    <select id="gender" name="gender">
                         <option th:each="a : ${allEnumGender}"
                                 th:value="${a}"
                                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
@@ -54,18 +68,18 @@
 
             <tr>
                 <td>Адрес проживания: cтрана</td>
-                <td><input type="text" th:field="*{homeAddress.city}"></td>
+                <td><input type="text" id="homeCity" name="homeCity"></td>
             </tr>
 
             <tr>
                 <td>Адрес проживания: город</td>
-                <td><input type="text" th:field="*{homeAddress.country}"></td>
+                <td><input type="text" id="homeCountry" name="homeCountry"></td>
             </tr>
 
             <tr>
                 <td>Семья и отношения</td>
                 <td>
-                    <select th:field="*{maritalStatus}">
+                    <select id="maritalStatus" name="maritalStatus">
                         <option th:each="a : ${allEnumMaritalStatus}"
                                 th:value="${a}"
                                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
@@ -75,11 +89,11 @@
 
             <tr>
                 <td>Адрес работы: cтрана</td>
-                <td><input type="text" th:field="*{workAddress.country}"></td>
+                <td><input type="text" id="workCountry" name="workCountry"></td>
             </tr>
             <tr>
                 <td>Адрес работы: город</td>
-                <td><input type="text" th:field="*{workAddress.city}"></td>
+                <td><input type="text" id="workCity" name="workCity"></td>
             </tr>
 
             <tr>

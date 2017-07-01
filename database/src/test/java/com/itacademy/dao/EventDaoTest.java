@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +31,8 @@ public class EventDaoTest extends BaseTest {
         Flashmob flashmob = new Flashmob();
         flashmob.setFlashmobType(EnumFlashmobType.ARTMOB);
         flashmob.setName("raise your hand");
+        flashmob.setAboutEvent("description test");
+        flashmob.setCreationDate(LocalDateTime.now());
         flashmobDao.save(flashmob);
     }
 

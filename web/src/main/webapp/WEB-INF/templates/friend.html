@@ -25,7 +25,12 @@
             <td th:text="${myFriends}"
                 th:if="${not myFriends.empty}">
             </td>
+            <td>
+                <a th:href="@{/openChat/{name}(name=${myFriends})}">Показать переписку</a>
+            </td>
+
         </tr>
+
         <tr>
             <td th:text="'нет информации'"
                 th:if="${myFriends1.empty}">

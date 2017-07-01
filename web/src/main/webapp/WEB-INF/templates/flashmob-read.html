@@ -16,26 +16,26 @@
     </style>
 </head>
 <body>
+
 <div th:insert="header"></div>
+
+<a href="#" onclick="history.back();">Назад</a>
 
 <center>
 
-<h2>Новый блог</h2>
-<form th:action="@{/saveBlog}" method="post" th:object="${blog}">
 
     <p><b>Название:</b></p>
-    <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
+    <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.name}"></textarea></p>
+    <p><b>Дата проведения:</b></p>
+    <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.holdingDate}"></textarea></p>
+    <p><b>Тип:</b></p>
+    <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.flashmobType}"></textarea></p>
     <p><b>Содержание:</b></p>
-    <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
-    <!--<input type="hidden" th:field="*{user}" th:value="${myUser}">-->
-    <!--<p> <input type="datetime-local" th:field="*{creationDate}" > </p>-->
-    <!--<p th:text="${#temporals.formatISO(localDateTime)}"></p>-->
+    <p><textarea rows="10" cols="90" disabled th:text="${myFlashmob.aboutEvent}"></textarea></p>
 
-    <p><input type="submit" value="Сохранить блог"/></p>
-
-</form>
 
 </center>
-</body>
 
+
+</body>
 </html>

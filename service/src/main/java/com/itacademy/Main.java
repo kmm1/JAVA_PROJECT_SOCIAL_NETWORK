@@ -29,6 +29,8 @@ public class Main {
 
 
         System.out.println(messages);
+
+
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");
 //
 //        List<String> list = new ArrayList<String>();
@@ -46,7 +48,7 @@ public class Main {
 //        System.out.println(list);
 //        System.out.println(x);
 
-    }
+}
 
 
 }

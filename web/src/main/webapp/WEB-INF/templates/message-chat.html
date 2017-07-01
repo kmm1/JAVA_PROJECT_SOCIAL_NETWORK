@@ -60,7 +60,7 @@
     </table>
 
     <p>Написать сообшение:</p>
-    <form th:action="@{/saveMessage/{userReceiverName}/(userReceiverName=${name2})}" method="post">
+    <form th:action="@{/saveMessage/{userReceiverName}/(userReceiverName=${name2})}" method="get">
         <p><b>Сообшение:</b></p>
         <p><textarea rows="3" cols="60" input type="text" id="text" name="text"></textarea></p>
         <p><input type="submit" value="Отправить сообшение"/></p>

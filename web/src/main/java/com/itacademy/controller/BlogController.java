@@ -68,7 +68,7 @@ public class BlogController {
     }
 
     @GetMapping(path = "/deliteBlog/{blogId}")
-    public String showMovieInfo(@PathVariable("blogId") Long blogId, Model model) {
+    public String deliteMovie (@PathVariable("blogId") Long blogId, Model model) {
         Blog myBlog = blogService.findById(blogId);
         blogService.delete(myBlog);
         return "redirect:/blog";

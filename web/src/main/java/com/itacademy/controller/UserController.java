@@ -1,15 +1,19 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.User;
+import com.itacademy.entity.*;
+import com.itacademy.service.FlashmobService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SessionAttributes(names = {"userName", "userId"})
@@ -17,15 +21,24 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final FlashmobService flashmobService;
+
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FlashmobService flashmobService) {
         this.userService = userService;
+        this.flashmobService = flashmobService;
+
     }
 
     @ModelAttribute("user")
     public User user() {
         return new User();
+    }
+
+    @ModelAttribute("allFlashmobTypes")
+    public List<EnumFlashmobType> enumFlashmob() {
+        return Arrays.asList(EnumFlashmobType.values());
     }
 
 
@@ -44,12 +57,17 @@ public class UserController {
         if (user.isEmpty()) {
             return "login-form";
         } else if (user.get(0).getRole().equals("user")) {
+            List<Event> allEvents = flashmobService.findAllEvents();
+            model.addAttribute("allEvents", allEvents);
             model.put("userName", user.get(0).getName());
             model.put("userId", user.get(0).getId());
             return "main-page-user";
         } else if (user.get(0).getRole().equals("admin")) {
+            List<Event> allEvents = flashmobService.findAllEvents();
+            model.addAttribute("allEvents", allEvents);
             model.put("userName", user.get(0).getName());
             model.put("userId", user.get(0).getId());
+
             return "main-page-admin";
         } else return "login-form";
     }
@@ -63,7 +81,7 @@ public class UserController {
     @PostMapping(path = "/registration")
     public String saveUser(User user, @RequestParam String name,
                            @RequestParam String password, @RequestParam String email,
-                           ModelMap model) throws UnsupportedEncodingException {
+                           ModelMap model) {
         if (name.equals("") || password.equals("") || email.equals("")) {
             return "registration-form";
         }
@@ -75,5 +93,12 @@ public class UserController {
     public String logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
         return "login-form";
+    }
+
+    @GetMapping(path = "/mainPageUser")
+    public String mainPageUser(Model model) {
+        List<Event> allEvents = flashmobService.findAllEvents();
+        model.addAttribute("allEvents", allEvents);
+        return "main-page-user";
     }
 }

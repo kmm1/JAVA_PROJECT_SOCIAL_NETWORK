@@ -14,17 +14,20 @@ DROP TABLE users;
 
 
 CREATE TABLE events (
-  id   INT AUTO_INCREMENT,
-  name VARCHAR(255),
+  id            INT AUTO_INCREMENT,
+  name          VARCHAR(255),
+  holding_date  VARCHAR(255),
+  creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
 );
-
 CREATE TABLE flashmobs (
-  type     VARCHAR(255),
-  event_id INT,
+  type        VARCHAR(255),
+  about_event TEXT,
+  event_id    INT,
   PRIMARY KEY (event_id),
   FOREIGN KEY (event_id) REFERENCES events (id)
 );
+
 
 CREATE TABLE users (
   id                INT          AUTO_INCREMENT,

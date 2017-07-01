@@ -1,12 +1,12 @@
 package com.itacademy.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
-/**
- * Created by Tom on 11.06.2017.
- */
+
 @Entity
 @Table(name = "flashmobs")
 @ToString(callSuper = true)
@@ -18,4 +18,9 @@ public class Flashmob extends Event {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private EnumFlashmobType flashmobType;
+
+    @Getter
+    @Setter
+    @Column(name = "about_event")
+    private String aboutEvent;
 }

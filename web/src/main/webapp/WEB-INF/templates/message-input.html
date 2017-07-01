@@ -36,7 +36,7 @@
         </tbody>
     </table>
 
-    <form th:action="@{/openChat/{name}}" method="get">
+    <form th:action="@{/openChat}" method="post">
         <p><b>Открыть переписку с:</b></p>
         <p><textarea rows="1" cols="20" input type="text" id="userReceiverName" name="userReceiverName"></textarea></p>
         <p><input type="submit" value="Открыть переписку"/></p>

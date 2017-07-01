@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface FlashmobDao extends BaseDao<Flashmob> {
-     List<Event> findAllEvents();
+    List<Event> findAllEvents();
 
-    }
+}

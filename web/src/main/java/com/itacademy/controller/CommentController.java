@@ -1,10 +1,8 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.Blog;
-import com.itacademy.entity.Friend;
-import com.itacademy.entity.Profile;
-import com.itacademy.entity.User;
+import com.itacademy.entity.*;
 import com.itacademy.service.BlogService;
+import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,22 +17,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class MainController {
+public class CommentController {
 
     private final BlogService blogService;
     private final UserService userService;
+    private final CommentService commentService;
 
 
     @Autowired
-    public MainController(BlogService blogService, UserService userService) {
+    public CommentController(BlogService blogService,
+                             UserService userService, CommentService commentService) {
         this.blogService = blogService;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
-    @GetMapping(path = "/mainPageUser")
-    public String hh( Model model) {
-        return "/main-page-user";
+    @ModelAttribute("blog")
+    public Blog blog() {
+        return new Blog();
     }
+
+    @ModelAttribute("comment")
+    public Comment comment() {
+        return new Comment();
+    }
+
+
 
 
 }
