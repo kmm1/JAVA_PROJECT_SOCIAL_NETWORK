@@ -2,8 +2,6 @@ package com.itacademy.service;
 
 import com.itacademy.dao.BlogDao;
 import com.itacademy.entity.Blog;
-import com.itacademy.entity.Friend;
-import com.itacademy.entity.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +52,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId) {
         blogDao.deliteExistingBlogFromExistingCategory(categoryId, blogId);
+    }
+
+    @Override
+    public List<Blog> findAllBlogsByCategory(Long categoryId) {
+        return blogDao.findAllBlogsByCategory(categoryId);
     }
 
 

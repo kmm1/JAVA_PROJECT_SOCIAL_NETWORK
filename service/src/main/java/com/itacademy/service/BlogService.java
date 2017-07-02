@@ -21,5 +21,7 @@ public interface BlogService {
 
     void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
 
+    List<Blog> findAllBlogsByCategory(Long categoryId);
+
 
 }

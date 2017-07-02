@@ -1,6 +1,7 @@
 package com.itacademy.controller;
 
 import com.itacademy.entity.*;
+import com.itacademy.service.CategoryService;
 import com.itacademy.service.FlashmobService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,15 @@ public class UserController {
 
     private final UserService userService;
     private final FlashmobService flashmobService;
+    CategoryService categoryService;
 
 
     @Autowired
-    public UserController(UserService userService, FlashmobService flashmobService) {
+    public UserController(UserService userService, FlashmobService flashmobService, CategoryService categoryService) {
         this.userService = userService;
         this.flashmobService = flashmobService;
+        this.categoryService = categoryService;
+
 
     }
 
@@ -39,6 +43,11 @@ public class UserController {
     @ModelAttribute("allFlashmobTypes")
     public List<EnumFlashmobType> enumFlashmob() {
         return Arrays.asList(EnumFlashmobType.values());
+    }
+
+    @ModelAttribute("allCategories")
+    public List<Category> categories() {
+        return categoryService.findAll();
     }
 
 

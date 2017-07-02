@@ -20,24 +20,29 @@
 
 <center>
 
-
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p>Читать в категории:</p></th>
+            <th colspan="6"><p>Блоги:</p></th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th colspan="1">Название</th>
+            <th colspan="1">Дата проведения</th>
+            <th colspan="1">Открыть событие</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="a : ${allCategories}">
-            <td>
-                <a th:href="@{/readBlogInCategory/{categoryId}(categoryId=${a.getId()})}"><a
-                        th:text="${a.getEnumCategory()}"></a></a>
-            </td>
+        <tr th:each="a : ${allBlogsInCategory}">
+            <td th:text="${a.getTitle()}"></td>
+            <td th:text="${a.getCreationDate()}"></td>
+            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}">Читать блог</a></td>
         </tr>
         </tbody>
     </table>
 
-
 </center>
 </body>
+
 </html>

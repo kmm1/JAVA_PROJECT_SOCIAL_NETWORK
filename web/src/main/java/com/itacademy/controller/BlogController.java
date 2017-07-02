@@ -174,5 +174,12 @@ public class BlogController {
         return "redirect:/addBlog/{blogId}";
     }
 
+    @GetMapping(path = "/readBlogInCategory/{categoryId}")
+    public String readBlogInCategory(@PathVariable("categoryId") Long categoryId, Model model) {
+        List<Blog> allBlogsInCategory = blogService.findAllBlogsByCategory(categoryId);
+        model.addAttribute("allBlogsInCategory", allBlogsInCategory);
+        return "blog-in-category";
+    }
+
 
 }
