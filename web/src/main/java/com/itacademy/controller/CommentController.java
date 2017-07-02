@@ -43,6 +43,55 @@ public class CommentController {
     }
 
 
+    @GetMapping(path = "/saveComment/{blogId}")
+    public String readBlog(@PathVariable("blogId") Long blogId,
+                           @RequestParam String text,
+                           Model model, HttpServletRequest req) {
+        String userName = (String) req.getSession().getAttribute("userName");
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        User myUser = userService.findOneUserByName(userName);
+        Blog myBlog = blogService.findById(blogId);
+        Comment comment = new Comment();
+        comment.setBlog(myBlog);
+        comment.setUser(myUser);
+        comment.setComment(text);
+        commentService.save(comment);
+
+        List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
+        model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
+        model.addAttribute("myBlog", myBlog);
+        model.addAttribute("userName", userName);
+        System.out.println(blogId);
+        System.out.println(myBlog);
+        System.out.println("KKKKKKKKKKKKK" + allCommentsByBlogId);
+        return "blog-read";
+    }
+
+    @GetMapping(path = "/deliteComment/{commentId}")
+    public String deliteComment(@PathVariable("commentId") Long commentId,
+                                Model model, HttpServletRequest req) {
+        String userName = (String) req.getSession().getAttribute("userName");
+        Long userId = (Long) req.getSession().getAttribute("userId");
+        User myUser = userService.findOneUserByName(userName);
+        Comment myComment = commentService.findById(commentId);
+        Blog myBlog = myComment.getBlog();
+        Long blogId = myBlog.getId();
+        if (myComment.getParentId() != null) {
+//            myComment.setComment("Коментарий удален");
+//            commentService.update(myComment);
+//            List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
+//            model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
+//            model.addAttribute("myBlog", myBlog);
+//            model.addAttribute("userName", userName);
+//            return "blog-read";
+        }
+        commentService.delete(myComment);
+        List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
+        model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
+        model.addAttribute("myBlog", myBlog);
+        model.addAttribute("userName", userName);
+        return "blog-read";
+    }
 
 
 }

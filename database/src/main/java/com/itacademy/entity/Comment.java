@@ -27,7 +27,7 @@ public class Comment extends BaseEntity {
     @Column(name = "creation_date")
     @Getter
     @Setter
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     @Getter
     @Setter
@@ -41,9 +41,6 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "blog_id")
     private Blog blog;
 
-//////??????????????????????????????????
-    //    @OneToOne
-//    @JoinColumn (name = "parent_id")
-//    private Comment comment;
+
 }
 

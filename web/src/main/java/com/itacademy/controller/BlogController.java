@@ -1,10 +1,8 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.Blog;
-import com.itacademy.entity.Friend;
-import com.itacademy.entity.Profile;
-import com.itacademy.entity.User;
+import com.itacademy.entity.*;
 import com.itacademy.service.BlogService;
+import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +21,14 @@ public class BlogController {
 
     private final BlogService blogService;
     private final UserService userService;
+    private final CommentService commentService;
 
 
     @Autowired
-    public BlogController(BlogService blogService, UserService userService) {
+    public BlogController(BlogService blogService, UserService userService, CommentService commentService) {
         this.blogService = blogService;
         this.userService = userService;
-
+        this.commentService = commentService;
     }
 
     @ModelAttribute("blog")
@@ -59,8 +58,13 @@ public class BlogController {
 
 
     @GetMapping(path = "/readBlog/{blogId}")
-    public String readBlog(@PathVariable("blogId") Long blogId, Model model) {
+    public String readBlog(@PathVariable("blogId") Long blogId, Model model, HttpServletRequest req) {
+        String userName = (String) req.getSession().getAttribute("userName");
+        Long userId = (Long) req.getSession().getAttribute("userId");
         Blog myBlog = blogService.findById(blogId);
+        List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
+        model.addAttribute("userName", userName);
+        model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
         model.addAttribute("myBlog", myBlog);
         System.out.println(blogId);
         System.out.println(myBlog);
@@ -68,7 +72,7 @@ public class BlogController {
     }
 
     @GetMapping(path = "/deliteBlog/{blogId}")
-    public String deliteMovie (@PathVariable("blogId") Long blogId, Model model) {
+    public String deliteMovie(@PathVariable("blogId") Long blogId, Model model) {
         Blog myBlog = blogService.findById(blogId);
         blogService.delete(myBlog);
         return "redirect:/blog";
@@ -87,8 +91,8 @@ public class BlogController {
                               @RequestParam String title,
                               @RequestParam String text) {
         Blog blog2 = blogService.findById(blogId);
-        System.out.println("title"+title);
-        System.out.println("text"+text);
+        System.out.println("title" + title);
+        System.out.println("text" + text);
         blog2.setTitle(title);
         blog2.setText(text);
         blogService.update(blog2);

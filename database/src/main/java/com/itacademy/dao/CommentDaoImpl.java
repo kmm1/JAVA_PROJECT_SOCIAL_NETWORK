@@ -53,7 +53,7 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment> implements CommentDao {
     public List<Comment> findAllCommentsByBlogId(Long blogId) {
         QComment comment = new QComment("myComment");
         JPAQuery<Comment> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select(comment.comment, comment.creationDate, comment.user.name)
+        query.select(comment/*.comment, comment.creationDate, comment.user.name*/)
                 .from(comment)
                 .join(comment.user)
                 .join(comment.blog)

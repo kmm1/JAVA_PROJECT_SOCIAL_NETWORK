@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:border="http://www.w3.org/1999/xhtml"
-      xmlns:border-collapse="http://java.sun.com/xml/ns/persistence/orm" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
@@ -30,19 +30,44 @@
     <p><textarea rows="1" cols="90" disabled th:text="${myBlog.getTitle()}"></textarea></p>
     <p><b>Содержание:</b></p>
     <p><textarea rows="20" cols="90" disabled th:text="${myBlog.getText()}"></textarea></p>
-
     <p><b>Дата:</b></p>
     <p><textarea rows="1" cols="20" disabled th:text="${myBlog.getCreationDate()}"></textarea></p>
 
-    <p>Написать отзыв:</p>
-    <form th:action="@{/saveComment/{userReceiverName}/(userReceiverName=${name2})}" method="get">
+    <h3></h3>
+
+    <form th:action="@{/saveComment/{blogId}/(blogId=${myBlog.getId()})}" method="get">
         <p><b>Отзыв:</b></p>
-        <p><textarea rows="2" cols="90" input type="text" id="text" name="text"></textarea></p>
+        <p><textarea rows="3" cols="90" input type="text" id="text" name="text"></textarea></p>
         <p><input type="submit" value="Сохранить"/></p>
     </form>
+
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="5"><p>Отзывы:</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${allCommentsByBlogId}">
+            <td><a th:text="${a.getUser().name}"></a>
+                <a>, </a>
+                <a th:text="${a.getCreationDate()}"> </a>
+                <a>, </a>
+                <a th:text="${a.getComment()}"> </a>
+            </td>
+            <td>
+                <a th:if="${a.getUser().name.equals(userName) or a.getBlog().getUser().name.equals(userName)}">
+                    <a th:href="@{/deliteComment/{commentId}/(commentId=${a.getId()})}">Удалить комментарий</a></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
 
 </center>
 
 
 </body>
 </html>
+
+
