@@ -19,5 +19,7 @@ public interface BlogService {
 
     void addExistingBlogToExistingCategory(Long categoryId, Long blogId);
 
+    void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
+
 
 }

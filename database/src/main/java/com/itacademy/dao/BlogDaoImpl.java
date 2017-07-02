@@ -39,6 +39,13 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
         blog.getCategories().add(category);
     }
 
+    @Override
+    public void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId) {
+        Blog blog = getSessionFactory().getCurrentSession().get(Blog.class, blogId);
+        Category category = getSessionFactory().getCurrentSession().get(Category.class, categoryId);
+        blog.getCategories().remove(category);
+    }
+
 
     /**
      * Достать все блоги у пользователя

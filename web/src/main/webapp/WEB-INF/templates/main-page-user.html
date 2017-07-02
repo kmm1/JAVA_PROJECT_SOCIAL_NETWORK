@@ -20,27 +20,7 @@
 
 <center>
 
-    <table border="1" width="30%" cellpadding="5" align="left">
-        <thead>
-        <tr>
-            <th colspan="6"><p>События:</p></th>
-        </tr>
-        </thead>
-        <thead>
-        <tr>
-            <th colspan="1">Название</th>
-            <th colspan="1">Дата проведения</th>
-            <th colspan="1">Открыть событие</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="a : ${allEvents}">
-            <td th:text="${a.name}"></td>
-            <td th:text="${a.holdingDate}"></td>
-            <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}">Открыть</a></td>
-        </tr>
-        </tbody>
-    </table>
+
 
 </center>
 </body>

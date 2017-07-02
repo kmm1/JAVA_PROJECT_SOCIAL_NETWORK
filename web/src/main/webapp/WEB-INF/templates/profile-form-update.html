@@ -12,7 +12,7 @@
 
 <center>
     <table border="1" width="30%" cellpadding="5">
-        <form th:action="@{/saveProfile}" method="post">
+        <form th:action="@{/updateProfile}" method="post" th:object="${profile}">
             <thead>
             <tr>
                 <th colspan="2">Введите информацию</th>
@@ -21,7 +21,7 @@
             <tbody>
             <tr>
                 <td>Обо мне</td>
-                <td><input type="text" id="aboutMe" name="aboutMe"></td>
+                <td><input type="text" id="aboutMe" name="aboutMe" th:field="*{aboutMe}"></td>
             </tr>
 
             <tr>
@@ -57,7 +57,7 @@
             <tr>
                 <td>Пол</td>
                 <td>
-                    <select id="gender" name="gender">
+                    <select id="gender" name="gender" th:field="*{gender}">
                         <option th:each="a : ${allEnumGender}"
                                 th:value="${a}"
                                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
@@ -79,7 +79,7 @@
             <tr>
                 <td>Семья и отношения</td>
                 <td>
-                    <select id="family" name="maritalStatus">
+                    <select id="family" name="maritalStatus" th:field="*{maritalStatus}">
                         <option th:each="a : ${allEnumMaritalStatus}"
                                 th:value="${a}"
                                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>

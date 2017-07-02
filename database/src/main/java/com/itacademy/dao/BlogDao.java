@@ -17,5 +17,8 @@ public interface BlogDao extends BaseDao<Blog> {
 
     List<Blog> findAllBlogsByCategory(Long categoryId);
 
+    void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
+
+
 }
 

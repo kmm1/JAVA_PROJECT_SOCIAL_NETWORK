@@ -24,12 +24,13 @@ public class Main {
         BlogService blogService = context.getBean((BlogService.class));
         MessageService messageService = context.getBean((MessageService.class));
         CommentService commentService = context.getBean((CommentService.class));
+        CategoryService categoryService = context.getBean((CategoryService.class));
 
 
-        List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(1L);
+        List<Category> allCategoriesByBlogId = categoryService.findAllCategoriesByBlogId(1L);
 
 
-        System.out.println(allCommentsByBlogId);
+        System.out.println(allCategoriesByBlogId);
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");

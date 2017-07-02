@@ -2,6 +2,7 @@ package com.itacademy.controller;
 
 import com.itacademy.entity.*;
 import com.itacademy.service.BlogService;
+import com.itacademy.service.CategoryService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,17 @@ public class BlogController {
     private final BlogService blogService;
     private final UserService userService;
     private final CommentService commentService;
+    private final CategoryService categoryService;
 
 
     @Autowired
-    public BlogController(BlogService blogService, UserService userService, CommentService commentService) {
+    public BlogController(BlogService blogService, UserService userService,
+                          CommentService commentService, CategoryService categoryService) {
         this.blogService = blogService;
         this.userService = userService;
         this.commentService = commentService;
+        this.categoryService = categoryService;
+
     }
 
     @ModelAttribute("blog")
@@ -39,6 +43,11 @@ public class BlogController {
     @ModelAttribute("user")
     public User user() {
         return new User();
+    }
+
+    @ModelAttribute("allCategories")
+    public List<Category> categories() {
+        return categoryService.findAll();
     }
 
 
@@ -74,13 +83,34 @@ public class BlogController {
     @GetMapping(path = "/deliteBlog/{blogId}")
     public String deliteMovie(@PathVariable("blogId") Long blogId, Model model) {
         Blog myBlog = blogService.findById(blogId);
+        List<Category> allCategoriesByBlogId = categoryService.findAllCategoriesByBlogId(blogId);
+        List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
+        if (allCategoriesByBlogId.size() != 0) {
+            System.out.println("RRRRRRRRRRRRRRRRRR");
+            for (int i = 0; i < allCategoriesByBlogId.size(); i++) {
+                Long categoryId = allCategoriesByBlogId.get(i).getId();
+                blogService.deliteExistingBlogFromExistingCategory(categoryId, blogId);
+            }
+        }
+        if (allCommentsByBlogId.size() != 0) {
+            System.out.println("SSSSSSSSSSSSSSSSSSS");
+            for (int i = 0; i < allCommentsByBlogId.size(); i++) {
+                Long commentId = allCommentsByBlogId.get(i).getId();
+                Comment comment = commentService.findById(commentId);
+                commentService.delete(comment);
+            }
+        }
+        System.out.println("HHHHHHHHHHHHHHHHHHHHH");
         blogService.delete(myBlog);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXX");
         return "redirect:/blog";
     }
 
     @GetMapping(path = "/addBlog/{blogId}")
     public String changeBlog1(@PathVariable("blogId") Long blogId, Model model) {
         Blog blog = blogService.findById(blogId);
+        List<Category> allCategoriesByBlogId = categoryService.findAllCategoriesByBlogId(blogId);
+        model.addAttribute("allCategoriesByBlogId", allCategoriesByBlogId);
         model.addAttribute("blog", blog);
         model.addAttribute("blogId", blogId);
         return "/blog-form-update";
@@ -91,14 +121,11 @@ public class BlogController {
                               @RequestParam String title,
                               @RequestParam String text) {
         Blog blog2 = blogService.findById(blogId);
-        System.out.println("title" + title);
-        System.out.println("text" + text);
         blog2.setTitle(title);
         blog2.setText(text);
         blogService.update(blog2);
         model.addAttribute("blogId", blogId);
         return "redirect:/readBlog/{blogId}";
-
     }
 
     @GetMapping(path = "/saveBlog")
@@ -123,6 +150,28 @@ public class BlogController {
         Long blogId = blogService.save(blog);
         model.addAttribute("blogId", blogId);
         return "redirect:/readBlog/{blogId}";
+    }
+
+    @PostMapping(path = "/addExistingBlogToExistingCategory/{blogId}")
+    public String addExistingBlogToExistingCategory1
+            (@PathVariable("blogId") Long blogId, Model model,
+             @RequestParam EnumCategory name) {
+        Blog blog2 = blogService.findById(blogId);
+        List<Category> oneCategoryByEnumCategory = categoryService.findOneCategoryByEnumCategory(name);
+        Long categoryId = oneCategoryByEnumCategory.get(0).getId();
+        blogService.addExistingBlogToExistingCategory(categoryId, blogId);
+        return "redirect:/addBlog/{blogId}";
+    }
+
+    @PostMapping(path = "/deliteExistingBlogFromExistingCategory/{blogId}")
+    public String deliteExistingBlogFromExistingCategory1
+            (@PathVariable("blogId") Long blogId, Model model,
+             @RequestParam EnumCategory name2) {
+        Blog blog2 = blogService.findById(blogId);
+        List<Category> oneCategoryByEnumCategory = categoryService.findOneCategoryByEnumCategory(name2);
+        Long categoryId = oneCategoryByEnumCategory.get(0).getId();
+        blogService.deliteExistingBlogFromExistingCategory(categoryId, blogId);
+        return "redirect:/addBlog/{blogId}";
     }
 
 

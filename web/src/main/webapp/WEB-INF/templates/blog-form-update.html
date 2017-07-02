@@ -20,16 +20,67 @@
 
 <center>
 
+    <a th:href="@{/saveBlog}">Создать новый блог</a>
+    <a th:href="@{/deliteBlog/{blogId}(blogId=${blog.getId()})}">Удалить блог</a>
+    <p></p>
+
     <h2>Редактировать блог:</h2>
     <form th:action="@{/addBlog/{blogId}/(blogId=${blog.getId()})}" method="post" th:object="${blog}">
         <p><b>Название:</b></p>
         <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
         <p><b>Содержание:</b></p>
         <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
-
-        <p><input type="submit" value="Редактировать блог"/></p>
-
+        <p><input type="submit" value="Сохранить"/></p>
     </form>
+
+    <h3></h3>
+
+    <form th:action="@{/addExistingBlogToExistingCategory/{blogId}/(blogId=${blog.getId()})}" method="post">
+        <table border="1" width="30%" cellpadding="5">
+            <tr>
+                <th colspan="1">Добавить блог к категории</th>
+                <th colspan="1">Добавить</th>
+            </tr>
+            <tbody>
+            <tr>
+                <td>
+                    <select id="name" name="name">
+                        <option th:each="a : ${allCategories}"
+                                th:value="${a.getEnumCategory()}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a.getEnumCategory()))}"></option>
+                    </select>
+                </td>
+                <td><input type="submit" value='Добавить'></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <h3></h3>
+
+    <form th:action="@{/deliteExistingBlogFromExistingCategory/{blogId}/(blogId=${blog.getId()})}" method="post">
+        <table border="1" width="30%" cellpadding="5">
+            <tr>
+                <th colspan="1">Удалить блог из категории</th>
+                <th colspan="1">Удалить</th>
+            </tr>
+            <tbody>
+            <tr>
+                <td>
+                    <select id="name2" name="name2">
+                        <option th:each="a : ${allCategoriesByBlogId}"
+                                th:value="${a.getEnumCategory()}"
+                                th:text="${#strings.capitalize(#strings.toLowerCase(a.getEnumCategory()))}"></option>
+                    </select>
+                </td>
+                <td th:if="${not allCategoriesByBlogId.empty}">
+                    <input type="submit" value="Удалить"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
 
 </center>
 </body>

@@ -75,12 +75,12 @@ public class FlashmobController {
         return "main-page-admin";
     }
 
-//    @GetMapping(path = "/flashmob")
-//    public String findEvent1(Model model) {
-//        Flashmob myFlashmob = flashmobService.findById(eventId);
-//        model.addAttribute("myFlashmob", myFlashmob);
-//        return "flashmob-read";
-//    }
+    @GetMapping(path = "/flashmob")
+    public String findEvent1(Model model) {
+        List<Event> allEvents = flashmobService.findAllEvents();
+        model.addAttribute("allEvents", allEvents);
+        return "flashmob";
+    }
 
     @GetMapping(path = "/findEvent/{eventId}")
     public String findEvent2(@PathVariable("eventId") Long eventId, Model model) {

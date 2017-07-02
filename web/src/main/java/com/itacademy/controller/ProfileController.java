@@ -88,7 +88,7 @@ public class ProfileController {
         } else
             model.addAttribute("profile", profile2);
         model.addAttribute("userName", userName);
-        return "profile";
+        return "/profile";
     }
 
     @GetMapping(path = "/addProfile")
@@ -119,8 +119,8 @@ public class ProfileController {
         System.out.println(monthOfBirth);
         System.out.println(yearOfBirth);
 
-
         profile.setUser(user);
+        profile.setAboutMe(aboutMe);
         profile.setHomeAddress(new Address(homeCountry, homeCity));
         profile.setWorkAddress(new Address(workCountry, workCity));
         profile.setBirthday(new Birthday(yearOfBirth, monthOfBirth, dayOfBirth));
@@ -135,25 +135,35 @@ public class ProfileController {
         return "profile";
     }
 
-    //TODO ne soxran enbedded
+    //TODO ne soxr enbadded => gde net feald sbrasivaet formy
     @PostMapping(path = "/updateProfile")
     public String profileUpdate(Model model, HttpServletRequest req,
                                 @RequestParam String aboutMe,
-                                @RequestParam String maritalStatus,
-                                @RequestParam String gender) {
+                                @RequestParam int dayOfBirth,
+                                @RequestParam int monthOfBirth,
+                                @RequestParam int yearOfBirth,
+                                @RequestParam EnumGender gender,
+                                @RequestParam String homeCity,
+                                @RequestParam String homeCountry,
+                                @RequestParam EnumMaritalStatus maritalStatus,
+                                @RequestParam String workCountry,
+                                @RequestParam String workCity) {
         Long userId = (Long) req.getSession().getAttribute("userId");
         String userName = (String) req.getSession().getAttribute("userName");
         List<Profile> profile2 = profileService.findProfileByUserId(userId);
         Profile profile = profile2.get(0);
+
         profile.setAboutMe(aboutMe);
-        profile.setMaritalStatus(EnumMaritalStatus.valueOf(maritalStatus));
-        profile.setGender(EnumGender.valueOf(gender));
+        profile.setHomeAddress(new Address(homeCountry, homeCity));
+        profile.setWorkAddress(new Address(workCountry, workCity));
+        profile.setBirthday(new Birthday(yearOfBirth, monthOfBirth, dayOfBirth));
+        profile.setGender(gender);
+        profile.setMaritalStatus(maritalStatus);
+
         profileService.update(profile);
         List<Profile> profile3 = profileService.findProfileByUserId(userId);
         model.addAttribute("profile", profile3);
         model.addAttribute("userName", userName);
-//        System.out.println("JJJJJJJJJJJJJJJJ");
-//        System.out.println(dayOfBirth);
         return "profile";
     }
 

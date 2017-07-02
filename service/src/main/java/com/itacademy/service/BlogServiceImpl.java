@@ -51,5 +51,10 @@ public class BlogServiceImpl implements BlogService {
         blogDao.addExistingBlogToExistingCategory(categoryId, blogId);
     }
 
+    @Override
+    public void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId) {
+        blogDao.deliteExistingBlogFromExistingCategory(categoryId, blogId);
+    }
+
 
 }
