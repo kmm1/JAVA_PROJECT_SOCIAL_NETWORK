@@ -31,9 +31,9 @@
         <tr th:each="a : ${allCategories}">
             <td>
                 <a th:href="@{/readBlogInCategory/{categoryId}(categoryId=${a.getId()})}"
-                        th:text="${a.getEnumCategory()}"></a>
+                   th:text="${#strings.capitalize(#strings.toLowerCase (a.getEnumCategory()))}">
+                </a>
             </td>
-
         </tr>
         </tbody>
     </table>
