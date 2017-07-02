@@ -36,7 +36,6 @@ public class CommentServiceTest extends BaseTest {
     }
 
 
-
     @After
     public void finish() {
         // ...
