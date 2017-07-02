@@ -45,7 +45,6 @@ public class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
     }
 
 
-
     @Override
     public List<T> findAll() {
         Session session = sessionFactory.getCurrentSession();

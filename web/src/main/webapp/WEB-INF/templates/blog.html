@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:border="http://www.w3.org/1999/xhtml"
-      xmlns:border-collapse="http://java.sun.com/xml/ns/persistence/orm" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
@@ -24,33 +24,33 @@
     <p></p>
 
 
-        <table border="1" width="30%" cellpadding="5">
-            <thead>
-            <tr>
-                <th colspan="10"><p>Мои блоги:</p></th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th colspan="1">Название</th>
-                <th colspan="1">Дата</th>
-                <th colspan="1">Читать блог</th>
-                <th colspan="1">Редактировать блог</th>
-                <th colspan="1">Удалить блог</th>
+    <table border="1" width="30%" cellpadding="5">
+        <thead>
+        <tr>
+            <th colspan="10"><p>Мои блоги:</p></th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th colspan="1">Название</th>
+            <th colspan="1">Дата</th>
+            <th colspan="1">Читать блог</th>
+            <th colspan="1">Редактировать блог</th>
+            <th colspan="1">Удалить блог</th>
 
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="a : ${findAllBlogsByUserName}">
-                <td th:text="${a.getTitle()}"></td>
-                <td th:text="${a.getCreationDate()}"></td>
-                <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}">Читать блог</a></td>
-                <td><a th:href="@{/addBlog/{blogId}(blogId=${a.getId()})}">Редактировать блог</a></td>
-                <td><a th:href="@{/deliteBlog/{blogId}(blogId=${a.getId()})}">Удалить блог</a></td>
-            </tr>
-            </tbody>
-        </table>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${findAllBlogsByUserName}">
+            <td th:text="${a.getTitle()}"></td>
+            <td th:text="${a.getCreationDate()}"></td>
+            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}">Читать блог</a></td>
+            <td><a th:href="@{/addBlog/{blogId}(blogId=${a.getId()})}">Редактировать блог</a></td>
+            <td><a th:href="@{/deliteBlog/{blogId}(blogId=${a.getId()})}">Удалить блог</a></td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </center>

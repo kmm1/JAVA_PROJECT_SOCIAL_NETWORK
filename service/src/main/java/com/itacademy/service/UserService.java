@@ -1,7 +1,5 @@
 package com.itacademy.service;
 
-import com.itacademy.entity.Friend;
-import com.itacademy.entity.Profile;
 import com.itacademy.entity.User;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public interface UserService {
 
     User findOneUserByName(String name);
 
-    List<User> findOneUserByName2 (String name);
+    List<User> findOneUserByName2(String name);
 
 
 }

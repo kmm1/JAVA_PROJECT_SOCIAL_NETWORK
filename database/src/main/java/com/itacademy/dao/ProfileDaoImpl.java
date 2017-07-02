@@ -1,7 +1,8 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
-import com.itacademy.entity.*;
+import com.itacademy.entity.Profile;
+import com.itacademy.entity.QProfile;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 

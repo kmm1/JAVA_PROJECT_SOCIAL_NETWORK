@@ -1,17 +1,12 @@
 package com.itacademy;
 
 import com.itacademy.config.RootConfig;
-import com.itacademy.dao.FriendDao;
-import com.itacademy.dao.UserDao;
-import com.itacademy.entity.*;
+import com.itacademy.entity.Blog;
+import com.itacademy.entity.Category;
 import com.itacademy.service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 
 public class Main {
@@ -27,14 +22,13 @@ public class Main {
         CategoryService categoryService = context.getBean((CategoryService.class));
 
 
-        List<Category> allCategoriesByBlogId = categoryService.findAllCategoriesByBlogId(1L);
+//        List<Category> allCategoriesByBlogId = categoryService.findAllCategoriesByBlogId(1L);
+        List<Blog> allBlogsInCategory = blogService.findAllBlogsByCategory(1L);
 
-
-        System.out.println(allCategoriesByBlogId);
+        System.out.println(allBlogsInCategory);
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");
-//
 //        List<String> list = new ArrayList<String>();
 //        ArrayList<String> list2 = new ArrayList<>();
 
@@ -50,7 +44,7 @@ public class Main {
 //        System.out.println(list);
 //        System.out.println(x);
 
-}
+    }
 
 
 }

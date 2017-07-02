@@ -1,11 +1,9 @@
 package com.itacademy.service;
 
 
-import com.itacademy.entity.Blog;
 import com.itacademy.entity.Message;
 
 import java.util.List;
-import java.util.Set;
 
 public interface MessageService {
 

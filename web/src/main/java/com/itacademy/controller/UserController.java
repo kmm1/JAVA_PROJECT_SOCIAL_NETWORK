@@ -1,6 +1,9 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.*;
+import com.itacademy.entity.Category;
+import com.itacademy.entity.EnumFlashmobType;
+import com.itacademy.entity.Event;
+import com.itacademy.entity.User;
 import com.itacademy.service.CategoryService;
 import com.itacademy.service.FlashmobService;
 import com.itacademy.service.UserService;
@@ -11,9 +14,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

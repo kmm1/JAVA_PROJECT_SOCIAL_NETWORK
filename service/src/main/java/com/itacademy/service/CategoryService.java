@@ -1,10 +1,8 @@
 package com.itacademy.service;
 
 
-import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
-import com.itacademy.entity.Flashmob;
 
 import java.util.List;
 

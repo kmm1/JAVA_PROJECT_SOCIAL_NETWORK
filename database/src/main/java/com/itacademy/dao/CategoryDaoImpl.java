@@ -1,9 +1,10 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
-import com.itacademy.entity.*;
+import com.itacademy.entity.Category;
+import com.itacademy.entity.EnumCategory;
+import com.itacademy.entity.QCategory;
 import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,13 +1,12 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
-import com.itacademy.entity.*;
+import com.itacademy.entity.Friend;
+import com.itacademy.entity.QFriend;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {

@@ -176,9 +176,11 @@ public class BlogController {
 
     @GetMapping(path = "/readBlogInCategory/{categoryId}")
     public String readBlogInCategory(@PathVariable("categoryId") Long categoryId, Model model) {
+        System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         List<Blog> allBlogsInCategory = blogService.findAllBlogsByCategory(categoryId);
         model.addAttribute("allBlogsInCategory", allBlogsInCategory);
         return "blog-in-category";
+//        return "blog";
     }
 
 

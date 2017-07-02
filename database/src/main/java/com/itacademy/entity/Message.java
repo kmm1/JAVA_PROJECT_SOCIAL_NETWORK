@@ -1,9 +1,12 @@
 package com.itacademy.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "messages")
@@ -19,7 +22,7 @@ public class Message extends BaseEntity {
     @Column(name = "creation_date")
     @Getter
     @Setter
-    private LocalDateTime creationDate= LocalDateTime.now();
+    private LocalDateTime creationDate = LocalDateTime.now();
 
     @Getter
     @Setter

@@ -41,6 +41,8 @@
         <p><input type="submit" value="Сохранить"/></p>
     </form>
 
+    <h3></h3>
+
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
@@ -59,7 +61,6 @@
                 <a th:if="${a.getUser().name.equals(userName) or a.getBlog().getUser().name.equals(userName)}">
                     <a th:href="@{/deliteComment/{commentId}/(commentId=${a.getId()})}">Удалить комментарий</a></a>
             </td>
-
         </tr>
         </tbody>
     </table>

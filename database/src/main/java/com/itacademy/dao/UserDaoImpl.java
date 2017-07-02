@@ -24,7 +24,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public User findOneUserByName (String name) {
+    public User findOneUserByName(String name) {
         QUser user = new QUser("myUser");
         JPAQuery<User> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(user)
@@ -33,7 +33,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return query.fetchOne();
     }
 
-    public List<User> findOneUserByName2 (String name) {
+    public List<User> findOneUserByName2(String name) {
         QUser user = new QUser("myUser");
         JPAQuery<User> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(user)

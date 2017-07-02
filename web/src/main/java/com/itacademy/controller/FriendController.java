@@ -1,6 +1,5 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.EnumGender;
 import com.itacademy.entity.Friend;
 import com.itacademy.entity.User;
 import com.itacademy.service.FriendService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller

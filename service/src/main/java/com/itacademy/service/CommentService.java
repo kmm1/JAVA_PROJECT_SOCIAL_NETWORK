@@ -1,7 +1,6 @@
 package com.itacademy.service;
 
 
-import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
 
 import java.util.List;

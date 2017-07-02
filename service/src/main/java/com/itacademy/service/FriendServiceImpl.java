@@ -2,15 +2,12 @@ package com.itacademy.service;
 
 
 import com.itacademy.dao.FriendDao;
-import com.itacademy.dao.UserDao;
 import com.itacademy.entity.Friend;
-import com.itacademy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional

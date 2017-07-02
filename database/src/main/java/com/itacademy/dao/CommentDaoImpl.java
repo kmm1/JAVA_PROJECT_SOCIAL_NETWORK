@@ -1,13 +1,11 @@
 package com.itacademy.dao;
 
-import com.itacademy.dao.common.BaseDao;
 import com.itacademy.dao.common.BaseDaoImpl;
-import com.itacademy.entity.*;
+import com.itacademy.entity.Blog;
+import com.itacademy.entity.Comment;
+import com.itacademy.entity.QComment;
+import com.itacademy.entity.User;
 import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

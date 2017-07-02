@@ -48,7 +48,7 @@ public class MessageDaoTest extends BaseTest {
     @Test
     public void testGetMessageById() {
         Message message = new Message();
-        Long messageId =  messageDao.save(message);
+        Long messageId = messageDao.save(message);
         Message message1 = messageDao.findById(messageId);
         assertThat(message1, notNullValue());
         System.out.println(message1);

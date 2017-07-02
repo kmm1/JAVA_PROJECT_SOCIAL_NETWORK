@@ -9,10 +9,7 @@ import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -34,27 +31,6 @@ public class CategoryController {
         this.categoryService = categoryService;
 
     }
-
-    @ModelAttribute("blog")
-    public Blog blog() {
-        return new Blog();
-    }
-
-    @ModelAttribute("category")
-    public Category category() {
-        return new Category();
-    }
-
-    @ModelAttribute("user")
-    public User user() {
-        return new User();
-    }
-
-    @ModelAttribute("allCategories")
-    public List<Category> categories() {
-        return categoryService.findAll();
-    }
-
 
 
 }

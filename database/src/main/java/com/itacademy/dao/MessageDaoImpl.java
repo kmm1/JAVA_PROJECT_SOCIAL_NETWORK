@@ -4,10 +4,12 @@ import com.itacademy.dao.common.BaseDaoImpl;
 import com.itacademy.entity.Message;
 import com.itacademy.entity.QMessage;
 import com.querydsl.jpa.impl.JPAQuery;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Repository
 public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {

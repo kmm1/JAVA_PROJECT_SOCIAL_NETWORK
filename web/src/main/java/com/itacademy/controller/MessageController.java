@@ -1,7 +1,7 @@
 package com.itacademy.controller;
 
-import com.itacademy.entity.*;
-import com.itacademy.service.BlogService;
+import com.itacademy.entity.Message;
+import com.itacademy.entity.User;
 import com.itacademy.service.MessageService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -135,12 +133,12 @@ public class MessageController {
         Long userId = (Long) req.getSession().getAttribute("userId");
         String userName = (String) req.getSession().getAttribute("userName");
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
-            System.out.println("jjj"+userReceiverName);
+            System.out.println("jjj" + userReceiverName);
             return "message-error";
         }
         List<User> oneUserByName2 = userService.findOneUserByName2(userReceiverName);
         if (oneUserByName2.size() == 0) {
-            System.out.println("kkk"+userReceiverName);
+            System.out.println("kkk" + userReceiverName);
             return "message-error";
         }
         Long id = oneUserByName2.get(0).getId();

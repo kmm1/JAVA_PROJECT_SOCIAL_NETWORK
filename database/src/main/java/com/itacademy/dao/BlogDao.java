@@ -2,7 +2,6 @@ package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDao;
 import com.itacademy.entity.Blog;
-import org.hibernate.Session;
 
 import java.util.List;
 

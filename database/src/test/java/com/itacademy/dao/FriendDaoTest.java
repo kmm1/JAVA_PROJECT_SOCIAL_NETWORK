@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertEquals;
@@ -85,10 +83,9 @@ public class FriendDaoTest extends BaseTest {
         Friend friend2 = new Friend("fri", user1, user3);
         friendDao.save(friend1);
         friendDao.save(friend2);
-       // List<Friend> results = friendDao.findAllFriendsByUserName("senderName");
-       // assertEquals(results.size(), 2);
+        // List<Friend> results = friendDao.findAllFriendsByUserName("senderName");
+        // assertEquals(results.size(), 2);
     }
-
 
 
     @After

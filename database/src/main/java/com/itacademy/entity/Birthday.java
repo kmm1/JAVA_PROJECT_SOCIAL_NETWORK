@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Embeddable
 @NoArgsConstructor

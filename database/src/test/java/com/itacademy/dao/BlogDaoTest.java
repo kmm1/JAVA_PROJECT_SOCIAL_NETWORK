@@ -1,17 +1,20 @@
 package com.itacademy.dao;
 
-import com.itacademy.entity.*;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.*;
+import com.itacademy.entity.Blog;
+import com.itacademy.entity.Category;
+import com.itacademy.entity.User;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 public class BlogDaoTest extends BaseTest {
@@ -98,7 +101,6 @@ public class BlogDaoTest extends BaseTest {
                 categoryId, userId, "test title", "test content");
         assertThat(blogId, notNullValue());
     }
-
 
 
     @Test

@@ -1,7 +1,6 @@
 package com.itacademy.service;
 
 import com.itacademy.dao.UserDao;
-import com.itacademy.entity.Friend;
 import com.itacademy.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,6 @@ public class UserServiceImpl implements UserService {
     public List<User> findUserByNamePassword(String name, String password) {
         return userDao.findUserByNamePassword(name, password);
     }
-
 
 
 }

@@ -56,7 +56,7 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
     public List<Blog> findAllUsersBlogs(Long userId) {
         QBlog blog = new QBlog("myBlog");
         JPAQuery<Blog> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-        query.select (blog)
+        query.select(blog)
                 .from(blog)
                 .join(blog.user)
                 .where(blog.user.id.eq(userId))
@@ -67,9 +67,7 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
     @Override
     public List<Blog> findAllBlogsByCategory(Long categoryId) {
         return getSessionFactory().getCurrentSession()
-                .createQuery("select b.title, b.creationDate " +
-                        "from Blog b join b.categories c " +
-                        "where c.id=:categoryId", Blog.class)
+                .createQuery("select b from Blog b join b.categories c where c.id=:categoryId", Blog.class)
                 .setParameter("categoryId", categoryId)
                 .getResultList();
     }

@@ -25,7 +25,6 @@ public class InternationalizationConfig extends WebMvcConfigurerAdapter {
     }
 
 
-
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();

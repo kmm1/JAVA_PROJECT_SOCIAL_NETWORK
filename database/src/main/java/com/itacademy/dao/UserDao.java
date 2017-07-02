@@ -1,7 +1,6 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDao;
-import com.itacademy.entity.Profile;
 import com.itacademy.entity.User;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface UserDao extends BaseDao<User> {
 
     User findOneUserByName(String name);
 
-     List<User> findOneUserByName2 (String name);
+    List<User> findOneUserByName2(String name);
 
 
-    }
+}

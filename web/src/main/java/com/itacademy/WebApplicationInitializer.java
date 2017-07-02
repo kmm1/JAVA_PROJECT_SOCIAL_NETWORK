@@ -23,6 +23,6 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[] {new EncodingFilter()};
+        return new Filter[]{new EncodingFilter()};
     }
 }
