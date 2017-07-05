@@ -4,7 +4,7 @@ import com.itacademy.dao.common.BaseDaoImpl;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.QBlog;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,7 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
      */
     @Override
     public Long createBlog(Long categoryId, Long userId, String title, String content) {
-        User user = getSessionFactory().getCurrentSession().get(User.class, userId);
+        SystemUser user = getSessionFactory().getCurrentSession().get(SystemUser.class, userId);
         Blog blog = new Blog();
         blog.setUser(user);
         blog.setTitle(title);

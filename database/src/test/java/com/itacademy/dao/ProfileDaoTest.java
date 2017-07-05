@@ -26,7 +26,7 @@ public class ProfileDaoTest extends BaseTest {
 
     @Test
     public void saveProfileToUser() {
-        User user = new User();
+        SystemUser user = new SystemUser();
         Long userId = userDao.save(user);
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);

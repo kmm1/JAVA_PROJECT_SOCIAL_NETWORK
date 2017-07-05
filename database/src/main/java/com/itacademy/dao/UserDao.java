@@ -1,18 +1,20 @@
 package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDao;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 
 import java.util.List;
 
 
-public interface UserDao extends BaseDao<User> {
+public interface UserDao extends BaseDao<SystemUser> {
 
-    List<User> findUserByNamePassword(String name, String password);
+    List<SystemUser> findUserByNamePassword(String name, String password);
 
-    User findOneUserByName(String name);
+    SystemUser findOneUserByName(String name);
 
-    List<User> findOneUserByName2(String name);
+    List<SystemUser> findOneUserByName2(String name);
+
+    SystemUser findByName(String name);
 
 
 }

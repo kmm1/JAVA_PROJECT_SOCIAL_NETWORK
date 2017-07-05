@@ -6,12 +6,16 @@ import com.itacademy.service.CategoryService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +45,8 @@ public class BlogController {
     }
 
     @ModelAttribute("user")
-    public User user() {
-        return new User();
+    public SystemUser user() {
+        return new SystemUser();
     }
 
     @ModelAttribute("allCategories")
@@ -52,10 +56,10 @@ public class BlogController {
 
 
     @GetMapping(path = "/blog")
-    public String showMyFriends(Blog blog, Model model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
-
+    public String showMyFriends(Blog blog, Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         List test = blogService.findAllUsersBlogs(userId);
         if (test.size() == 0) {
             return "blog-form";
@@ -67,9 +71,9 @@ public class BlogController {
 
 
     @GetMapping(path = "/readBlog/{blogId}")
-    public String readBlog(@PathVariable("blogId") Long blogId, Model model, HttpServletRequest req) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        Long userId = (Long) req.getSession().getAttribute("userId");
+    public String readBlog(@PathVariable("blogId") Long blogId, Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
         Blog myBlog = blogService.findById(blogId);
         List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
         model.addAttribute("userName", userName);
@@ -129,10 +133,11 @@ public class BlogController {
     }
 
     @GetMapping(path = "/saveBlog")
-    public String createBlog(Model model, HttpServletRequest req) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        User myUser = userService.findOneUserByName(userName);
+    public String createBlog(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
+        SystemUser myUser = userService.findOneUserByName(userName);
         model.addAttribute("myUser", myUser);
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(myUser);
@@ -140,11 +145,13 @@ public class BlogController {
     }
 
     @PostMapping(path = "/saveBlog")
-    public String createBlog2(Blog blog, ModelMap model, HttpServletRequest req) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        User myUser = userService.findOneUserByName(userName);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
+    public String createBlog2(Blog blog, ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser myUser = userService.findOneUserByName(userName);
+        System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGG");
         System.out.println(myUser);
+        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         blog.setUser(myUser);
         blog.setCreationDate(LocalDateTime.now());
         Long blogId = blogService.save(blog);

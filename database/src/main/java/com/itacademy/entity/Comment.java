@@ -33,7 +33,7 @@ public class Comment extends BaseEntity {
     @Setter
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private SystemUser user;
 
     @Getter
     @Setter

@@ -2,11 +2,13 @@ package com.itacademy.controller;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.BlogService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,10 +49,10 @@ public class CommentController {
     @GetMapping(path = "/saveComment/{blogId}")
     public String readBlog(@PathVariable("blogId") Long blogId,
                            @RequestParam String text,
-                           Model model, HttpServletRequest req) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        User myUser = userService.findOneUserByName(userName);
+                           Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser myUser = userService.findOneUserByName(userName);
         Blog myBlog = blogService.findById(blogId);
         Comment comment = new Comment();
         comment.setBlog(myBlog);
@@ -70,14 +72,14 @@ public class CommentController {
 
     @GetMapping(path = "/deliteComment/{commentId}")
     public String deliteComment(@PathVariable("commentId") Long commentId,
-                                Model model, HttpServletRequest req) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        User myUser = userService.findOneUserByName(userName);
+                                Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser myUser = userService.findOneUserByName(userName);
         Comment myComment = commentService.findById(commentId);
         Blog myBlog = myComment.getBlog();
         Long blogId = myBlog.getId();
-        if (myComment.getParentId() != null) {
+//        if (myComment.getParentId() != null) {
 //            myComment.setComment("Коментарий удален");
 //            commentService.update(myComment);
 //            List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
@@ -85,7 +87,7 @@ public class CommentController {
 //            model.addAttribute("myBlog", myBlog);
 //            model.addAttribute("userName", userName);
 //            return "blog-read";
-        }
+//        }
         commentService.delete(myComment);
         List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
         model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);

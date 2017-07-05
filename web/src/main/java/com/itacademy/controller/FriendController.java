@@ -1,10 +1,12 @@
 package com.itacademy.controller;
 
 import com.itacademy.entity.Friend;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.FriendService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +38,9 @@ public class FriendController {
 
 
     @GetMapping(path = "/friend")
-    public String showMyFriends(Friend friend, Model model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
-
+    public String showMyFriends(Friend friend, Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
         ArrayList<Friend> findAllFriendsByUserName = (ArrayList<Friend>) friendService.findAllFriendsByUserName(userName);
         List<String> myFriends1 = new ArrayList<>();
         for (int i = 0; i < findAllFriendsByUserName.size(); i++) {
@@ -49,7 +50,6 @@ public class FriendController {
         while (myFriends1.contains(userName)) {
             myFriends1.remove(userName);
         }
-
 
         ArrayList<Friend> findAllMyFriendRequestsSent = (ArrayList<Friend>) friendService.findAllMyFriendRequestsSent(userName);
         List<String> myFriends2 = new ArrayList<>();
@@ -64,7 +64,7 @@ public class FriendController {
             myFriends3.add(findAllMyFriendRequestsResived.get(i).getUserSender().getName());
         }
 
-        ArrayList<User> allUsers = (ArrayList<User>) userService.findAll();
+        ArrayList<SystemUser> allUsers = (ArrayList<SystemUser>) userService.findAll();
         List<String> users = new ArrayList<>();
         for (int i = 0; i < allUsers.size(); i++) {
             users.add(allUsers.get(i).getName());
@@ -97,12 +97,12 @@ public class FriendController {
     }
 
     @PostMapping(path = "/sendFriendRequest")
-    public String sendFriendRequest(Model model, HttpServletRequest req,
+    public String sendFriendRequest(Model model,
                                     @RequestParam String userReceiver) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        User sender = userService.findOneUserByName(userName);
-        User reciver = userService.findOneUserByName(userReceiver);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser sender = userService.findOneUserByName(userName);
+        SystemUser reciver = userService.findOneUserByName(userReceiver);
 
         Friend friend = new Friend("req", sender, reciver);
         friendService.save(friend);
@@ -113,10 +113,10 @@ public class FriendController {
     }
 
     @PostMapping(path = "/acceptFriendRequest")
-    public String acceptFriendRequest(Model model, HttpServletRequest req,
+    public String acceptFriendRequest(Model model,
                                       @RequestParam String userReceiver) {
-        String userName = (String) req.getSession().getAttribute("userName");
-
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
         Friend friend = friendService.findOneFriendByUsersNames(userReceiver, userName);
         friend.setStatus("fri");
         friendService.update(friend);
@@ -126,9 +126,10 @@ public class FriendController {
     }
 
     @PostMapping(path = "/deliteFriend")
-    public String deliteFriend(Model model, HttpServletRequest req,
+    public String deliteFriend(Model model,
                                @RequestParam String userReceiver) {
-        String userName = (String) req.getSession().getAttribute("userName");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
         Friend friend = friendService.findOneFriendByUsersNames2(userReceiver, userName);
         friendService.delete(friend);
         System.out.println("JJJJJJJJJJJJJJJJJJ");

@@ -2,7 +2,7 @@ package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
 import com.itacademy.entity.QUser;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 
@@ -10,12 +10,12 @@ import java.util.List;
 
 
 @Repository
-public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<SystemUser> implements UserDao {
 
     @Override
-    public List<User> findUserByNamePassword(String name, String password) {
+    public List<SystemUser> findUserByNamePassword(String name, String password) {
         QUser user = new QUser("myUser");
-        JPAQuery<User> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        JPAQuery<SystemUser> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(user)
                 .from(user)
                 .where(user.name.eq(name))
@@ -24,21 +24,35 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public User findOneUserByName(String name) {
+    public SystemUser findOneUserByName(String name) {
         QUser user = new QUser("myUser");
-        JPAQuery<User> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        JPAQuery<SystemUser> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(user)
                 .from(user)
                 .where(user.name.eq(name));
         return query.fetchOne();
     }
 
-    public List<User> findOneUserByName2(String name) {
+    @Override
+    public List<SystemUser> findOneUserByName2(String name) {
         QUser user = new QUser("myUser");
-        JPAQuery<User> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        JPAQuery<SystemUser> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(user)
                 .from(user)
                 .where(user.name.eq(name));
         return query.fetchResults().getResults();
     }
+
+    @Override
+    public SystemUser findByName(String name) {
+        QUser user = new QUser("myUser");
+        JPAQuery<SystemUser> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(user)
+                .from(user)
+                .where(user.name.eq(name));
+        List<SystemUser> results = query.fetchResults().getResults();
+        return results.size() > 0 ? results.get(0) : null;
+    }
+
+
 }

@@ -62,7 +62,7 @@ public class Profile extends BaseEntity {
     @Setter
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private SystemUser user;
 
     public Profile(String aboutMe) {
         this.aboutMe = aboutMe;

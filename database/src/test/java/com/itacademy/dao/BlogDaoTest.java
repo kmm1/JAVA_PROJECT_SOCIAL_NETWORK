@@ -2,7 +2,7 @@ package com.itacademy.dao;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class BlogDaoTest extends BaseTest {
 
     @Test
     public void testSaveBlog() {
-        User blogger = new User();
+        SystemUser blogger = new SystemUser();
         userDao.save(blogger);
         Blog blog = new Blog();
         blog.setCreationDate(LocalDateTime.now());
@@ -93,7 +93,7 @@ public class BlogDaoTest extends BaseTest {
     @Test
     public void testCreateBlog() {
         Blog blog = new Blog();
-        User user = new User();
+        SystemUser user = new SystemUser();
         Category category = new Category();
         Long userId = userDao.save(user);
         Long categoryId = categoryDao.save(category);

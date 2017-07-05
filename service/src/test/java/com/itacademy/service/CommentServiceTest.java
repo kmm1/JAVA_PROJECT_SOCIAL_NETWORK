@@ -2,7 +2,7 @@ package com.itacademy.service;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

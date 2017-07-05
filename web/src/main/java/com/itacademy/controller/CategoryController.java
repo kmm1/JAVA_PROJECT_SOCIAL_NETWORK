@@ -2,7 +2,7 @@ package com.itacademy.controller;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.BlogService;
 import com.itacademy.service.CategoryService;
 import com.itacademy.service.CommentService;

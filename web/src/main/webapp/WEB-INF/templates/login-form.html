@@ -8,7 +8,7 @@
 
 <center>
     <table border="1" width="30%" cellpadding="3">
-        <form th:action="@{/enter}" method="post" th:object="${user}">
+        <form th:action="@{/login}" method="post">
             <thead>
             <tr>
                 <th colspan="2">войти</th>
@@ -17,12 +17,12 @@
             <tbody>
             <tr>
                 <td><label th:for="name">Имя</label></td>
-                <td><input type="text" th:field="*{name}"><br>
+                <td><input type="text" name="username" id="username"><br>
                 </td>
             </tr>
             <tr>
                 <td><label th:for="password">Пароль</label></td>
-                <td><input type="password" th:field="*{password}"></td>
+                <td><input type="password" name="password" id="password"></td>
             </tr>
             <tr>
                 <td>Войти</td>

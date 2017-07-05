@@ -4,7 +4,7 @@ import com.itacademy.dao.common.BaseDaoImpl;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
 import com.itacademy.entity.QComment;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +18,7 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment> implements CommentDao {
     @Override
     public Long writeCommentToBlog(Long userId, Long blogId, String myComment) {
         Blog blog = getSessionFactory().getCurrentSession().get(Blog.class, blogId);
-        User user = getSessionFactory().getCurrentSession().get(User.class, userId);
+        SystemUser user = getSessionFactory().getCurrentSession().get(SystemUser.class, userId);
         Comment comment = new Comment();
         comment.setBlog(blog);
         comment.setUser(user);
@@ -34,7 +34,7 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment> implements CommentDao {
     public Long writeCommentToExistingComment(Long userId, Long blogId,
                                               Long commentParentId, String myComment) {
         Blog blog = getSessionFactory().getCurrentSession().get(Blog.class, blogId);
-        User user = getSessionFactory().getCurrentSession().get(User.class, userId);
+        SystemUser user = getSessionFactory().getCurrentSession().get(SystemUser.class, userId);
         Comment secondComment = new Comment();
         secondComment.setBlog(blog);
         secondComment.setUser(user);

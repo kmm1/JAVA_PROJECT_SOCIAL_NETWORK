@@ -5,17 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = {"profile"})
-public class User extends BaseEntity {
+@ToString(callSuper = true, exclude = {"profile", "roles"})
+public class SystemUser extends BaseEntity {
 
     @Column(name = "name")
     @Getter
@@ -32,11 +31,6 @@ public class User extends BaseEntity {
     @Setter
     private String password;
 
-    @Column(name = "role")
-    @Getter
-    @Setter
-    private String role = "user";
-
     @Column(name = "registration_date")
     @Getter
     @Setter
@@ -47,5 +41,15 @@ public class User extends BaseEntity {
     @Getter
     @Setter
     private Profile profile;
+
+    @Setter
+    @Getter
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }
+
+
 

@@ -2,7 +2,7 @@ package com.itacademy.dao;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class CommentDaoTest extends BaseTest {
 
     @Test
     public void testSaveComment() {
-        User user = new User();
+        SystemUser user = new SystemUser();
         userDao.save(user);
         Blog blog = new Blog();
         blogDao.save(blog);
@@ -68,7 +68,7 @@ public class CommentDaoTest extends BaseTest {
 
     @Test
     public void testWriteCommentToBlog() {
-        User user = new User();
+        SystemUser user = new SystemUser();
         Long userId = (Long) userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
@@ -83,7 +83,7 @@ public class CommentDaoTest extends BaseTest {
 
     @Test
     public void testWriteCommentToExistingComment() {
-        User user = new User();
+        SystemUser user = new SystemUser();
         Long userId = userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);

@@ -1,7 +1,7 @@
 package com.itacademy.dao;
 
 import com.itacademy.entity.Message;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,8 @@ public class MessageDaoTest extends BaseTest {
 
     @Test
     public void testSaveMessage() {
-        User user1 = new User();
-        User user2 = new User();
+        SystemUser user1 = new SystemUser();
+        SystemUser user2 = new SystemUser();
         userDao.save(user1);
         userDao.save(user2);
         Message message = new Message();
@@ -56,8 +56,8 @@ public class MessageDaoTest extends BaseTest {
 
     @Test
     public void testDeleteMessage() {
-        User user1 = new User();
-        User user2 = new User();
+        SystemUser user1 = new SystemUser();
+        SystemUser user2 = new SystemUser();
         userDao.save(user1);
         userDao.save(user2);
         Message message = new Message();

@@ -46,7 +46,7 @@ public class Blog extends BaseEntity {
     @Setter
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private SystemUser user;
 
     @Getter
     @Setter
@@ -58,7 +58,7 @@ public class Blog extends BaseEntity {
         this.text = text;
     }
 
-    public Blog(String title, String text, User user) {
+    public Blog(String title, String text, SystemUser user) {
         this.title = title;
         this.text = text;
         this.user = user;

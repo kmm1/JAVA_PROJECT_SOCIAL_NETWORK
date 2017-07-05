@@ -5,6 +5,8 @@ import com.itacademy.entity.*;
 import com.itacademy.service.ProfileService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,9 +84,10 @@ public class ProfileController {
 
 
     @GetMapping(path = "/profile")
-    public String showMyProfile(Model model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
+    public String showMyProfile(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         List<Profile> profile2 = profileService.findProfileByUserId(userId);
         if (profile2.isEmpty()) {
             return "profile-form-save";
@@ -95,15 +98,17 @@ public class ProfileController {
     }
 
     @GetMapping(path = "/addProfile")
-    public String profileAdd(Model model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
+    public String profileAdd(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         Profile profile = profileService.findOneProfileByUserId(userId);
         model.addAttribute("profile", profile);
         return "profile-form-update";
     }
 
     @PostMapping(path = "/saveProfile")
-    public String profileSave(Profile profile, Model model, HttpServletRequest req,
+    public String profileSave(Profile profile, Model model,
                               @RequestParam String aboutMe,
                               @RequestParam int dayOfBirth,
                               @RequestParam int monthOfBirth,
@@ -114,9 +119,10 @@ public class ProfileController {
                               @RequestParam EnumMaritalStatus maritalStatus,
                               @RequestParam String workCountry,
                               @RequestParam String workCity) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
-        User user = userService.findById(userId);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser user = userService.findOneUserByName(userName);
+        Long userId = userService.findOneUserByName(userName).getId();
         System.out.println(maritalStatus);
         System.out.println(dayOfBirth);
         System.out.println(monthOfBirth);
@@ -140,7 +146,7 @@ public class ProfileController {
 
     //TODO ne soxr enbadded => gde net feald sbrasivaet formy
     @PostMapping(path = "/updateProfile")
-    public String profileUpdate(Model model, HttpServletRequest req,
+    public String profileUpdate(Model model,
                                 @RequestParam String aboutMe,
                                 @RequestParam int dayOfBirth,
                                 @RequestParam int monthOfBirth,
@@ -151,8 +157,10 @@ public class ProfileController {
                                 @RequestParam EnumMaritalStatus maritalStatus,
                                 @RequestParam String workCountry,
                                 @RequestParam String workCity) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser user = userService.findOneUserByName(userName);
+        Long userId = userService.findOneUserByName(userName).getId();
         List<Profile> profile2 = profileService.findProfileByUserId(userId);
         Profile profile = profile2.get(0);
 

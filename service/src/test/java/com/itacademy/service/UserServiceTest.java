@@ -1,6 +1,6 @@
 package com.itacademy.service;
 
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testSaveUser() {
-        User user = new User();
+        SystemUser user = new SystemUser();
         userService.save(user);
     }
 

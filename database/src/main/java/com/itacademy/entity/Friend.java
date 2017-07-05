@@ -20,12 +20,12 @@ public class Friend extends BaseEntity {
     @Setter
     @ManyToOne
     @JoinColumn(name = "friend_one")
-    private User userSender;
+    private SystemUser userSender;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "friend_two")
-    private User userReceiver;
+    private SystemUser userReceiver;
 
 }

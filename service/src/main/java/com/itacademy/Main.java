@@ -3,7 +3,7 @@ package com.itacademy;
 import com.itacademy.config.RootConfig;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -22,9 +22,8 @@ public class Main {
         CommentService commentService = context.getBean((CommentService.class));
         CategoryService categoryService = context.getBean((CategoryService.class));
 
-        User user = new User();
-        user.setName("test");
-        userService.save(user);
+        SystemUser myUser = userService.findOneUserByName("kate");
+        System.out.println(myUser);
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");

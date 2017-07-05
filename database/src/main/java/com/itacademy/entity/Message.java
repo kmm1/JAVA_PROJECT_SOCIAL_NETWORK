@@ -28,15 +28,15 @@ public class Message extends BaseEntity {
     @Setter
     @ManyToOne
     @JoinColumn(name = "user_receiver_id")
-    private User userSender;
+    private SystemUser userSender;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "user_sender_id")
-    private User userReceiver;
+    private SystemUser userReceiver;
 
-    public Message(String text, User userSender, User userReceiver) {
+    public Message(String text, SystemUser userSender, SystemUser userReceiver) {
         this.text = text;
         this.userSender = userSender;
         this.userReceiver = userReceiver;

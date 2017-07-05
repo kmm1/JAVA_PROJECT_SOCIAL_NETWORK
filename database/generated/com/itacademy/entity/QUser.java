@@ -14,7 +14,7 @@ import com.querydsl.core.types.dsl.PathInits;
  * QUser is a Querydsl query type for User
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QUser extends EntityPathBase<User> {
+public class QUser extends EntityPathBase<SystemUser> {
 
     private static final long serialVersionUID = -329132196L;
 
@@ -40,10 +40,10 @@ public class QUser extends EntityPathBase<User> {
     public final StringPath role = createString("role");
 
     public QUser(String variable) {
-        this(User.class, forVariable(variable), INITS);
+        this(SystemUser.class, forVariable(variable), INITS);
     }
 
-    public QUser(Path<? extends User> path) {
+    public QUser(Path<? extends SystemUser> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -52,10 +52,10 @@ public class QUser extends EntityPathBase<User> {
     }
 
     public QUser(PathMetadata metadata, PathInits inits) {
-        this(User.class, metadata, inits);
+        this(SystemUser.class, metadata, inits);
     }
 
-    public QUser(Class<? extends User> type, PathMetadata metadata, PathInits inits) {
+    public QUser(Class<? extends SystemUser> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.profile = inits.isInitialized("profile") ? new QProfile(forProperty("profile"), inits.get("profile")) : null;
     }

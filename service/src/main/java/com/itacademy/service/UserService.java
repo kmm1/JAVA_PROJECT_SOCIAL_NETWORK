@@ -1,23 +1,26 @@
 package com.itacademy.service;
 
-import com.itacademy.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+
+import com.itacademy.entity.SystemUser;
 
 import java.util.List;
 
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
-    User findById(Long id);
+    SystemUser findById(Long id);
 
-    Long save(User user);
+    Long save(SystemUser user);
 
-    List<User> findAll();
+    List<SystemUser> findAll();
 
-    List<User> findUserByNamePassword(String name, String password);
+    List<SystemUser> findUserByNamePassword(String name, String password);
 
-    User findOneUserByName(String name);
+    SystemUser findOneUserByName(String name);
 
-    List<User> findOneUserByName2(String name);
+    List<SystemUser> findOneUserByName2(String name);
 
 
 }

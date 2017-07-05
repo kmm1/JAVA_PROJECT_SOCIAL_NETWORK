@@ -1,7 +1,7 @@
 package com.itacademy.service;
 
 import com.itacademy.entity.Friend;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.FriendService;
 import com.itacademy.service.UserService;
 import org.junit.After;

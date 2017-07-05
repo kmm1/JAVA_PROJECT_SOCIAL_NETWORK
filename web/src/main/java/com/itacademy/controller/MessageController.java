@@ -1,10 +1,12 @@
 package com.itacademy.controller;
 
 import com.itacademy.entity.Message;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import com.itacademy.service.MessageService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,14 +45,15 @@ public class MessageController {
     }
 
     @PostMapping(path = "/saveMessage")
-    public String saveMessage2(ModelMap model, HttpServletRequest req,
+    public String saveMessage2(ModelMap model,
                                @RequestParam String userReceiverName, @RequestParam String text) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        User userSender = userService.findOneUserByName(userName);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser userSender = userService.findOneUserByName(userName);
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
             return "message-error";
         }
-        List<User> user = userService.findOneUserByName2(userReceiverName);
+        List<SystemUser> user = userService.findOneUserByName2(userReceiverName);
         System.out.println(user);
         if (user.size() == 0) {
             return "message-error";
@@ -66,16 +69,17 @@ public class MessageController {
 
     @GetMapping(path = "/saveMessage/{userReceiverName}")
     public String saveMessage3(@PathVariable("userReceiverName") String userReceiverName,
-                               ModelMap model, HttpServletRequest req,
+                               ModelMap model,
                                @RequestParam String text) {
-        String userName = (String) req.getSession().getAttribute("userName");
-        User userSender = userService.findOneUserByName(userName);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        SystemUser userSender = userService.findOneUserByName(userName);
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
             return "message-error";
         }
         System.out.println("JJJJJJJJJJJJJJJJJ");
         System.out.println(userReceiverName);
-        List<User> user = userService.findOneUserByName2(userReceiverName);
+        List<SystemUser> user = userService.findOneUserByName2(userReceiverName);
         System.out.println(user);
         if (user.size() == 0) {
             return "message-error";
@@ -92,9 +96,10 @@ public class MessageController {
 
 
     @GetMapping(path = "/messageInput")
-    public String messageInput1(Message message, ModelMap model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
+    public String messageInput1(Message message, ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         List<String> names = messageService.names(userId, userName);
         model.addAttribute("names", names);
         System.out.println(names);
@@ -105,15 +110,16 @@ public class MessageController {
 
     @GetMapping(path = "/openChat/{name}")
     public String messageChat1(@PathVariable("name") String name,
-                               Message message, ModelMap model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
+                               Message message, ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         if (name.equals("") || name.equals(null)) {
             return "message-error";
         }
         System.out.println("JJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(name);
-        List<User> oneUserByName2 = userService.findOneUserByName2(name);
+        List<SystemUser> oneUserByName2 = userService.findOneUserByName2(name);
         if (oneUserByName2.size() == 0) {
             return "message-error";
         }
@@ -129,14 +135,15 @@ public class MessageController {
 
     @PostMapping(path = "/openChat")
     public String messageChat2(@RequestParam String userReceiverName,
-                               ModelMap model, HttpServletRequest req) {
-        Long userId = (Long) req.getSession().getAttribute("userId");
-        String userName = (String) req.getSession().getAttribute("userName");
+                               ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
             System.out.println("jjj" + userReceiverName);
             return "message-error";
         }
-        List<User> oneUserByName2 = userService.findOneUserByName2(userReceiverName);
+        List<SystemUser> oneUserByName2 = userService.findOneUserByName2(userReceiverName);
         if (oneUserByName2.size() == 0) {
             System.out.println("kkk" + userReceiverName);
             return "message-error";

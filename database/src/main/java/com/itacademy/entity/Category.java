@@ -26,6 +26,7 @@ public class Category extends BaseEntity {
     @Setter
     private Set<Blog> blogs = new HashSet<>();
 
+
     public Category(EnumCategory enumCategory) {
         this.enumCategory = enumCategory;
     }

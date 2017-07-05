@@ -1,7 +1,7 @@
 package com.itacademy.dao;
 
 import com.itacademy.entity.Friend;
-import com.itacademy.entity.User;
+import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,8 @@ public class FriendDaoTest extends BaseTest {
 
     @Test
     public void testSaveFriend() {
-        User sender = new User();
-        User reciver = new User();
+        SystemUser sender = new SystemUser();
+        SystemUser reciver = new SystemUser();
         userDao.save(sender);
         userDao.save(reciver);
         Friend friend = new Friend("fri", sender, reciver);
@@ -72,10 +72,10 @@ public class FriendDaoTest extends BaseTest {
 
     @Test
     public void testFindAllFriendsByUserId() {
-        User user1 = new User();
+        SystemUser user1 = new SystemUser();
         user1.setName("senderName");
-        User user2 = new User();
-        User user3 = new User();
+        SystemUser user2 = new SystemUser();
+        SystemUser user3 = new SystemUser();
         userDao.save(user1);
         userDao.save(user2);
         userDao.save(user3);
