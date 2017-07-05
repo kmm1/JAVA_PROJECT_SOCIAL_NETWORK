@@ -74,7 +74,7 @@ public class UserController {
         return "login-form";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String showHomePage() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails) principal).getUsername();
