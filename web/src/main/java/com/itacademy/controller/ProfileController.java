@@ -5,6 +5,7 @@ import com.itacademy.entity.*;
 import com.itacademy.service.ProfileService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,13 @@ public class ProfileController {
     public ProfileController(ProfileService profileService, UserService userService) {
         this.profileService = profileService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("roles")
+    public Collection<? extends GrantedAuthority> roles() {
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
+                .getAuthentication().getAuthorities();
+        return roles;
     }
 
     @ModelAttribute("profile")

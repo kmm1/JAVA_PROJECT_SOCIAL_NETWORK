@@ -8,21 +8,21 @@ import com.itacademy.service.CategoryService;
 import com.itacademy.service.FlashmobService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-import static com.itacademy.entity.QUser.user;
-
-@SessionAttributes(names = {"userName", "userId"})
 @Controller
 public class UserController {
 
@@ -58,6 +58,14 @@ public class UserController {
     @ModelAttribute("allCategories")
     public List<Category> categories() {
         return categoryService.findAll();
+    }
+
+    @ModelAttribute("roles")
+    public Collection<? extends GrantedAuthority> roles() {
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
+                .getAuthentication().getAuthorities();
+        System.out.println("HHHHHHHHHHHHHHHHHH");
+        return roles;
     }
 
 
@@ -98,7 +106,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/mainPageUser")
-    public String mainPageUser(Model model) {
+    public String mainPageUser() {
         return "main-page-user";
     }
+
+    @GetMapping(path = "/admin")
+    public String mainPageAdmin() {
+        return "main-page-admin";
+    }
+
+
 }

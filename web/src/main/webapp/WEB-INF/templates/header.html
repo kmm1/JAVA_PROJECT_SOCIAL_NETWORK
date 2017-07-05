@@ -1,5 +1,14 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
+</head>
+<body>
 
 Вы зарегистрированы как:
 
@@ -13,8 +22,12 @@
 <li><a th:href="@{/friend}">Друзья</a></li>
 <li><a th:href="@{/message}">Сообшения</a></li>
 <li><a th:href="@{/flashmob}">События</a></li>
-<!--<li><a th:href="@{/admin}" th:if="${not user.empty}">Администратор</a></li>-->
+<li><a th:href="@{/admin}" th:if="${roles.size()>1}" >Администратор </a></li>
 
+
+
+</body>
+</html>
 
 
 

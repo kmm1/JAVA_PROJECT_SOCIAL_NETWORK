@@ -5,6 +5,7 @@ import com.itacademy.entity.SystemUser;
 import com.itacademy.service.MessageService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -27,6 +29,13 @@ public class MessageController {
     public MessageController(MessageService messageService, UserService userService) {
         this.messageService = messageService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("roles")
+    public Collection<? extends GrantedAuthority> roles() {
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
+                .getAuthentication().getAuthorities();
+        return roles;
     }
 
     @ModelAttribute("message")

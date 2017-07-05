@@ -8,9 +8,12 @@ import com.itacademy.service.CategoryService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -30,6 +33,13 @@ public class CategoryController {
         this.commentService = commentService;
         this.categoryService = categoryService;
 
+    }
+
+    @ModelAttribute("roles")
+    public Collection<? extends GrantedAuthority> roles() {
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
+                .getAuthentication().getAuthorities();
+        return roles;
     }
 
 

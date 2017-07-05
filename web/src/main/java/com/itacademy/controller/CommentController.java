@@ -7,6 +7,7 @@ import com.itacademy.service.BlogService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -33,6 +35,13 @@ public class CommentController {
         this.blogService = blogService;
         this.userService = userService;
         this.commentService = commentService;
+    }
+
+    @ModelAttribute("roles")
+    public Collection<? extends GrantedAuthority> roles() {
+        Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
+                .getAuthentication().getAuthorities();
+        return roles;
     }
 
     @ModelAttribute("blog")
