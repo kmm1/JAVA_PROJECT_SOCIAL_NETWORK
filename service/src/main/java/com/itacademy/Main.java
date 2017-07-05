@@ -22,8 +22,9 @@ public class Main {
         CommentService commentService = context.getBean((CommentService.class));
         CategoryService categoryService = context.getBean((CategoryService.class));
 
-        SystemUser myUser = userService.findOneUserByName("kate");
-        System.out.println(myUser);
+        SystemUser user = userService.findOneUserByName("kate");
+        userService.addExistingRoleToExistingUser(2L, 1L);
+        System.out.println(user);
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");

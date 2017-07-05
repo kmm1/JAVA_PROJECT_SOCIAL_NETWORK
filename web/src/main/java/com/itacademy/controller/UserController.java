@@ -61,7 +61,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/login")
     public String showLoginPage() {
         return "login-form";
@@ -87,7 +86,8 @@ public class UserController {
         if (name.equals("") || password.equals("") || email.equals("")) {
             return "registration-form";
         }
-        userService.save(user);
+        Long userId = userService.save(user);
+        userService.addExistingRoleToExistingUser(2L, userId);
         return "login-form";
     }
 

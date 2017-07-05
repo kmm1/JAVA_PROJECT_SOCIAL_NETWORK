@@ -2,6 +2,7 @@ package com.itacademy.dao;
 
 import com.itacademy.dao.common.BaseDaoImpl;
 import com.itacademy.entity.QUser;
+import com.itacademy.entity.Role;
 import com.itacademy.entity.SystemUser;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Repository;
@@ -52,6 +53,13 @@ public class UserDaoImpl extends BaseDaoImpl<SystemUser> implements UserDao {
                 .where(user.name.eq(name));
         List<SystemUser> results = query.fetchResults().getResults();
         return results.size() > 0 ? results.get(0) : null;
+    }
+
+    @Override
+    public void addExistingRoleToExistingUser(Long roleId, Long userId) {
+        SystemUser user = getSessionFactory().getCurrentSession().get(SystemUser.class, userId);
+        Role role = getSessionFactory().getCurrentSession().get(Role.class, roleId);
+        user.getRoles().add(role);
     }
 
 

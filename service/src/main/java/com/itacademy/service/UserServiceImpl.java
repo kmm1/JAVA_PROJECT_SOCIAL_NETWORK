@@ -75,4 +75,10 @@ public class UserServiceImpl implements UserService {
         }
         return grantedAuthorities;
     }
+
+    @Override
+    public void addExistingRoleToExistingUser(Long roleId, Long userId) {
+        userDao.addExistingRoleToExistingUser(roleId, userId);
+    }
+
 }

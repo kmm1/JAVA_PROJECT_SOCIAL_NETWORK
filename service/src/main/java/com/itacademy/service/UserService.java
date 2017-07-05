@@ -22,6 +22,9 @@ public interface UserService extends UserDetailsService {
 
     List<SystemUser> findOneUserByName2(String name);
 
+    void addExistingRoleToExistingUser(Long roleId, Long userId);
+
+
 
 }
 
