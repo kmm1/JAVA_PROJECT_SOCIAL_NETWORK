@@ -23,6 +23,7 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDa
                         "from Blog b join b.categories c " +
                         "where b.id=:blogId", Category.class)
                 .setParameter("blogId", blogId)
+                .setHint("org.hibernate.cacheable", true)
                 .getResultList();
     }
 
@@ -31,7 +32,8 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDa
         JPAQuery<Category> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(category)
                 .from(category)
-                .where(category.enumCategory.eq(name));
+                .where(category.enumCategory.eq(name))
+                .setHint("org.hibernate.cacheable", true);
         return query.fetchResults().getResults();
     }
 

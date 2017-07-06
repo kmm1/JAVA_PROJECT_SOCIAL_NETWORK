@@ -4,14 +4,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "categories")
 @ToString(callSuper = true, exclude = {"blogs"})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor
 public class Category extends BaseEntity {
 
@@ -22,6 +27,7 @@ public class Category extends BaseEntity {
     private EnumCategory enumCategory;
 
     @ManyToMany(mappedBy = "categories")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @Getter
     @Setter
     private Set<Blog> blogs = new HashSet<>();

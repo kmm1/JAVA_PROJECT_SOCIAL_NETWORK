@@ -96,6 +96,7 @@ public class UserController {
         }
         Long userId = userService.save(user);
         userService.addExistingRoleToExistingUser(2L, userId);
+
         return "login-form";
     }
 

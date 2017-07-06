@@ -45,6 +45,24 @@ public class RootConfig {
     @Value("${hibernate.creation_policy}")
     private String creationPolicy;
 
+
+    @Value("${hibernate.cache.use_second_level_cache}")
+    private String secondLevelCache;
+
+    @Value("${hibernate.cache.use_query_cache}")
+    private String queryCache;
+
+    @Value("${hibernate.cache.region.factory_class}")
+    private String factory;
+
+    @Value("${hibernate.generate_statistics}")
+    private String statistics;
+
+    //todo ne ispolz
+//    @Value("${hibernate.configurationResourceName}")
+//    private String configurationResourceName;
+
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -61,7 +79,6 @@ public class RootConfig {
         sessionFactoryBean.setDataSource(dataSource());
         sessionFactoryBean.setPackagesToScan("com.itacademy.entity");
         sessionFactoryBean.setHibernateProperties(hibernateProperties());
-
         return sessionFactoryBean;
     }
 
@@ -72,8 +89,14 @@ public class RootConfig {
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.format_sql", formatSql);
         properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
+
+        properties.setProperty("hibernate.cache.use_second_level_cache", secondLevelCache);
+        properties.setProperty("hibernate.cache.use_query_cache", queryCache);
+        properties.setProperty("hibernate.cache.region.factory_class", factory);
+        properties.setProperty("hibernate.generate_statistics", statistics);
         return properties;
     }
+
 
     @Bean
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
