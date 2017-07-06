@@ -32,6 +32,11 @@ public class FlashmobServiceImpl implements FlashmobService {
     }
 
     @Override
+    public void update(Flashmob flashmob) {
+        flashmobDao.update(flashmob);
+    }
+
+    @Override
     public void delete(Flashmob flashmob) {
         flashmobDao.delete(flashmob);
     }

@@ -1,6 +1,7 @@
 package com.itacademy.service;
 
 
+import com.itacademy.entity.Blog;
 import com.itacademy.entity.Event;
 import com.itacademy.entity.Flashmob;
 
@@ -11,6 +12,8 @@ public interface FlashmobService {
     Flashmob findById(Long id);
 
     Long save(Flashmob flashmob);
+
+    void update(Flashmob flashmob);
 
     void delete(Flashmob flashmob);
 

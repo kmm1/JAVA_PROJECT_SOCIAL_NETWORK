@@ -73,9 +73,24 @@ public class FlashmobController {
     }
 
     @GetMapping(path = "/updateEvent/{eventId}")
-    public String updateEvent(@PathVariable("eventId") Long eventId, Model model) {
-        Flashmob myFlashmob = flashmobService.findById(eventId);
-        //TODO metod ne realizovan
+    public String updateEvent1(@PathVariable("eventId") Long eventId, Model model) {
+        Flashmob flashmob = flashmobService.findById(eventId);
+        model.addAttribute("flashmob", flashmob);
+        return "flashmob-update";
+    }
+
+    @PostMapping(path = "/updateEvent/{eventId}")
+    public String updateEvent2(@PathVariable("eventId") Long eventId, Model model,
+                               @RequestParam String name,
+                               @RequestParam String holdingDate,
+                               @RequestParam String aboutEvent,
+                               @RequestParam EnumFlashmobType flashmobType) {
+        Flashmob flashmob = flashmobService.findById(eventId);
+        flashmob.setFlashmobType(flashmobType);
+        flashmob.setHoldingDate(holdingDate);
+        flashmob.setAboutEvent(aboutEvent);
+        flashmob.setName(name);
+        flashmobService.update(flashmob);
         List<Event> allEvents = flashmobService.findAllEvents();
         model.addAttribute("allEvents", allEvents);
         return "main-page-admin";

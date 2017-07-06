@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
+    <style type="text/css">
+
+        p {
+            margin-top: 0.0em; /* Отступ сверху */
+            margin-bottom: 0.0em; /* Отступ снизу */
+        }
+    </style>
+</head>
+<body>
+<div th:insert="header"></div>
+
+<center>
+
+    <h4>Редактировать событие:</h4>
+    <form th:action="@{/updateEvent/{eventId}(eventId=${flashmob.getId()})}" method="post" th:object="${flashmob}">
+        <p><b>Название:</b></p>
+        <p><textarea rows="1" cols="50" input type="text"
+                     id="name" name="name" th:field="*{name}"></textarea></p>
+        <p><b>Дата проведения:</b></p>
+        <p><textarea rows="1" cols="50" input type="text"
+                     id="holdingDate" name="holdingDate" th:field="*{holdingDate}"></textarea></p>
+        <p><b>О событии:</b></p>
+        <p><textarea rows="5" cols="50" input type="text"
+                     id="aboutEvent" name="aboutEvent" th:field="*{aboutEvent}"></textarea></p>
+        <p><b>Тип события:</b></p>
+        <p></p>
+        <select id="flashmobType" name="flashmobType" th:field="*{flashmobType}">
+            <option th:each="a : ${allFlashmobTypes}"
+                    th:value="${a}"
+                    th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
+        </select>
+        <p><input type="submit" value="Сохранить"/></p>
+    </form>
+
+
+</center>
+</body>
+
+</html>
