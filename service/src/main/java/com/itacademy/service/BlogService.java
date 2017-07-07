@@ -11,7 +11,7 @@ public interface BlogService {
 
     Long save(Blog blog);
 
-    List<Blog> findAllUsersBlogs(Long userId);
+    List<Blog> findAllUsersBlogs(Long userId, Integer limit, Integer offset);
 
     void delete(Blog blog);
 
@@ -22,6 +22,8 @@ public interface BlogService {
     void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
 
     List<Blog> findAllBlogsByCategory(Long categoryId);
+
+    Integer countUserBlogs(Long userId);
 
 
 }

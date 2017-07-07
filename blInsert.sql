@@ -1,6 +1,6 @@
-INSERT INTO events (id, name, bl.events.holding_date) VALUES (1, 'ice bucket challenge', 'tomorrow');
+INSERT INTO events (id, name, holding_date, version) VALUES (1, 'ice bucket challenge', 'tomorrow', 0);
 INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'info about this event', 1);
-INSERT INTO events (id, name, bl.events.holding_date) VALUES (2, 'raise your hand', 'next week');
+INSERT INTO events (id, name, holding_date, version) VALUES (2, 'raise your hand', 'next week', 0);
 INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'info about this event', 2);
 
 

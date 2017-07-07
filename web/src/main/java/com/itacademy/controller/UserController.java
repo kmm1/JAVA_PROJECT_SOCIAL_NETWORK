@@ -79,6 +79,7 @@ public class UserController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails) principal).getUsername();
         System.out.println(username);
+        System.out.println("IIIIIIIIIIIIIIIIIIII");
         return "main-page-user";
     }
 

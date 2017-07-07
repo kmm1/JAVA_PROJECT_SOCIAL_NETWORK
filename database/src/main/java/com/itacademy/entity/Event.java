@@ -30,5 +30,10 @@ public abstract class Event extends BaseEntity {
     @Setter
     private LocalDateTime CreationDate = LocalDateTime.now();
 
+    @Column(name = "version")
+    @Version
+    @Getter
+    @Setter
+    private long version;
 
 }

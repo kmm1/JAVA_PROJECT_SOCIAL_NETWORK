@@ -4,8 +4,6 @@ package com.itacademy.controller;
 import com.itacademy.entity.*;
 import com.itacademy.service.ProfileService;
 import com.itacademy.service.UserService;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

@@ -6,7 +6,6 @@ import com.itacademy.service.CategoryService;
 import com.itacademy.service.CommentService;
 import com.itacademy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,7 +35,6 @@ public class BlogController {
         this.userService = userService;
         this.commentService = commentService;
         this.categoryService = categoryService;
-
     }
 
     @ModelAttribute("roles")
@@ -63,17 +59,50 @@ public class BlogController {
         return categoryService.findAll();
     }
 
+    public Integer limit = 5;
+
 
     @GetMapping(path = "/blog")
-    public String showMyFriends(Blog blog, Model model) {
+    public String showMyBlogs(Blog blog, Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = ((UserDetails) principal).getUsername();
         Long userId = userService.findOneUserByName(userName).getId();
-        List test = blogService.findAllUsersBlogs(userId);
+
+        Integer numberOfBlogs = blogService.countUserBlogs(userId);
+        Integer numberOfPages = (int) Math.ceil((double) numberOfBlogs / (double) limit);
+        List<Object> numbers = new ArrayList<>();
+        for (int i = 1; i < numberOfPages + 1; i++) {
+            numbers.add(i);
+        }
+        List test = blogService.findAllUsersBlogs(userId, 1, 0);
         if (test.size() == 0) {
             return "blog-form";
         }
-        ArrayList<Blog> findAllBlogsByUserName = (ArrayList<Blog>) blogService.findAllUsersBlogs(userId);
+        ArrayList<Blog> findAllBlogsByUserName = (ArrayList<Blog>) blogService.findAllUsersBlogs(userId, limit, 0);
+        model.addAttribute("numbers", numbers);
+        model.addAttribute("findAllBlogsByUserName", findAllBlogsByUserName);
+        return "blog";
+    }
+
+    @GetMapping(path = "/blog/{pageId}")
+    public String paging(@PathVariable("pageId") Integer pageId, Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        Long userId = userService.findOneUserByName(userName).getId();
+
+        Integer numberOfBlogs = blogService.countUserBlogs(userId);
+        Integer numberOfPages = (int) Math.ceil((double) numberOfBlogs / (double) limit);
+        List<Object> numbers = new ArrayList<>();
+        for (int i = 1; i < numberOfPages + 1; i++) {
+            numbers.add(i);
+        }
+        List test = blogService.findAllUsersBlogs(userId, 1, 0);
+        if (test.size() == 0) {
+            return "blog-form";
+        }
+        Integer offset = (pageId - 1) * limit;
+        ArrayList<Blog> findAllBlogsByUserName = (ArrayList<Blog>) blogService.findAllUsersBlogs(userId, limit, offset);
+        model.addAttribute("numbers", numbers);
         model.addAttribute("findAllBlogsByUserName", findAllBlogsByUserName);
         return "blog";
     }

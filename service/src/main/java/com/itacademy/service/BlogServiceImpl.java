@@ -30,8 +30,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> findAllUsersBlogs(Long userId) {
-        return blogDao.findAllUsersBlogs(userId);
+    public List<Blog> findAllUsersBlogs(Long userId, Integer limit, Integer offset) {
+        return blogDao.findAllUsersBlogs(userId, limit, offset);
     }
 
     @Override
@@ -57,6 +57,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> findAllBlogsByCategory(Long categoryId) {
         return blogDao.findAllBlogsByCategory(categoryId);
+    }
+
+    @Override
+    public Integer countUserBlogs(Long userId) {
+        return blogDao.countUserBlogs(userId);
     }
 
 

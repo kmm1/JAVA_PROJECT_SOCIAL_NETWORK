@@ -4,12 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,6 +52,12 @@ public class Blog extends BaseEntity {
     @Setter
     @OneToMany(mappedBy = "blog")
     private Set<Comment> comments = new HashSet<>();
+
+    @Column(name = "version")
+    @Version
+    @Getter
+    @Setter
+    private long version;
 
     public Blog(String title, String text) {
         this.title = title;

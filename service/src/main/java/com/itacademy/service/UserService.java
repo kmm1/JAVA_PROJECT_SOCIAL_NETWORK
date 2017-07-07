@@ -1,9 +1,7 @@
 package com.itacademy.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-
-
 import com.itacademy.entity.SystemUser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -23,7 +21,6 @@ public interface UserService extends UserDetailsService {
     List<SystemUser> findOneUserByName2(String name);
 
     void addExistingRoleToExistingUser(Long roleId, Long userId);
-
 
 
 }

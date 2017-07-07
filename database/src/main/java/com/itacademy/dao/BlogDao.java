@@ -12,12 +12,13 @@ public interface BlogDao extends BaseDao<Blog> {
 
     void addExistingBlogToExistingCategory(Long categoryId, Long blogId);
 
-    List<Blog> findAllUsersBlogs(Long userId);
+    List<Blog> findAllUsersBlogs(Long userId, Integer limit, Integer offset);
 
     List<Blog> findAllBlogsByCategory(Long categoryId);
 
     void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
 
+    Integer countUserBlogs(Long userId);
 
 }
 

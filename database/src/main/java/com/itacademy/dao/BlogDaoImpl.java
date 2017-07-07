@@ -53,14 +53,14 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
      * WHERE u.id = 2 ORDER BY (b.creation_date);
      */
     @Override
-    public List<Blog> findAllUsersBlogs(Long userId) {
+    public List<Blog> findAllUsersBlogs(Long userId, Integer limit, Integer offset) {
         QBlog blog = new QBlog("myBlog");
         JPAQuery<Blog> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
         query.select(blog)
                 .from(blog)
                 .join(blog.user)
                 .where(blog.user.id.eq(userId))
-                .orderBy(blog.creationDate.asc());
+                .orderBy(blog.creationDate.asc()).limit(limit).offset(offset);
         return query.fetchResults().getResults();
     }
 
@@ -72,5 +72,17 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
                 .getResultList();
     }
 
-
+    @Override
+    public Integer countUserBlogs(Long userId) {
+        QBlog blog = new QBlog("myBlog");
+        JPAQuery<Blog> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
+        query.select(blog)
+                .from(blog)
+                .join(blog.user)
+                .where(blog.user.id.eq(userId))
+                .orderBy(blog.creationDate.asc());
+        List<Blog> results = query.fetchResults().getResults();
+        int size = results.size();
+        return size;
+    }
 }
