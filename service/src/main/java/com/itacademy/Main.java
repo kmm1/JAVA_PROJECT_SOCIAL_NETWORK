@@ -20,17 +20,7 @@ public class Main {
         CommentService commentService = context.getBean((CommentService.class));
         CategoryService categoryService = context.getBean((CategoryService.class));
 
-        Integer numberOfBlogs = blogService.countUserBlogs(1L);
-        Integer a = (int) Math.ceil((double) numberOfBlogs / (double) 5);
-        System.out.println(a);
-        Integer numberOfPages = (int) Math.ceil(numberOfBlogs / 5);
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i < numberOfPages + 1; i++) {
-            numbers.add(i);
-        }
-        System.out.println(numberOfBlogs);
-        System.out.println(numberOfPages);
-        System.out.println(numbers);
+
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");

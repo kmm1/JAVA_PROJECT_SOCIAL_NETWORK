@@ -4,12 +4,20 @@ INSERT INTO events (id, name, holding_date, version) VALUES (2, 'raise your hand
 INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'info about this event', 2);
 
 
-INSERT INTO users (name, email, password) VALUES ('kate', 'km@gmail.com', 'smth');
-INSERT INTO users (name, email, password) VALUES ('vova', 'vg@gmail.com', 'password');
-INSERT INTO users (name, email, password) VALUES ('nastya', 'ng@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('veranika', 'verg@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('sergei', 'sp@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('admin', 'admin@gmail.com', 'admin');
+INSERT INTO users (name, email, password)
+VALUES ('kate', 'km@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('vova', 'vg@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('nastya', 'ng@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('veranika', 'verg@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('sergei', 'sp@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('admin', 'admin@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+# password for users in BCRYPT: smth
+
 
 INSERT INTO roles (name) VALUES ('ADMIN');
 INSERT INTO roles (name) VALUES ('USER');
@@ -42,9 +50,9 @@ INSERT INTO categories (name) VALUES ('FINANCE');
 INSERT INTO categories (name) VALUES ('SPORT');
 INSERT INTO categories (name) VALUES ('DIFFERENT');
 
-INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 1', 'Vova Blog content 1', 2);
-INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 2', 'Vova Blog content 2', 2);
-INSERT INTO blogs (title, text, user_id) VALUES ('VerTravele1', 'Ver Blog content 1', 3);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('kiteboarding 1', 'Vova Blog content 1', 2, 0);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('kiteboarding 2', 'Vova Blog content 2', 2, 0);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('VerTravele1', 'Ver Blog content 1', 3, 0);
 
 INSERT INTO blogs_categories (blog_id, category_id) VALUES (1, 2);
 INSERT INTO blogs_categories (blog_id, category_id) VALUES (2, 2);

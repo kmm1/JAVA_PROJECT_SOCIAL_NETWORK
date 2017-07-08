@@ -9,6 +9,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -58,10 +62,6 @@ public class RootConfig {
     @Value("${hibernate.generate_statistics}")
     private String statistics;
 
-    //todo ne ispolz
-//    @Value("${hibernate.configurationResourceName}")
-//    private String configurationResourceName;
-
 
     @Bean
     public DataSource dataSource() {
@@ -96,6 +96,12 @@ public class RootConfig {
         properties.setProperty("hibernate.generate_statistics", statistics);
         return properties;
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 
     @Bean

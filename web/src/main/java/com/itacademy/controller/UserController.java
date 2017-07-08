@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +29,16 @@ public class UserController {
 
     private final UserService userService;
     private final FlashmobService flashmobService;
-    CategoryService categoryService;
-
+    private final CategoryService categoryService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService, FlashmobService flashmobService, CategoryService categoryService) {
+    public UserController(UserService userService, FlashmobService flashmobService,
+                          CategoryService categoryService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.flashmobService = flashmobService;
         this.categoryService = categoryService;
-
+        this.passwordEncoder = passwordEncoder;
 
     }
 
@@ -95,7 +97,11 @@ public class UserController {
         if (name.equals("") || password.equals("") || email.equals("")) {
             return "registration-form";
         }
-        Long userId = userService.save(user);
+        SystemUser user1 = new SystemUser();
+        user1.setName(name);
+        user1.setEmail(email);
+        user1.setPassword(passwordEncoder.encode(password));
+        Long userId = userService.save(user1);
         userService.addExistingRoleToExistingUser(2L, userId);
 
         return "login-form";
@@ -106,6 +112,7 @@ public class UserController {
         sessionStatus.setComplete();
         return "login-form";
     }
+
 
     @GetMapping(path = "/mainPageUser")
     public String mainPageUser() {

@@ -159,7 +159,7 @@ public class BlogController {
     }
 
     @PostMapping(path = "/addBlog/{blogId}")
-    public String changeBlog2(@PathVariable("blogId") Long blogId, Model model,
+    public String changeBlog2(Blog blog, @PathVariable("blogId") Long blogId, Model model,
                               @RequestParam String title,
                               @RequestParam String text) {
         Blog blog2 = blogService.findById(blogId);
