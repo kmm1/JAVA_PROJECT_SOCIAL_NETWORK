@@ -20,17 +20,17 @@
 
 <center>
 
-    <a th:href="@{/saveBlog}">Создать новый блог</a>
-    <a th:href="@{/deliteBlog/{blogId}(blogId=${blog.getId()})}">Удалить блог</a>
+    <a th:href="@{/saveBlog}" th:text="#{new.blog}"></a>
+    <a th:href="@{/deliteBlog/{blogId}(blogId=${blog.getId()})}" th:text="#{blog.delite.blog}"></a>
     <p></p>
 
-    <h2>Редактировать блог:</h2>
+    <h2 th:text="#{blog.edit.blog}"></h2>
     <form th:action="@{/addBlog/{blogId}/(blogId=${blog.getId()})}" method="post" th:object="${blog}">
-        <p><b>Название:</b></p>
+        <p><b th:text="#{blog.name}"></b></p>
         <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
-        <p><b>Содержание:</b></p>
+        <p><b th:text="#{blog.content}"></b></p>
         <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
-        <p><input type="submit" value="Сохранить"/></p>
+        <p><input type="submit" th:value="#{save}"/></p>
     </form>
 
     <h3></h3>
@@ -38,8 +38,8 @@
     <form th:action="@{/addExistingBlogToExistingCategory/{blogId}/(blogId=${blog.getId()})}" method="post">
         <table border="1" width="30%" cellpadding="5">
             <tr>
-                <th colspan="1">Добавить блог к категории</th>
-                <th colspan="1">Добавить</th>
+                <th colspan="1" th:text="#{add.blog.to.category}"></th>
+                <th colspan="1" th:text="#{blog.add}"></th>
             </tr>
             <tbody>
             <tr>
@@ -50,7 +50,7 @@
                                 th:text="${#strings.capitalize(#strings.toLowerCase(a.getEnumCategory()))}"></option>
                     </select>
                 </td>
-                <td><input type="submit" value='Добавить'></td>
+                <td><input type="submit" th:value="#{blog.add}"/></td>
             </tr>
             </tbody>
         </table>
@@ -61,8 +61,8 @@
     <form th:action="@{/deliteExistingBlogFromExistingCategory/{blogId}/(blogId=${blog.getId()})}" method="post">
         <table border="1" width="30%" cellpadding="5">
             <tr>
-                <th colspan="1">Удалить блог из категории</th>
-                <th colspan="1">Удалить</th>
+                <th colspan="1" th:text="#{blog.delite.from.category}"></th>
+                <th colspan="1" th:text="#{delite}"></th>
             </tr>
             <tbody>
             <tr>
@@ -74,7 +74,7 @@
                     </select>
                 </td>
                 <td th:if="${not allCategoriesByBlogId.empty}">
-                    <input type="submit" value="Удалить"/>
+                    <input type="submit" th:value="#{delite}"/>/>
                 </td>
             </tr>
             </tbody>

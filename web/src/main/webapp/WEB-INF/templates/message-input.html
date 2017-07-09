@@ -12,18 +12,18 @@
 
 <center>
 
-    <a th:href="@{/saveMessage}">Написать сообщение</a>
+    <a th:href="@{/saveMessage}" th:value="#{message.write.message}"></a>
     <p></p>
 
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p>Мои переписки:</p></th>
+            <th colspan="5"><p th:value="#{message.my.messages}"></p></th>
         </tr>
 
         <tbody>
         <tr th:each="x : ${names}">
-            <td><a th:href="@{/openChat/{name}(name=${x})}">Открыть переписку с:</a></td>
+            <td><a th:href="@{/openChat/{name}(name=${x})}" th:text="#{message.open.correspondence.with}"></a></td>
             <td th:text="${x}"
                 th:if="${not x.empty}">
             </td>
@@ -37,9 +37,9 @@
     </table>
 
     <form th:action="@{/openChat}" method="post">
-        <p><b>Открыть переписку с:</b></p>
+        <p><b th:text="#{message.open.correspondence.with}"></b></p>
         <p><textarea rows="1" cols="20" input type="text" id="userReceiverName" name="userReceiverName"></textarea></p>
-        <p><input type="submit" value="Открыть переписку"/></p>
+        <p><input type="submit" th:value="#{message.open.correspondence}"/></p>
     </form>
 
 

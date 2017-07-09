@@ -23,13 +23,13 @@
 <center>
 
 
-    <p><b>Название:</b></p>
+    <p><b th:text="#{event.title}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.name}"></textarea></p>
-    <p><b>Дата проведения:</b></p>
+    <p><b th:text="#{event.holding.date}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.holdingDate}"></textarea></p>
-    <p><b>Тип:</b></p>
+    <p><b th:text="#{event.type.event}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.flashmobType}"></textarea></p>
-    <p><b>Содержание:</b></p>
+    <p><b th:text="#{event.content}"></b></p>
     <p><textarea rows="10" cols="90" disabled th:text="${myFlashmob.aboutEvent}"></textarea></p>
 
 

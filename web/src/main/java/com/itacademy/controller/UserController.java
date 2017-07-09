@@ -87,6 +87,7 @@ public class UserController {
 
     @GetMapping(path = "/registration")
     public String showRegistrationForm() {
+
         return "registration-form";
     }
 

@@ -59,11 +59,11 @@
         </tbody>
     </table>
 
-    <p>Написать сообшение:</p>
+    <p th:text="#{message.write.message}"></p>
     <form th:action="@{/saveMessage/{userReceiverName}/(userReceiverName=${name2})}" method="get">
-        <p><b>Сообшение:</b></p>
+        <p><b th:text="#{message}"></b></p>
         <p><textarea rows="3" cols="60" input type="text" id="text" name="text"></textarea></p>
-        <p><input type="submit" value="Отправить сообшение"/></p>
+        <p><input type="submit" th:value="#{message.send.message}"/></p>
     </form>
 
 </center>

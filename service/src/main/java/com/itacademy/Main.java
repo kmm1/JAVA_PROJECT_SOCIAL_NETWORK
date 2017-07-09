@@ -4,9 +4,6 @@ import com.itacademy.config.RootConfig;
 import com.itacademy.service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Main {
 
@@ -19,8 +16,6 @@ public class Main {
         MessageService messageService = context.getBean((MessageService.class));
         CommentService commentService = context.getBean((CommentService.class));
         CategoryService categoryService = context.getBean((CategoryService.class));
-
-
 
 
 //        List<Friend> x = friendService.findAllFriendsByUserName("vova");

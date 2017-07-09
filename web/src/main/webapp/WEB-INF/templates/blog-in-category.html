@@ -23,21 +23,21 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="6"><p>Блоги:</p></th>
+            <th colspan="6"><p th:text="#{blogs}"></p></th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th colspan="1">Название</th>
-            <th colspan="1">Дата проведения</th>
-            <th colspan="1">Открыть событие</th>
+            <th colspan="1" th:text="#{blog.name}"></th>
+            <th colspan="1" th:text="#{blog.date}"></th>
+            <th colspan="1" th:text="#{read.blog}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="a : ${allBlogsInCategory}">
             <td th:text="${a.getTitle()}"></td>
             <td th:text="${a.getCreationDate()}"></td>
-            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}">Читать блог</a></td>
+            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}" th:text="#{read.blog}"></a></td>
         </tr>
         </tbody>
     </table>

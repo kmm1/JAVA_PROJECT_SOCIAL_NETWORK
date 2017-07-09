@@ -17,7 +17,7 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p>Мои друзья:</p></th>
+            <th colspan="5"><p th:text="#{friend.my.friends}"></p></th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                 th:if="${not myFriends.empty}">
             </td>
             <td>
-                <a th:href="@{/openChat/{name}(name=${myFriends})}">Показать переписку</a>
+                <a th:href="@{/openChat/{name}(name=${myFriends})}" th:text="#{friend.show.messages}"></a>
             </td>
         </tr>
 
@@ -41,7 +41,7 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p> Отправленные запросы на добавления в друзья:</p></th>
+            <th colspan="5"><p th:text="#{friend.sent.requests.to.friends}"></p></th>
         </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p>Полученные запросы на добавления в друзья:</p></th>
+            <th colspan="5"><p th:text="#{friend.received.requests.from.friends}"></p></th>
         </tr>
         </thead>
         <tbody>
@@ -82,12 +82,12 @@
         <form th:action="@{/sendFriendRequest}" method="post" th:object="${friend}">
             <thead>
             <tr>
-                <th colspan="2">Отправить запрос на добавления в друзья</th>
+                <th colspan="2" th:text="#{friend.send.request}"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Введите имя друга</td>
+                <td th:text="#{friend.enter.friend.name}"></td>
                 <td>
                     <select th:field="*{userReceiver}">
                         <option th:each="a : ${users}"
@@ -97,8 +97,8 @@
                 </td>
             </tr>
             <tr th:if="${not users.empty}">
-                <td>Отправить запрос</td>
-                <td><input type="submit" value="Отправить запрос"/></td>
+                <td th:text="#{friend.send.request2}"></td>
+                <td><input type="submit" th:value="#{friend.send.request2}"/></td>
             </tr>
             </tbody>
         </form>
@@ -109,12 +109,12 @@
 
             <thead>
             <tr>
-                <th colspan="2">Подтвердить запрос от друга</th>
+                <th colspan="2" th:text="#{friend.confirm.request}"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Введите имя друга</td>
+                <td th:text="#{friend.enter.friend.name}"></td>
                 <td>
                     <select th:field="*{userReceiver}">
                         <option th:each="a : ${myFriends3}"
@@ -124,8 +124,8 @@
                 </td>
             </tr>
             <tr th:if="${not myFriends3.empty}">
-                <td>Отправить запрос</td>
-                <td><input type="submit" value="Отправить запрос"/></td>
+                <td th:text="#{friend.send.request2}"></td>
+                <td><input type="submit" th:text="#{friend.send.request2}"/></td>
             </tr>
             </tbody>
         </form>
@@ -136,12 +136,12 @@
         <form th:action="@{/deliteFriend}" method="post" th:object="${friend}">
             <thead>
             <tr>
-                <th colspan="2">Удалить друга</th>
+                <th colspan="2" th:text="#{friend.delite.friend}"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Введите имя друга</td>
+                <td th:text="#{friend.enter.friend.name}"></td>
                 <td>
                     <select th:field="*{userReceiver}">
                         <option th:each="a : ${myFriends1}"
@@ -151,8 +151,8 @@
                 </td>
             </tr>
             <tr th:if="${not myFriends1.empty}">
-                <td>Отправить запрос</td>
-                <td><input type="submit" value="Удалить друга"/></td>
+                <td th:text="#{friend.send.request2}"></td>
+                <td><input type="submit" th:value="#{friend.delite.friend}"/></td>
             </tr>
             </tbody>
         </form>

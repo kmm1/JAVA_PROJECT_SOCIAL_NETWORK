@@ -20,22 +20,22 @@
 
 <center>
 
-    <h4>Новое событие:</h4>
+    <h4 th:text="#{event.new.event}"></h4>
     <form th:action="@{/saveFlashmob}" method="post">
-        <p><b>Название:</b></p>
+        <p><b th:text="#{event.title}"></b></p>
         <p><textarea rows="1" cols="50" input type="text" id="name" name="name"></textarea></p>
-        <p><b>Дата проведения:</b></p>
+        <p><b th:text="#{event.holding.date}"></b></p>
         <p><textarea rows="1" cols="50" input type="text" id="holdingDate" name="holdingDate"></textarea></p>
-        <p><b>О событии:</b></p>
+        <p><b th:text="#{event.about.event}"></b></p>
         <p><textarea rows="5" cols="50" input type="text" id="aboutEvent" name="aboutEvent"></textarea></p>
-        <p><b>Тип события:</b></p>
+        <p><b th:text="#{event.type.event}"></b></p>
         <p></p>
         <select id="flashmobType" name="flashmobType">
             <option th:each="a : ${allFlashmobTypes}"
                     th:value="${a}"
                     th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
         </select>
-        <p><input type="submit" value="Сохранить"/></p>
+        <p><input type="submit" th:value="#{save}"/></p>
     </form>
 
     <h3></h3>
@@ -43,17 +43,17 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="6"><p>События:</p></th>
+            <th colspan="6"><p th:text="#{events}"></p></th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th colspan="1">Название</th>
-            <th colspan="1">Дата проведения</th>
-            <th colspan="1">Дата создания</th>
-            <th colspan="1">Открыть событие</th>
-            <th colspan="1">Редактировать событие</th>
-            <th colspan="1">Удалить событие</th>
+            <th colspan="1" th:text="#{event.title}"></th>
+            <th colspan="1" th:text="#{event.holding.date}"></th>
+            <th colspan="1" th:text="#{event.creation.date}"></th>
+            <th colspan="1" th:text="#{event.open.event}"></th>
+            <th colspan="1" th:text="#{event.edit.event}"></th>
+            <th colspan="1" th:text="#{event.delite.event}"></th>
         </tr>
         </thead>
         <tbody>
@@ -61,9 +61,9 @@
             <td th:text="${a.name}"></td>
             <td th:text="${a.holdingDate}"></td>
             <td th:text="${a.creationDate}"></td>
-            <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}">Открыть</a></td>
-            <td><a th:href="@{/updateEvent/{eventId}(eventId=${a.getId()})}">Редактировать событие</a></td>
-            <td><a th:href="@{/deliteEvent/{eventId}(eventId=${a.getId()})}">Удалить событие</a></td>
+            <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.open.event}"></a></td>
+            <td><a th:href="@{/updateEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.edit.event}"></a></td>
+            <td><a th:href="@{/deliteEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.delite.event}"></a></td>
 
         </tr>
         </tbody>

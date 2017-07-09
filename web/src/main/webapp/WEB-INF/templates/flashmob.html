@@ -23,21 +23,21 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="6"><p>События:</p></th>
+            <th colspan="6"><p th:text="#{events}"></p></th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th colspan="1">Название</th>
-            <th colspan="1">Дата проведения</th>
-            <th colspan="1">Открыть событие</th>
+            <th colspan="1" th:text="#{event.title}"></th>
+            <th colspan="1" th:text="#{event.holding.date}"></th>
+            <th colspan="1" th:text="#{event.open.event}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="a : ${allEvents}">
             <td th:text="${a.name}"></td>
             <td th:text="${a.holdingDate}"></td>
-            <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}">Открыть</a></td>
+            <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.open.event}"></a></td>
         </tr>
         </tbody>
     </table>

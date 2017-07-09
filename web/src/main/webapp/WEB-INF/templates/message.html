@@ -12,10 +12,10 @@
 
 <center>
 
-    <h4>Моя почта</h4>
-    <a th:href="@{/saveMessage}">Написать сообщение</a>
+    <h4 th:text="#{email.my.emails}"></h4>
+    <a th:href="@{/saveMessage}" th:text="#{message.write.message}"></a>
     <p></p>
-    <a th:href="@{/messageInput}">Мои переписки</a>
+    <a th:href="@{/messageInput}" th:text="#{message.my.messages}"></a>
 
 
 </center>

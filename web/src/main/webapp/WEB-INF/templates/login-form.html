@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<th:setLocale value="${not empty sessionScope.currentLanguage ? sessionScope.currentLanguage : 'en_US'}"/>-->
+<!--<th:setBundle basename="translations"/>-->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:insert="language-control"></div>
+
 
 <center>
     <table border="1" width="30%" cellpadding="3">
         <form th:action="@{/login}" method="post">
             <thead>
             <tr>
-                <th colspan="2">войти</th>
+                <th colspan="2" th:text="#{login.enter}"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><label th:for="name">Имя</label></td>
+                <td><label th:text="#{login.username}" th:for="username"></label></td>
                 <td><input type="text" name="username" id="username"><br>
                 </td>
             </tr>
             <tr>
-                <td><label th:for="password">Пароль</label></td>
+                <td><label th:text="#{login.password}" th:for="password"></label></td>
                 <td><input type="password" name="password" id="password"></td>
             </tr>
             <tr>
-                <td>Войти</td>
-                <td><input type="submit" value=войти></td>
+                <td th:text="#{login.enter}"></td>
+                <td><input type="submit" th:value="#{login.enter}"/></td>
             </tr>
             </tbody>
         </form>
@@ -34,9 +38,10 @@
 
     <form th:action="@{/registration}" method="get">
         <tr>
-            <td><input type="submit" name="prof" value=зарегистрироваться></td>
+            <td><input type="submit" name="prof" th:value="#{registration.registration}"/></td>
         </tr>
     </form>
+
 
 </center>
 </form>

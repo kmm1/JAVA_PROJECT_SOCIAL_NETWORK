@@ -20,19 +20,17 @@
 
 <center>
 
-    <h2>Новый блог</h2>
+    <h2 th:text="#{new.blog}"></h2>
     <form th:action="@{/saveBlog}" method="post" th:object="${blog}">
 
-        <p><b>Название:</b></p>
+        <p><b th:text="#{blog.name}"></b></p>
         <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
-        <p><b>Содержание:</b></p>
+        <p><b th:text="#{blog.content}"></b></p>
         <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
         <!--<input type="hidden" th:field="*{user}" th:value="${myUser}">-->
         <!--<p> <input type="datetime-local" th:field="*{creationDate}" > </p>-->
         <!--<p th:text="${#temporals.formatISO(localDateTime)}"></p>-->
-
-        <p><input type="submit" value="Сохранить блог"/></p>
-
+        <p><input type="submit" th:value="#{save}"/></p>
     </form>
 
 </center>

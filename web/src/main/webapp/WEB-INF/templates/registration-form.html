@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <title>Title</title>
 </head>
 <body>
+<div th:insert="language-control"></div>
 
 <center>
     <table border="1" width="30%" cellpadding="5">
         <form th:action="@{/registration}" method="post" th:object="${user}" th:form>
             <thead>
             <tr>
-                <th colspan="2">Введите информацию</th>
+                <th colspan="2" th:text="#{registration.fill.out}"></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><label th:for="name">Имя</label></td>
+                <td><label th:text="#{login.username}" th:for="name"></label></td>
                 <td><input type="text" th:field="*{name}"></td>
             </tr>
             <tr>
-                <td><label th:for="email">E-mail</label></td>
+                <td><label th:text="#{login.email}" th:for="email"></label></td>
                 <td><input type="text" th:field="*{email}"></td>
             </tr>
             <tr>
-                <td><label th:for="password">Пароль</label></td>
+                <td><label th:text="#{login.password}" th:for="password"></label></td>
                 <td><input type="password" th:field="*{password}"></td>
             </tr>
             <tr>
-                <td><label th:for="password">Пароль еще раз</label></td>
+                <td><label th:text="#{login.password.again }" th:for="passwordRepeat"></label></td>
                 <td><input type="password" name="passwordRepeat" value=""/></td>
             </tr>
             <tr>
-                <td>зарегистрироваться</td>
-                <td><input type="submit" value="зарегистрироваться"/></td>
+                <td th:text="#{registration.registration }"></td>
+                <td><input type="submit" th:value="#{registration.registration}"/></td>
             </tr>
             </tbody>
         </form>
@@ -45,8 +46,8 @@
 
     <form th:action="@{/enter}" method="get">
         <tr>
-            <td>уже зарегистрированы?</td>
-            <td><input type="submit" value="вход"></td>
+            <td th:text="#{registration.already.registrated}"></td>
+            <td><input type="submit" th:value="#{login.enter}"></td>
         </tr>
     </form>
 </center>

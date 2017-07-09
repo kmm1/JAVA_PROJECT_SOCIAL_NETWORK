@@ -21,24 +21,24 @@
 
 <center>
 
-    <a th:href="@{/saveBlog}">Создать новый блог</a>
-    <a th:href="@{/addBlog/{blogId}(blogId=${myBlog.getId()})}">Редактировать блог</a>
-    <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}">Удалить блог</a>
+    <a th:href="@{/saveBlog}" th:text="#{blog.create.a.new.blog}"></a>
+    <a th:href="@{/addBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{blog.edit.blog}"></a>
+    <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{delite}"></a>
     <p></p>
 
-    <p><b>Название:</b></p>
+    <p><b th:text="#{blog.name}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myBlog.getTitle()}"></textarea></p>
-    <p><b>Содержание:</b></p>
+    <p><b th:text="#{blog.content}"></b></p>
     <p><textarea rows="20" cols="90" disabled th:text="${myBlog.getText()}"></textarea></p>
-    <p><b>Дата:</b></p>
+    <p><b th:text="#{blog.date}"></b></p>
     <p><textarea rows="1" cols="20" disabled th:text="${myBlog.getCreationDate()}"></textarea></p>
 
     <h3></h3>
 
     <form th:action="@{/saveComment/{blogId}/(blogId=${myBlog.getId()})}" method="get">
-        <p><b>Отзыв:</b></p>
+        <p><b th:text="#{comments}"></b></p>
         <p><textarea rows="3" cols="90" input type="text" id="text" name="text"></textarea></p>
-        <p><input type="submit" value="Сохранить"/></p>
+        <p><input type="submit" th:value="#{save}"/></p>
     </form>
 
     <h3></h3>
@@ -46,7 +46,7 @@
     <table border="1" width="30%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="5"><p>Отзывы:</p></th>
+            <th colspan="5"><p th:text="#{comments}"></p></th>
         </tr>
         </thead>
         <tbody>
@@ -59,7 +59,7 @@
             </td>
             <td>
                 <a th:if="${a.getUser().name.equals(userName) or a.getBlog().getUser().name.equals(userName)}">
-                    <a th:href="@{/deliteComment/{commentId}/(commentId=${a.getId()})}">Удалить комментарий</a></a>
+                    <a th:href="@{/deliteComment/{commentId}/(commentId=${a.getId()})}" th:text="#{delite.comment}"></a></a>
             </td>
         </tr>
         </tbody>

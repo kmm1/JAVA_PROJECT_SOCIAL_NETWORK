@@ -1,6 +1,5 @@
 package com.itacademy.config;
 
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
-
 @Configuration
 public class InternationalizationConfig extends WebMvcConfigurerAdapter {
 
@@ -23,7 +21,6 @@ public class InternationalizationConfig extends WebMvcConfigurerAdapter {
         resourceBundleMessageSource.setDefaultEncoding("UTF-8");
         return resourceBundleMessageSource;
     }
-
 
     @Bean
     public SessionLocaleResolver localeResolver() {

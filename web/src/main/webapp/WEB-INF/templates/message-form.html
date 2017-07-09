@@ -13,14 +13,14 @@
 
 <center>
 
-    <h2>Новое сообшение:</h2>
+    <h2 th:text="#{message.new.message}"></h2>
     <form th:action="@{/saveMessage/}" method="post">
-        <p><b>Кому:</b></p>
+        <p><b th:text="#{message.receiver}"></b></p>
         <p><textarea rows="1" cols="90" input type="text"
                      id="userReceiverName" name="userReceiverName"></textarea></p>
-        <p><b>Сообшение:</b></p>
+        <p><b th:text="#{message}"></b></p>
         <p><textarea rows="10" cols="90" input type="text" id="text" name="text"></textarea></p>
-        <p><input type="submit" value="Отправить сообшение"/></p>
+        <p><input type="submit" th:value="#{message.send.message}"/></p>
     </form>
 
 </center>
