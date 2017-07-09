@@ -39,6 +39,10 @@
                     th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></option>
         </select>
         <p><input type="submit" th:value="#{save}"/></p>
+
+        <input type="hidden" name="version" th:value="${version}"></input>
+
+
     </form>
 
 

@@ -60,6 +60,9 @@ public class RootConfig {
     @Value("${hibernate.generate_statistics}")
     private String statistics;
 
+    @Value("${hibernate.connection.isolation}")
+    private String isolation;
+
 
     @Bean
     public DataSource dataSource() {
@@ -92,8 +95,10 @@ public class RootConfig {
         properties.setProperty("hibernate.cache.use_query_cache", queryCache);
         properties.setProperty("hibernate.cache.region.factory_class", factory);
         properties.setProperty("hibernate.generate_statistics", statistics);
+        properties.setProperty("hibernate.connection.isolation", isolation);
         return properties;
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

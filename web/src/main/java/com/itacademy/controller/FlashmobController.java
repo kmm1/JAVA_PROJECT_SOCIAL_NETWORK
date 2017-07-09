@@ -75,7 +75,10 @@ public class FlashmobController {
     @GetMapping(path = "/updateEvent/{eventId}")
     public String updateEvent1(@PathVariable("eventId") Long eventId, Model model) {
         Flashmob flashmob = flashmobService.findById(eventId);
+        long version = flashmob.getVersion();
         model.addAttribute("flashmob", flashmob);
+        model.addAttribute("version", version);
+
         return "flashmob-update";
     }
 
@@ -84,8 +87,15 @@ public class FlashmobController {
                                @RequestParam String name,
                                @RequestParam String holdingDate,
                                @RequestParam String aboutEvent,
+                               @RequestParam Long version,
                                @RequestParam EnumFlashmobType flashmobType) {
         Flashmob flashmob = flashmobService.findById(eventId);
+        long version1 = flashmob.getVersion();
+        System.out.println(version1);
+        System.out.println(version);
+        if (version1 != version) {
+            return "version-error";
+        }
         flashmob.setFlashmobType(flashmobType);
         flashmob.setHoldingDate(holdingDate);
         flashmob.setAboutEvent(aboutEvent);
