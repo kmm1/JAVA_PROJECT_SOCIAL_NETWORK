@@ -26,13 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/registration", "/login", "/login?language_en_US", "/login?language_ru_RU")
-//                .permitAll()
-//                .antMatchers("/admin")
-//                .hasAuthority("ADMIN")
-                .anyRequest()
+                .antMatchers("/registration", "/login")
                 .permitAll()
-//                .authenticated()
+                .antMatchers("/admin")
+                .hasAuthority("ADMIN")
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

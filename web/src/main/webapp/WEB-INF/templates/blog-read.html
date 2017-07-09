@@ -23,7 +23,7 @@
 
     <a th:href="@{/saveBlog}" th:text="#{blog.create.a.new.blog}"></a>
     <a th:href="@{/addBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{blog.edit.blog}"></a>
-    <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{delite}"></a>
+    <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{delite.blog}"></a>
     <p></p>
 
     <p><b th:text="#{blog.name}"></b></p>

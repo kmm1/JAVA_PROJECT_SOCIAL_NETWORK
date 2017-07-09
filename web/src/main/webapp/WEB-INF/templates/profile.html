@@ -16,62 +16,62 @@
     <table border="1" width="50%" cellpadding="5">
         <thead>
         <tr>
-            <th colspan="1">Профиль:</th>
+            <th colspan="1" th:text="#{profile}"></th>
             <td th:text="${userName}"></td>
         </tr>
         </thead>
 
         <tbody>
         <tr>
-            <td>Обо мне:</td>
+            <td th:text="#{profile.about.me}"></td>
             <td th:text="${profile.get(0).aboutMe}"></td>
         </tr>
 
         <tr>
-            <td> День рождения:</td>
+            <td th:text="#{birthday.day}"></td>
             <td th:text="${profile.get(0).birthday.dayOfBirth}"></td>
         </tr>
 
         <tr>
-            <td> Месяц рождения:</td>
+            <td th:text="#{birthday.month}"></td>
             <td th:text="${profile.get(0).birthday.monthOfBirth}"></td>
         </tr>
 
         <tr>
-            <td> Год рождения:</td>
+            <td th:text="#{birthday.year}"></td>
             <td th:text="${profile.get(0).birthday.yearOfBirth}"></td>
         </tr>
 
         <tr>
-            <td>Пол:</td>
+            <td th:text="#{gender}"></td>
             <td th:each="a : ${profile.get(0).gender}"
                 th:value="${a}"
                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></td>
         </tr>
 
         <tr>
-            <td> Я живу в стране:</td>
+            <td th:text="#{country.home}"></td>
             <td th:text="${profile.get(0).homeAddress.country}"></td>
         </tr>
 
         <tr>
-            <td> Я живу в городе:</td>
+            <td th:text="#{city.home}"></td>
             <td th:text="${profile.get(0).homeAddress.city}"></td>
         </tr>
 
         </tr>
         <tr>
-            <td> Я работаю в стране:</td>
+            <td th:text="#{country.work}"></td>
             <td th:text="${profile.get(0).workAddress.country}"></td>
         </tr>
 
         <tr>
-            <td> Я работаю в городе:</td>
+            <td th:text="#{city.work}"></td>
             <td th:text="${profile.get(0).workAddress.city}"></td>
         </tr>
 
         <tr>
-            <td> Семья и отношения:</td>
+            <td th:text="#{profile.family.and.relationship}"></td>
             <td th:each="a : ${profile.get(0).maritalStatus}"
                 th:value="${a}"
                 th:text="${#strings.capitalize(#strings.toLowerCase(a))}"></td>
@@ -81,7 +81,7 @@
 
     <form th:action="@{/addProfile}" method="get">
         <tr>
-            <td><input type="submit" value=редактировать профиль></td>
+            <td><input type="submit" th:value="#{profile.update}"></td>
         </tr>
     </form>
 

@@ -44,7 +44,7 @@ CREATE TABLE users (
   id                INT AUTO_INCREMENT,
   name              VARCHAR(20),
   email             VARCHAR(20),
-  password          VARCHAR(20),
+  password          VARCHAR(255),
   registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
 );
