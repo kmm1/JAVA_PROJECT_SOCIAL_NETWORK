@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertEquals;
@@ -19,10 +21,6 @@ public class ProfileDaoTest extends BaseTest {
     @Autowired
     private ProfileDao profileDao;
 
-    @Before
-    public void init() {
-        // ....
-    }
 
     @Test
     public void saveProfileToUser() {
@@ -74,8 +72,36 @@ public class ProfileDaoTest extends BaseTest {
         assertThat(profile1, nullValue());
     }
 
-    @After
-    public void finish() {
-        // ...
+    @Test
+    public void testFindAllProfiles() {
+        Profile profile1 = new Profile();
+        Profile profile2 = new Profile();
+        profileDao.save(profile1);
+        profileDao.save(profile2);
+        List<Profile> results = profileDao.findAll();
+        assertEquals(results.size(), 2);
     }
+
+    @Test
+    public void testFindProfileByUserId() {
+        SystemUser user1 = new SystemUser();
+        Long userId = userDao.save(user1);
+        Profile profile1 = new Profile();
+        profile1.setUser(user1);
+        profileDao.save(profile1);
+        List<Profile> result = profileDao.findProfileByUserId(userId);
+        assertEquals(result.size(), 1);
+    }
+
+    @Test
+    public void testFindOneProfileByUserId() {
+        SystemUser user1 = new SystemUser();
+        Long userId = userDao.save(user1);
+        Profile profile1 = new Profile();
+        profile1.setUser(user1);
+        profileDao.save(profile1);
+        Profile result = profileDao.findOneProfileByUserId(userId);
+        assertThat(result, notNullValue());
+    }
+
 }

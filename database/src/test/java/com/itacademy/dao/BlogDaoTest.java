@@ -2,7 +2,9 @@ package com.itacademy.dao;
 
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
+import com.itacademy.entity.EnumCategory;
 import com.itacademy.entity.SystemUser;
+import org.h2.engine.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +28,6 @@ public class BlogDaoTest extends BaseTest {
     private UserDao userDao;
     @Autowired
     private BlogDao blogDao;
-
-
-    @Before
-    public void init() {
-        // ....
-    }
 
 
     @Test
@@ -111,13 +107,64 @@ public class BlogDaoTest extends BaseTest {
         blogDao.save(blog2);
         List<Blog> results = blogDao.findAll();
         assertEquals(results.size(), 2);
-
     }
 
 
-    @After
-    public void finish() {
-        // ...
+    @Test
+    public void testFindAllUsersBlogs() {
+        SystemUser user = new SystemUser();
+        Long userId = userDao.save(user);
+        Blog blog1 = new Blog();
+        Blog blog2 = new Blog();
+        blog1.setUser(user);
+        blog2.setUser(user);
+        blogDao.save(blog1);
+        blogDao.save(blog2);
+        List<Blog> results = blogDao.findAllUsersBlogs(1L, 2, 0);
+        assertEquals(results.size(), 2);
     }
+
+    @Test
+    public void testFindAllBlogsByCategory() {
+        Blog blog = new Blog();
+        Long blogId = blogDao.save(blog);
+        Category category = new Category();
+        category.setEnumCategory(EnumCategory.BUSINESS);
+        Long categoryId = categoryDao.save(category);
+        blogDao.addExistingBlogToExistingCategory(categoryId, blogId);
+        List<Blog> results = blogDao.findAllBlogsByCategory(categoryId);
+        assertEquals(results.size(), 1);
+    }
+
+    @Test
+    public void testDeliteExistingBlogFromExistingCategory() {
+        Blog blog = new Blog();
+        Long blogId = blogDao.save(blog);
+        Category category = new Category();
+        category.setEnumCategory(EnumCategory.BUSINESS);
+        Long categoryId = categoryDao.save(category);
+        blogDao.addExistingBlogToExistingCategory(categoryId, blogId);
+        List<Blog> results = blogDao.findAllBlogsByCategory(categoryId);
+        assertEquals(results.size(), 1);
+        blogDao.deliteExistingBlogFromExistingCategory(categoryId, blogId);
+        List<Blog> results2 = blogDao.findAllBlogsByCategory(categoryId);
+        assertEquals(results2.size(), 0);
+
+    }
+
+    @Test
+    public void testCountUserBlogs() {
+        SystemUser user = new SystemUser();
+        Long userId = userDao.save(user);
+        Blog blog1 = new Blog();
+        Blog blog2 = new Blog();
+        blog1.setUser(user);
+        blog2.setUser(user);
+        blogDao.save(blog1);
+        blogDao.save(blog2);
+        Integer resoult = blogDao.countUserBlogs(userId);
+        assertThat(resoult, notNullValue());
+    }
+
 }
 

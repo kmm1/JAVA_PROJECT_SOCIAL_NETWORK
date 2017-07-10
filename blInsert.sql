@@ -66,4 +66,3 @@ INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Вова,
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Как дела', 2, 4);
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Норм.', 4, 2);
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Hello, Nastya.', 4, 3);
-

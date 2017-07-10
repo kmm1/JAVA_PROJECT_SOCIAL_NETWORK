@@ -53,11 +53,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SystemUser> findUserByNamePassword(String name, String password) {
-        return userDao.findUserByNamePassword(name, password);
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SystemUser foundSystemUser = userDao.findByName(username);
         if (foundSystemUser == null) {

@@ -14,8 +14,6 @@ public interface UserService extends UserDetailsService {
 
     List<SystemUser> findAll();
 
-    List<SystemUser> findUserByNamePassword(String name, String password);
-
     SystemUser findOneUserByName(String name);
 
     List<SystemUser> findOneUserByName2(String name);

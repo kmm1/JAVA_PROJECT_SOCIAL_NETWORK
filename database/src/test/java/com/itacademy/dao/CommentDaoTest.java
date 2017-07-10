@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -24,11 +25,6 @@ public class CommentDaoTest extends BaseTest {
     @Autowired
     private BlogDao blogDao;
 
-
-    @Before
-    public void init() {
-        // ....
-    }
 
     @Test
     public void testSaveComment() {
@@ -46,6 +42,30 @@ public class CommentDaoTest extends BaseTest {
         assertEquals(comment.getBlog(), blog);
         assertEquals(comment.getUser(), user);
         assertEquals(comment.getComment(), "My first Comment");
+    }
+
+    @Test
+    public void testFindAllComments() {
+        Comment comment = new Comment();
+        Comment comment2 = new Comment();
+        comment.setComment("My second Comment");
+        comment2.setComment("My first Comment");
+        commentDao.save(comment);
+        commentDao.save(comment2);
+        List<Comment> result = commentDao.findAll();
+        assertEquals(result.size(), 2);
+    }
+
+    @Test
+    public void testUpdateComment() {
+        Comment comment = new Comment();
+        comment.setComment("My first Comment");
+        Long commentId = commentDao.save(comment);
+        Comment comment2 = commentDao.findById(commentId);
+        comment2.setComment("My second comment");
+        commentDao.update(comment2);
+        Comment comment3 = commentDao.findById(commentId);
+        assertEquals(comment3.getComment(), "My second comment");
     }
 
     @Test
@@ -99,8 +119,4 @@ public class CommentDaoTest extends BaseTest {
     }
 
 
-    @After
-    public void finish() {
-        // ...
-    }
 }

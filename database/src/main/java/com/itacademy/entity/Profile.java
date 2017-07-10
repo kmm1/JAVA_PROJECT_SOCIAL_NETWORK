@@ -1,12 +1,16 @@
 package com.itacademy.entity;
 
 import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "profiles")
 @ToString(callSuper = true, exclude = {"user"})
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Profile extends BaseEntity {

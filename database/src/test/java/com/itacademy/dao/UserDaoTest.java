@@ -1,5 +1,6 @@
 package com.itacademy.dao;
 
+import com.itacademy.entity.Role;
 import com.itacademy.entity.SystemUser;
 import org.junit.After;
 import org.junit.Before;
@@ -20,10 +21,9 @@ public class UserDaoTest extends BaseTest {
     @Autowired
     private UserDao userDao;
 
-    @Before
-    public void init() {
-        // ....
-    }
+    @Autowired
+    private RoleDao roleDao;
+
 
     @Test
     public void testSaveUser() {
@@ -50,7 +50,7 @@ public class UserDaoTest extends BaseTest {
     }
 
     @Test
-    public void testGetUserByName() {
+    public void testFindUserByName() {
         SystemUser user = new SystemUser();
         user.setName("name");
         Long userId = userDao.save(user);
@@ -71,7 +71,7 @@ public class UserDaoTest extends BaseTest {
     }
 
     @Test
-    public void deleteUser() {
+    public void testDeleteUser() {
         SystemUser user = new SystemUser();
         Long userId = userDao.save(user);
         userDao.delete(user);
@@ -80,7 +80,7 @@ public class UserDaoTest extends BaseTest {
     }
 
     @Test
-    public void testFindAll() {
+    public void testFindAllUsers() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
         userDao.save(user1);
@@ -89,9 +89,45 @@ public class UserDaoTest extends BaseTest {
         assertEquals(results.size(), 2);
     }
 
-    @After
-    public void finish() {
-        // ...
+    @Test
+    public void testFindUserByNamePassword() {
+        SystemUser user1 = new SystemUser();
+        user1.setName("Name");
+        user1.setPassword("Password");
+        Long userId = userDao.save(user1);
+        List<SystemUser> result = userDao.findUserByNamePassword("Name", "Password");
+        assertEquals(result.size(), 1);
     }
+
+    @Test
+    public void testFindOneUserByName() {
+        SystemUser user1 = new SystemUser();
+        user1.setName("Name");
+        userDao.save(user1);
+        SystemUser result = userDao.findOneUserByName("Name");
+        assertThat(result, notNullValue());
+    }
+
+    @Test
+    public void testFindOneUserByName2() {
+        SystemUser user1 = new SystemUser();
+        user1.setName("Name");
+        userDao.save(user1);
+        List<SystemUser> result = userDao.findOneUserByName2("Name");
+        assertThat(result, notNullValue());
+    }
+
+    @Test
+    public void testAddExistingRoleToExistingUser() {
+        Role role = new Role();
+        role.setName("ADMIN");
+        Long roleId = roleDao.save(role);
+        SystemUser user1 = new SystemUser();
+        Long userId = userDao.save(user1);
+        userDao.addExistingRoleToExistingUser(roleId, userId);
+        SystemUser result = userDao.findById(userId);
+        assertThat(result.getRoles(), notNullValue());
+    }
+
 }
 
