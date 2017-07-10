@@ -3,8 +3,6 @@ package com.itacademy.service;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

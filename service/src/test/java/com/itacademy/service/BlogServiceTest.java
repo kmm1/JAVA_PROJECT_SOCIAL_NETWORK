@@ -1,14 +1,9 @@
 package com.itacademy.service;
 
-import com.itacademy.dao.BlogDao;
-import com.itacademy.dao.CategoryDao;
-import com.itacademy.dao.UserDao;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
 import com.itacademy.entity.SystemUser;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

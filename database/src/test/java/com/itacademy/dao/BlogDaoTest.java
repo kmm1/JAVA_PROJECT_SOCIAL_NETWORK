@@ -4,9 +4,6 @@ import com.itacademy.entity.Blog;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
 import com.itacademy.entity.SystemUser;
-import org.h2.engine.User;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -88,7 +88,7 @@ public class FlashmobController {
                                @RequestParam String holdingDate,
                                @RequestParam String aboutEvent,
                                @RequestParam Long version,
-                               @RequestParam EnumFlashmobType flashmobType) {
+                               @RequestParam EnumFlashmobType flashmobType) throws Exception {
         Flashmob flashmob = flashmobService.findById(eventId);
         long version1 = flashmob.getVersion();
         System.out.println(version1);
@@ -96,11 +96,16 @@ public class FlashmobController {
         if (version1 != version) {
             return "version-error";
         }
-        flashmob.setFlashmobType(flashmobType);
-        flashmob.setHoldingDate(holdingDate);
-        flashmob.setAboutEvent(aboutEvent);
-        flashmob.setName(name);
-        flashmobService.update(flashmob);
+        try {
+            flashmob.setFlashmobType(flashmobType);
+            flashmob.setHoldingDate(holdingDate);
+            flashmob.setAboutEvent(aboutEvent);
+            flashmob.setName(name);
+            flashmobService.update(flashmob);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return "version-error";
+        }
         List<Event> allEvents = flashmobService.findAllEvents();
         model.addAttribute("allEvents", allEvents);
         return "main-page-admin";

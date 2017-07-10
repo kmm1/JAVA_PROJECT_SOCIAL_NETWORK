@@ -3,8 +3,6 @@ package com.itacademy.service;
 import com.itacademy.entity.EnumFlashmobType;
 import com.itacademy.entity.Event;
 import com.itacademy.entity.Flashmob;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

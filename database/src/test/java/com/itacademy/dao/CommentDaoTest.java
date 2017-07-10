@@ -3,8 +3,6 @@ package com.itacademy.dao;
 import com.itacademy.entity.Blog;
 import com.itacademy.entity.Comment;
 import com.itacademy.entity.SystemUser;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
