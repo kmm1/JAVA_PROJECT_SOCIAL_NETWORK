@@ -53,13 +53,11 @@
         </tbody>
     </table>
 
-
     <div class="paginator">
         <a th:each="a : ${numbers}">
             <a th:href="@{/blog/{pageId}(pageId=${a})}"> <span th:text="${(a)}"></span> </a>
         </a>
     </div>
-
 
 </center>
 </body>

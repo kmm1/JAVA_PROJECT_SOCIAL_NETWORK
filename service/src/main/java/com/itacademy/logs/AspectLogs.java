@@ -1,10 +1,11 @@
 package com.itacademy.logs;
 
 import org.apache.log4j.Logger;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+
+import java.util.Arrays;
 
 @Aspect
 public class AspectLogs {
@@ -15,14 +16,15 @@ public class AspectLogs {
     public void logingServiceMethods() {
     }
 
-    @Before("logingServiceMethods()")
-    public void logBefore() {
-        LOGGER.info("Service method BEFORE");
-    }
-
-
-    @After("logingServiceMethods()")
-    public void logAfter() {
-        LOGGER.info("Service method AFTER");
+    @AfterReturning(pointcut = ("execution(* com.itacademy.service.*.*(..))"),
+            returning = "result")
+    public void logAfterReturning(JoinPoint joinPoint, Object result) {
+        LOGGER.info("******");
+        LOGGER.info("logAfterReturning() is running!");
+        LOGGER.info("перехват : " + joinPoint.getSignature().getName());
+        LOGGER.info("перехваченные аргументы : " + Arrays.toString(joinPoint.getArgs()));
+        LOGGER.info("перехваченные аргументы : " + (joinPoint.getSignature()));
+        LOGGER.info("Method returned value is : " + result);
+        LOGGER.info("******");
     }
 }
