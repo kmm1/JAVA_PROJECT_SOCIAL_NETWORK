@@ -22,7 +22,6 @@ public class ThymeleafConfig {
         return resolver;
     }
 
-
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
@@ -40,8 +39,6 @@ public class ThymeleafConfig {
         resolver.setContentType("text/html; charset=UTF-8"); //added
         return resolver;
     }
-
-
 }
 
 

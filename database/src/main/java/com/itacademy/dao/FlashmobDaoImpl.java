@@ -16,5 +16,4 @@ public class FlashmobDaoImpl extends BaseDaoImpl<Flashmob> implements FlashmobDa
                 .createQuery("from Event ", Event.class)
                 .getResultList();
     }
-
 }

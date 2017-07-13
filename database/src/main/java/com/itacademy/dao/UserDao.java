@@ -17,6 +17,4 @@ public interface UserDao extends BaseDao<SystemUser> {
     SystemUser findByName(String name);
 
     void addExistingRoleToExistingUser(Long roleId, Long userId);
-
-
 }

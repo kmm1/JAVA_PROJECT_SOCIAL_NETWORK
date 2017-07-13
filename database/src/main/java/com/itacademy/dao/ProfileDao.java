@@ -11,6 +11,4 @@ public interface ProfileDao extends BaseDao<Profile> {
     List<Profile> findProfileByUserId(Long userId);
 
     Profile findOneProfileByUserId(Long userId);
-
-
 }

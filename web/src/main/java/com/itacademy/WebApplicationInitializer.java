@@ -1,7 +1,7 @@
 package com.itacademy;
 
-import com.itacademy.config.RootConfig;
 import com.itacademy.config.SecurityConfig;
+import com.itacademy.config.ServiceConfig;
 import com.itacademy.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -12,7 +12,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{RootConfig.class, SecurityConfig.class};
+        return new Class[]{ServiceConfig.class, SecurityConfig.class};
     }
 
     @Override

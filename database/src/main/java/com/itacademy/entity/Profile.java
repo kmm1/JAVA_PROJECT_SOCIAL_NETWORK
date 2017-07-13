@@ -1,14 +1,12 @@
 package com.itacademy.entity;
 
 import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "profiles")
 @ToString(callSuper = true, exclude = {"user"})
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Profile extends BaseEntity {
@@ -17,7 +15,6 @@ public class Profile extends BaseEntity {
     @Getter
     @Setter
     private String aboutMe;
-
 
     @Column(name = "gender")
     @Getter
@@ -42,7 +39,6 @@ public class Profile extends BaseEntity {
             @AttributeOverride(name = "city", column = @Column(name = "work_city")),
     })
     private Address workAddress;
-
 
     @Column(name = "marital_status")
     @Getter
@@ -69,5 +65,4 @@ public class Profile extends BaseEntity {
     public Profile(String aboutMe) {
         this.aboutMe = aboutMe;
     }
-
 }

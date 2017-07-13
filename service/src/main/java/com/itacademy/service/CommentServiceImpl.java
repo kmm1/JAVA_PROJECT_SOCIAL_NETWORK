@@ -2,6 +2,7 @@ package com.itacademy.service;
 
 import com.itacademy.dao.CommentDao;
 import com.itacademy.entity.Comment;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl extends BaseServiceImpl<Comment> implements CommentService {
 
     private final CommentDao commentDao;
 

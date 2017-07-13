@@ -24,7 +24,6 @@ public class MessageController {
     private final UserService userService;
     private final MessageService messageService;
 
-
     @Autowired
     public MessageController(MessageService messageService, UserService userService) {
         this.messageService = messageService;
@@ -36,6 +35,13 @@ public class MessageController {
         Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
                 .getAuthentication().getAuthorities();
         return roles;
+    }
+
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
     }
 
     @ModelAttribute("message")
@@ -86,10 +92,7 @@ public class MessageController {
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
             return "message-error";
         }
-        System.out.println("JJJJJJJJJJJJJJJJJ");
-        System.out.println(userReceiverName);
         List<SystemUser> user = userService.findOneUserByName2(userReceiverName);
-        System.out.println(user);
         if (user.size() == 0) {
             return "message-error";
         }
@@ -111,8 +114,6 @@ public class MessageController {
         Long userId = userService.findOneUserByName(userName).getId();
         List<String> names = messageService.names(userId, userName);
         model.addAttribute("names", names);
-        System.out.println(names);
-        System.out.println(model);
         return "/message-input";
     }
 
@@ -126,8 +127,6 @@ public class MessageController {
         if (name.equals("") || name.equals(null)) {
             return "message-error";
         }
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(name);
         List<SystemUser> oneUserByName2 = userService.findOneUserByName2(name);
         if (oneUserByName2.size() == 0) {
             return "message-error";
@@ -137,8 +136,6 @@ public class MessageController {
         model.addAttribute("messages", messages);
         model.addAttribute("userName", userName);
         model.addAttribute("name2", name);
-        System.out.println(messages);
-        System.out.println(name);
         return "/message-chat";
     }
 
@@ -149,12 +146,10 @@ public class MessageController {
         String userName = ((UserDetails) principal).getUsername();
         Long userId = userService.findOneUserByName(userName).getId();
         if (userReceiverName.equals("") || userReceiverName.equals(null)) {
-            System.out.println("jjj" + userReceiverName);
             return "message-error";
         }
         List<SystemUser> oneUserByName2 = userService.findOneUserByName2(userReceiverName);
         if (oneUserByName2.size() == 0) {
-            System.out.println("kkk" + userReceiverName);
             return "message-error";
         }
         Long id = oneUserByName2.get(0).getId();
@@ -162,10 +157,6 @@ public class MessageController {
         model.addAttribute("messages", messages);
         model.addAttribute("userName", userName);
         model.addAttribute("name2", userReceiverName);
-        System.out.println(messages);
-        System.out.println(userReceiverName);
         return "/message-chat";
     }
-
-
 }

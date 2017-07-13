@@ -1,5 +1,7 @@
 package com.itacademy.service;
 
-public interface RoleService {
+import com.itacademy.entity.Role;
+import com.itacademy.service.common.BaseService;
 
+public interface RoleService extends BaseService<Role> {
 }

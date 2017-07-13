@@ -39,6 +39,13 @@ public class ProfileController {
         return roles;
     }
 
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
+    }
+
     @ModelAttribute("profile")
     public Profile profile() {
         return new Profile();
@@ -90,7 +97,6 @@ public class ProfileController {
         return month;
     }
 
-
     @GetMapping(path = "/profile")
     public String showMyProfile(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -131,10 +137,6 @@ public class ProfileController {
         String userName = ((UserDetails) principal).getUsername();
         SystemUser user = userService.findOneUserByName(userName);
         Long userId = userService.findOneUserByName(userName).getId();
-        System.out.println(maritalStatus);
-        System.out.println(dayOfBirth);
-        System.out.println(monthOfBirth);
-        System.out.println(yearOfBirth);
 
         profile.setUser(user);
         profile.setAboutMe(aboutMe);
@@ -145,14 +147,12 @@ public class ProfileController {
         profile.setMaritalStatus(maritalStatus);
 
         Long id = profileService.save(profile);
-        System.out.println(profile);
         List<Profile> profile2 = profileService.findProfileByUserId(userId);
         model.addAttribute("profile", profile2);
         model.addAttribute("userName", userName);
         return "profile";
     }
 
-    //TODO ne soxr enbadded => gde net feald sbrasivaet formy
     @PostMapping(path = "/updateProfile")
     public String profileUpdate(Model model,
                                 @RequestParam String aboutMe,
@@ -185,6 +185,4 @@ public class ProfileController {
         model.addAttribute("userName", userName);
         return "profile";
     }
-
-
 }

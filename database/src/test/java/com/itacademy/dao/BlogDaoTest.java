@@ -26,7 +26,6 @@ public class BlogDaoTest extends BaseTest {
     @Autowired
     private BlogDao blogDao;
 
-
     @Test
     public void testSaveBlog() {
         SystemUser blogger = new SystemUser();
@@ -82,7 +81,6 @@ public class BlogDaoTest extends BaseTest {
         assertThat(blog.getCategories(), notNullValue());
     }
 
-
     @Test
     public void testCreateBlog() {
         Blog blog = new Blog();
@@ -95,7 +93,6 @@ public class BlogDaoTest extends BaseTest {
         assertThat(blogId, notNullValue());
     }
 
-
     @Test
     public void testFindAllBlogs() {
         Blog blog1 = new Blog();
@@ -105,7 +102,6 @@ public class BlogDaoTest extends BaseTest {
         List<Blog> results = blogDao.findAll();
         assertEquals(results.size(), 2);
     }
-
 
     @Test
     public void testFindAllUsersBlogs() {
@@ -162,6 +158,5 @@ public class BlogDaoTest extends BaseTest {
         Integer resoult = blogDao.countUserBlogs(userId);
         assertThat(resoult, notNullValue());
     }
-
 }
 

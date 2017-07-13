@@ -7,6 +7,7 @@ import com.itacademy.service.FlashmobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -41,6 +42,13 @@ public class FlashmobController {
         Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext()
                 .getAuthentication().getAuthorities();
         return roles;
+    }
+
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
     }
 
 
@@ -78,7 +86,6 @@ public class FlashmobController {
         long version = flashmob.getVersion();
         model.addAttribute("flashmob", flashmob);
         model.addAttribute("version", version);
-
         return "flashmob-update";
     }
 
@@ -91,8 +98,6 @@ public class FlashmobController {
                                @RequestParam EnumFlashmobType flashmobType) throws Exception {
         Flashmob flashmob = flashmobService.findById(eventId);
         long version1 = flashmob.getVersion();
-        System.out.println(version1);
-        System.out.println(version);
         if (version1 != version) {
             return "version-error";
         }
@@ -125,6 +130,4 @@ public class FlashmobController {
         model.addAttribute("myFlashmob", myFlashmob);
         return "flashmob-read";
     }
-
-
 }

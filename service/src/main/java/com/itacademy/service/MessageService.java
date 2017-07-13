@@ -2,10 +2,11 @@ package com.itacademy.service;
 
 
 import com.itacademy.entity.Message;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface MessageService {
+public interface MessageService extends BaseService<Message> {
 
     Message findById(Long id);
 
@@ -13,8 +14,5 @@ public interface MessageService {
 
     List<Message> chatByTwoUsers(Long firstUserId, Long secondUserId);
 
-
     List<String> names(Long userId, String userName);
-
-
 }

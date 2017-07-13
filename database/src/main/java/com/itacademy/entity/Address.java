@@ -22,5 +22,4 @@ public class Address {
     @Getter
     @Setter
     private String city;
-
 }

@@ -14,7 +14,6 @@ import java.util.TreeSet;
 @Repository
 public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
 
-
     /**
      * Возвращает сообщения, их автора, дату
      * SELECT u1.name, m.text, m.creation_date
@@ -40,7 +39,6 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
         return query.fetchResults().getResults();
     }
 
-    //TODO vspomogatelnii metod
     @Override
     public List<Message> findMessagesByUserName(Long userId) {
         QMessage message = new QMessage("myMessage");
@@ -69,6 +67,4 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements MessageDao {
         List<String> list = new ArrayList<>(z);
         return list;
     }
-
-
 }

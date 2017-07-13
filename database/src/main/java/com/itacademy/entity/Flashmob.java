@@ -23,6 +23,4 @@ public class Flashmob extends Event {
     @Setter
     @Column(name = "about_event")
     private String aboutEvent;
-
-
 }

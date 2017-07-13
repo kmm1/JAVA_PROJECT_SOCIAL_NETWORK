@@ -28,7 +28,6 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
         return blogId;
     }
 
-
     /**
      * Пользователь к существующему блогу добавляет категорию
      */
@@ -45,7 +44,6 @@ public class BlogDaoImpl extends BaseDaoImpl<Blog> implements BlogDao {
         Category category = getSessionFactory().getCurrentSession().get(Category.class, categoryId);
         blog.getCategories().remove(category);
     }
-
 
     /**
      * Достать все блоги у пользователя

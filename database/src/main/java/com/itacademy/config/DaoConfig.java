@@ -1,13 +1,11 @@
 package com.itacademy.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,10 +16,10 @@ import java.util.Properties;
 
 
 @Configuration
-@ComponentScan(basePackages = {"com.itacademy"})
+@ComponentScan(basePackages = {"com.itacademy.dao"})
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")
-public class RootConfig {
+public class DaoConfig {
 
     @Value("${jdbc.url}")
     private String dbUrl;
@@ -46,7 +44,6 @@ public class RootConfig {
 
     @Value("${hibernate.creation_policy}")
     private String creationPolicy;
-
 
     @Value("${hibernate.cache.use_second_level_cache}")
     private String secondLevelCache;
@@ -99,17 +96,8 @@ public class RootConfig {
         return properties;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
     }
 }

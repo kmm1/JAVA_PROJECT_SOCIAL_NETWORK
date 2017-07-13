@@ -19,6 +19,5 @@ public interface BlogDao extends BaseDao<Blog> {
     void deliteExistingBlogFromExistingCategory(Long categoryId, Long blogId);
 
     Integer countUserBlogs(Long userId);
-
 }
 

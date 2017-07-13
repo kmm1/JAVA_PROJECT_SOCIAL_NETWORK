@@ -27,7 +27,6 @@ public class BlogController {
     private final CommentService commentService;
     private final CategoryService categoryService;
 
-
     @Autowired
     public BlogController(BlogService blogService, UserService userService,
                           CommentService commentService, CategoryService categoryService) {
@@ -59,15 +58,20 @@ public class BlogController {
         return categoryService.findAll();
     }
 
-    public Integer limit = 5;
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
+    }
 
+    private final Integer limit = 5;
 
     @GetMapping(path = "/blog")
     public String showMyBlogs(Blog blog, Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = ((UserDetails) principal).getUsername();
         Long userId = userService.findOneUserByName(userName).getId();
-
         Integer numberOfBlogs = blogService.countUserBlogs(userId);
         Integer numberOfPages = (int) Math.ceil((double) numberOfBlogs / (double) limit);
         List<Object> numbers = new ArrayList<>();
@@ -107,7 +111,6 @@ public class BlogController {
         return "blog";
     }
 
-
     @GetMapping(path = "/readBlog/{blogId}")
     public String readBlog(@PathVariable("blogId") Long blogId, Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -117,8 +120,6 @@ public class BlogController {
         model.addAttribute("userName", userName);
         model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
         model.addAttribute("myBlog", myBlog);
-        System.out.println(blogId);
-        System.out.println(myBlog);
         return "blog-read";
     }
 
@@ -135,16 +136,13 @@ public class BlogController {
             }
         }
         if (allCommentsByBlogId.size() != 0) {
-            System.out.println("SSSSSSSSSSSSSSSSSSS");
             for (int i = 0; i < allCommentsByBlogId.size(); i++) {
                 Long commentId = allCommentsByBlogId.get(i).getId();
                 Comment comment = commentService.findById(commentId);
                 commentService.delete(comment);
             }
         }
-        System.out.println("HHHHHHHHHHHHHHHHHHHHH");
         blogService.delete(myBlog);
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXX");
         return "redirect:/blog";
     }
 
@@ -177,8 +175,6 @@ public class BlogController {
         Long userId = userService.findOneUserByName(userName).getId();
         SystemUser myUser = userService.findOneUserByName(userName);
         model.addAttribute("myUser", myUser);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(myUser);
         return "blog-form";
     }
 
@@ -187,9 +183,6 @@ public class BlogController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName = ((UserDetails) principal).getUsername();
         SystemUser myUser = userService.findOneUserByName(userName);
-        System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGG");
-        System.out.println(myUser);
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         blog.setUser(myUser);
         blog.setCreationDate(LocalDateTime.now());
         Long blogId = blogService.save(blog);
@@ -221,12 +214,8 @@ public class BlogController {
 
     @GetMapping(path = "/readBlogInCategory/{categoryId}")
     public String readBlogInCategory(@PathVariable("categoryId") Long categoryId, Model model) {
-        System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         List<Blog> allBlogsInCategory = blogService.findAllBlogsByCategory(categoryId);
         model.addAttribute("allBlogsInCategory", allBlogsInCategory);
         return "blog-in-category";
-//        return "blog";
     }
-
-
 }

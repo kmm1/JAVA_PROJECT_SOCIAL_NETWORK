@@ -61,6 +61,4 @@ public class UserDaoImpl extends BaseDaoImpl<SystemUser> implements UserDao {
         Role role = getSessionFactory().getCurrentSession().get(Role.class, roleId);
         user.getRoles().add(role);
     }
-
-
 }

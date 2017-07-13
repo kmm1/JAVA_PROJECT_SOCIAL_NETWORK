@@ -2,10 +2,11 @@ package com.itacademy.service;
 
 
 import com.itacademy.entity.Blog;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface BlogService {
+public interface BlogService extends BaseService<Blog> {
 
     Blog findById(Long id);
 

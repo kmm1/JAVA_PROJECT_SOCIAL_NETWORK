@@ -22,7 +22,6 @@ import java.util.List;
 @Controller
 public class FriendController {
 
-
     private final FriendService friendService;
     private final UserService userService;
 
@@ -44,6 +43,12 @@ public class FriendController {
         return new Friend();
     }
 
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
+    }
 
     @GetMapping(path = "/friend")
     public String showMyFriends(Friend friend, Model model) {
@@ -64,7 +69,6 @@ public class FriendController {
         for (int i = 0; i < findAllMyFriendRequestsSent.size(); i++) {
             myFriends2.add(findAllMyFriendRequestsSent.get(i).getUserReceiver().getName());
         }
-
 
         ArrayList<Friend> findAllMyFriendRequestsResived = (ArrayList<Friend>) friendService.findAllMyFriendRequestsResived(userName);
         List<String> myFriends3 = new ArrayList<>();
@@ -95,7 +99,6 @@ public class FriendController {
                 users.remove(myFriends3.get(i));
             }
         }
-        System.out.println("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
         System.out.println(users);
         model.addAttribute("myFriends1", myFriends1);
         model.addAttribute("myFriends2", myFriends2);
@@ -111,10 +114,8 @@ public class FriendController {
         String userName = ((UserDetails) principal).getUsername();
         SystemUser sender = userService.findOneUserByName(userName);
         SystemUser reciver = userService.findOneUserByName(userReceiver);
-
         Friend friend = new Friend("req", sender, reciver);
         friendService.save(friend);
-        System.out.println("JJJJJJJJJJJJJJJJJJ");
         System.out.println(sender);
         System.out.println(reciver);
         return "redirect:/friend";
@@ -128,7 +129,6 @@ public class FriendController {
         Friend friend = friendService.findOneFriendByUsersNames(userReceiver, userName);
         friend.setStatus("fri");
         friendService.update(friend);
-        System.out.println("JJJJJJJJJJJJJJJJJJ");
         System.out.println(friend);
         return "redirect:/friend";
     }
@@ -140,9 +140,7 @@ public class FriendController {
         String userName = ((UserDetails) principal).getUsername();
         Friend friend = friendService.findOneFriendByUsersNames2(userReceiver, userName);
         friendService.delete(friend);
-        System.out.println("JJJJJJJJJJJJJJJJJJ");
         System.out.println(friend);
         return "redirect:/friend";
     }
-
 }

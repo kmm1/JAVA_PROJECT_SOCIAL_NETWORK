@@ -2,6 +2,7 @@ package com.itacademy.service;
 
 import com.itacademy.dao.ProfileDao;
 import com.itacademy.entity.Profile;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProfileServiceImpl implements ProfileService {
+public class ProfileServiceImpl extends BaseServiceImpl<Profile> implements ProfileService {
 
     private final ProfileDao profileDao;
 
@@ -43,5 +44,4 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile findOneProfileByUserId(Long userId) {
         return profileDao.findOneProfileByUserId(userId);
     }
-
 }

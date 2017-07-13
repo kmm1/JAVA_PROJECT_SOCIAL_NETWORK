@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,16 +36,13 @@ public class SystemUser extends BaseEntity {
     @Setter
     private LocalDateTime registrationDate;
 
-
     @OneToOne(mappedBy = "user")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @Getter
     @Setter
     private Profile profile;
 
     @Setter
     @Getter
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

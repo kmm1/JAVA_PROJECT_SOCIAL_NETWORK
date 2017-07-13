@@ -3,10 +3,11 @@ package com.itacademy.service;
 
 import com.itacademy.entity.Event;
 import com.itacademy.entity.Flashmob;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface FlashmobService {
+public interface FlashmobService extends BaseService<Flashmob> {
 
     Flashmob findById(Long id);
 

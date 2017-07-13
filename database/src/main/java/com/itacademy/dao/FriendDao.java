@@ -17,5 +17,4 @@ public interface FriendDao extends BaseDao<Friend> {
     Friend findOneFriendByUsersNames(String name1, String name2);
 
     Friend findOneFriendByUsersNames2(String name1, String name2);
-
 }

@@ -12,7 +12,8 @@
 
 <div th:insert="language-control"></div>
 
-<a th:text="#{registration.you.are.registrated.as}"></a>
+<a th:text="#{registration.you.are.registrated.as}"><p></p></a><a th:text="${userName}"></a>
+
 
 <li><a th:href="@{/logout}" th:text="#{logout}"></a></li>
 <h6></h6>
@@ -29,11 +30,5 @@
 
 </body>
 </html>
-
-
-
-
-
-
 
 

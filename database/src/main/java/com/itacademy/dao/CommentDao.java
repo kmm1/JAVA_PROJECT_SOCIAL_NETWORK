@@ -13,6 +13,4 @@ public interface CommentDao extends BaseDao<Comment> {
                                        Long commentParentId, String myComment);
 
     List<Comment> findAllCommentsByBlogId(Long blogId);
-
-
 }

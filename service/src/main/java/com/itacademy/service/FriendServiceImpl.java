@@ -3,6 +3,7 @@ package com.itacademy.service;
 
 import com.itacademy.dao.FriendDao;
 import com.itacademy.entity.Friend;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class FriendServiceImpl implements FriendService {
+public class FriendServiceImpl extends BaseServiceImpl<Friend> implements FriendService {
 
     private final FriendDao friendDao;
 
@@ -30,7 +31,6 @@ public class FriendServiceImpl implements FriendService {
     public Long save(Friend friend) {
         return friendDao.save(friend);
     }
-
 
     @Override
     public void delete(Friend friend) {
@@ -66,7 +66,6 @@ public class FriendServiceImpl implements FriendService {
     public Friend findOneFriendByUsersNames2(String name1, String name2) {
         return friendDao.findOneFriendByUsersNames2(name1, name2);
     }
-
 
     @Override
     public void update(Friend friend) {

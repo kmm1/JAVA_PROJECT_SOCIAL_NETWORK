@@ -3,10 +3,11 @@ package com.itacademy.service;
 
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface CategoryService extends BaseService<Category> {
 
     Category findById(Long id);
 

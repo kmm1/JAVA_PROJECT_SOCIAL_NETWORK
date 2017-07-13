@@ -2,10 +2,11 @@ package com.itacademy.service;
 
 
 import com.itacademy.entity.Comment;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface CommentService {
+public interface CommentService extends BaseService<Comment> {
 
     Comment findById(Long id);
 

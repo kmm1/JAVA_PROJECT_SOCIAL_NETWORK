@@ -36,6 +36,4 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDa
                 .setHint("org.hibernate.cacheable", true);
         return query.fetchResults().getResults();
     }
-
-
 }

@@ -1,10 +1,11 @@
 package com.itacademy.service;
 
 import com.itacademy.entity.Friend;
+import com.itacademy.service.common.BaseService;
 
 import java.util.List;
 
-public interface FriendService {
+public interface FriendService extends BaseService<Friend> {
 
     Friend findById(Long id);
 

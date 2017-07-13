@@ -2,6 +2,7 @@ package com.itacademy.service;
 
 import com.itacademy.dao.BlogDao;
 import com.itacademy.entity.Blog;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class BlogServiceImpl implements BlogService {
+public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BlogService {
 
     private final BlogDao blogDao;
 

@@ -27,7 +27,6 @@ public class CommentController {
     private final UserService userService;
     private final CommentService commentService;
 
-
     @Autowired
     public CommentController(BlogService blogService,
                              UserService userService, CommentService commentService) {
@@ -53,6 +52,12 @@ public class CommentController {
         return new Comment();
     }
 
+    @ModelAttribute("userName")
+    public String userName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = ((UserDetails) principal).getUsername();
+        return userName;
+    }
 
     @GetMapping(path = "/saveComment/{blogId}")
     public String readBlog(@PathVariable("blogId") Long blogId,
@@ -74,7 +79,6 @@ public class CommentController {
         model.addAttribute("userName", userName);
         System.out.println(blogId);
         System.out.println(myBlog);
-        System.out.println("KKKKKKKKKKKKK" + allCommentsByBlogId);
         return "blog-read";
     }
 
@@ -103,6 +107,4 @@ public class CommentController {
         model.addAttribute("userName", userName);
         return "blog-read";
     }
-
-
 }

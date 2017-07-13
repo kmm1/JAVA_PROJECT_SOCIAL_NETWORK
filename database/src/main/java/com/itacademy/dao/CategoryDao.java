@@ -12,6 +12,4 @@ public interface CategoryDao extends BaseDao<Category> {
     List<Category> findAllCategoriesByBlogId(Long blogId);
 
     List<Category> findOneCategoryByEnumCategory(EnumCategory name);
-
-
 }

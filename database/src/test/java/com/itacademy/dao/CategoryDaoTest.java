@@ -15,7 +15,6 @@ import static org.junit.Assert.assertThat;
 
 public class CategoryDaoTest extends BaseTest {
 
-
     @Autowired
     private CategoryDao categoryDao;
     @Autowired
@@ -94,6 +93,5 @@ public class CategoryDaoTest extends BaseTest {
         List<Category> resoults = categoryDao.findOneCategoryByEnumCategory(EnumCategory.SCIENCE);
         assertEquals(resoults.size(), 1);
     }
-
 }
 

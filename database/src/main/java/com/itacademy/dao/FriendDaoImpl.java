@@ -24,22 +24,9 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
                 .getResultList();
     }
 
-
     /**
      * Возвращает имена всех друзей которым отправлен запрос на добавления в друзья со статусом "req""
      */
-//    @Override
-//    public List<Friend> findAllMyFriendRequestsSent(String userName) {
-//        QFriend friend = new QFriend("myFriend");
-//        JPAQuery<Friend> query = new JPAQuery<>(getSessionFactory().getCurrentSession());
-//        query.select(friend.userReceiver.id, friend.userReceiver.name)
-//                .from(friend)
-//                .join(friend.userReceiver)
-//                .where(friend.status.eq("req"))
-//                .where(friend.userSender.name.eq(userName))
-//                .orderBy(friend.userReceiver.name.asc());
-//        return query.fetchResults().getResults();
-//    }
     @Override
     public List<Friend> findAllMyFriendRequestsSent(String userName) {
         return getSessionFactory().getCurrentSession()
@@ -98,5 +85,4 @@ public class FriendDaoImpl extends BaseDaoImpl<Friend> implements FriendDao {
                                         .and(friend.status.eq("fri")))));
         return query.fetchOne();
     }
-
 }

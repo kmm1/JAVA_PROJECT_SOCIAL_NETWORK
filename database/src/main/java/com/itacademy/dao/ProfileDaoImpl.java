@@ -39,5 +39,4 @@ public class ProfileDaoImpl extends BaseDaoImpl<Profile> implements ProfileDao {
                 .where(profile.user.id.eq(userId));
         return query.fetchOne();
     }
-
 }

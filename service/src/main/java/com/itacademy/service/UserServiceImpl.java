@@ -3,6 +3,7 @@ package com.itacademy.service;
 import com.itacademy.dao.UserDao;
 import com.itacademy.entity.Role;
 import com.itacademy.entity.SystemUser;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +19,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<SystemUser> implements UserService {
 
     private final UserDao userDao;
 
@@ -75,5 +76,4 @@ public class UserServiceImpl implements UserService {
     public void addExistingRoleToExistingUser(Long roleId, Long userId) {
         userDao.addExistingRoleToExistingUser(roleId, userId);
     }
-
 }

@@ -3,6 +3,7 @@ package com.itacademy.service;
 import com.itacademy.dao.CategoryDao;
 import com.itacademy.entity.Category;
 import com.itacademy.entity.EnumCategory;
+import com.itacademy.service.common.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends BaseServiceImpl<Category> implements CategoryService {
 
     private final CategoryDao categoryDao;
 

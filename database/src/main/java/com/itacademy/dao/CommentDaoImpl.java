@@ -59,7 +59,4 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment> implements CommentDao {
                 .orderBy(comment.blog.creationDate.asc());
         return query.fetchResults().getResults();
     }
-
-    //TODO vlojennost komentariev
-
 }

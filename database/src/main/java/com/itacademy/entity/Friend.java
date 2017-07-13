@@ -27,5 +27,4 @@ public class Friend extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "friend_two")
     private SystemUser userReceiver;
-
 }
