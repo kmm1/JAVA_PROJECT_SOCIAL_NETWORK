@@ -3,7 +3,6 @@ USE bl;
 
 DROP TABLE flashmobs;
 DROP TABLE events;
-
 DROP TABLE friends;
 DROP TABLE messages;
 DROP TABLE blogs_categories;
@@ -14,7 +13,6 @@ DROP TABLE profiles;
 DROP TABLE users_roles;
 DROP TABLE users;
 DROP TABLE roles;
-
 
 CREATE TABLE events (
   id            INT AUTO_INCREMENT,
@@ -42,8 +40,8 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
   id                INT AUTO_INCREMENT,
-  name              VARCHAR(20),
-  email             VARCHAR(20),
+  name              VARCHAR(20)  UNIQUE,
+  email             VARCHAR(20) UNIQUE,
   password          VARCHAR(255),
   registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (id)
@@ -62,13 +60,14 @@ CREATE TABLE blogs (
   TEXT          TEXT,
   creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   user_id       INT,
+  version       INT,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE categories (
   id   INT AUTO_INCREMENT,
-  name VARCHAR(50),
+  name VARCHAR(50) UNIQUE,
   PRIMARY KEY (id)
 );
 
@@ -132,55 +131,112 @@ CREATE TABLE profiles (
 );
 
 
-INSERT INTO events (id, name, holding_date, version) VALUES (1, 'ice bucket challenge', 'tomorrow', 0);
-INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'info about this event', 1);
-INSERT INTO events (id, name, holding_date, version) VALUES (2, 'raise your hand', 'next week', 0);
-INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'info about this event', 2);
+INSERT INTO events (id, name, holding_date, version) VALUES (1, 'Я ♥ Water Battle!', '22 июля-15 августа', 0);
+INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'Все любители массовых игрищ и развлечений,
+где нужно помокнуть,повеселиться и побороться, в том числе и с оружием (умолчим, что оно водное), непременно следите
+за информацией о проведении сборищ!', 1);
+INSERT INTO events (id, name, holding_date, version) VALUES (2, 'Как насчет вокального флэшмоба?? Есть поющие??))', '15 августа', 0);
+INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'Хотим снять видео с прикольным флешмобом .
+Надо будет танцевать под эту песню . Нужны девушки и парни . Все это будет на открытой территории в разных местах .', 2);
 
 
-INSERT INTO users (name, email, password) VALUES ('kate', 'km@gmail.com', 'smth');
-INSERT INTO users (name, email, password) VALUES ('vova', 'vg@gmail.com', 'password');
-INSERT INTO users (name, email, password) VALUES ('nastya', 'ng@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('veranika', 'verg@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('sergei', 'sp@gmail.com', 'pass');
-INSERT INTO users (name, email, password) VALUES ('admin', 'admin@gmail.com', 'admin');
+INSERT INTO users (name, email, password)
+VALUES ('kate', 'km@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('vova', 'vg@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('nastya', 'ng@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('veranika', 'verg@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('sergei', 'sp@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+INSERT INTO users (name, email, password)
+VALUES ('admin', 'admin@gmail.com', '$2a$10$gqVmsBZBvbWyBnBnouJcdOrFmoZ/aNze6pc3L2bgrdPFankGJgmf6');
+# password for users in BCRYPT: smth
 
 INSERT INTO roles (name) VALUES ('ADMIN');
 INSERT INTO roles (name) VALUES ('USER');
 
 INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (2, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (3, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (4, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (5, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (6, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (6, 2);
 
 
-INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 3, 'req');
-INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 1, 'fri');
-INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 4, 'fri');
 INSERT INTO friends (friend_one, friend_two, status) VALUES (1, 2, 'fri');
-INSERT INTO friends (friend_one, friend_two, status) VALUES (4, 2, 'fri');
+INSERT INTO friends (friend_one, friend_two, status) VALUES (1, 6, 'fri');
+INSERT INTO friends (friend_one, friend_two, status) VALUES (1, 5, 'fri');
+INSERT INTO friends (friend_one, friend_two, status) VALUES (1, 4, 'req');
+INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 4, 'fri');
+INSERT INTO friends (friend_one, friend_two, status) VALUES (2, 3, 'req');
+
 
 INSERT INTO profiles (about_me, gender, work_country, work_city, home_country, home_city, marital_status,
                       year_of_birth, month_of_birth, day_of_birth, user_id)
 VALUES ('i am a kiteboarder', 'MALE', 'Belarus', 'Minsk', 'Belarus', 'Minsk', 'SINGLE', 1976, 07, 12, 2);
 
-INSERT INTO profiles (work_country, work_city, home_country, home_city, marital_status,
+INSERT INTO profiles (work_country, work_city, home_country, home_city,
                       year_of_birth, month_of_birth, day_of_birth, user_id)
-VALUES ('Belarus', 'Minsk', 'Belarus', 'Minsk', 'SINGLE', 1976, 08, 10, 4);
+VALUES ('Belarus', 'Minsk', 'Belarus', 'Minsk', 1976, 08, 10, 1);
 
-INSERT INTO categories (name) VALUES ('FINANCE');
 INSERT INTO categories (name) VALUES ('SPORT');
+INSERT INTO categories (name) VALUES ('TRAVEL');
+INSERT INTO categories (name) VALUES ('BUSINESS');
+INSERT INTO categories (name) VALUES ('RELIGION');
+INSERT INTO categories (name) VALUES ('SCIENCE');
+INSERT INTO categories (name) VALUES ('CULTURE');
 INSERT INTO categories (name) VALUES ('DIFFERENT');
 
-INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 1', 'Vova Blog content 1', 2);
-INSERT INTO blogs (title, text, user_id) VALUES ('kiteboarding 2', 'Vova Blog content 2', 2);
-INSERT INTO blogs (title, text, user_id) VALUES ('VerTravele1', 'Ver Blog content 1', 3);
 
-INSERT INTO blogs_categories (blog_id, category_id) VALUES (1, 2);
-INSERT INTO blogs_categories (blog_id, category_id) VALUES (2, 2);
-INSERT INTO blogs_categories (blog_id, category_id) VALUES (3, 3);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('FLYSURFER KITES', 'Новый кайт от компании Флайсерфер.
+Flysurfer порадовал своих поклонников новинкой. Чисто зимним и ленд кайтом Outlow. Этот кайт обещает посоперничатьс самыми известными собратьями по скорости и стабильности. Ну а качества ему не занимать.
+
+Короткая информация об OUTLAW
+
+Приятно сообщить о новом дополнении к нашему Flysurfer –у.
+
+Как раз вовремя для зимнего сезона мы представляем вам наш новый OUTLAW.
+
+
+OUTLAW- кайт с открытыми ячейками , предназначенный для катания по обычной
+и заснеженной поверхности. Выполнен с высшим качеством Flysurfer-а.
+
+OUTLAW- это новый дизайн в нашем составе с великолепными летными
+характеристиками, управлением и скоростью на повороте.
+
+OUTLAW дарит райдеру устойчивую и безопасную платформу для осуществления
+своих трюков без жертв в управлении.
+
+Со своей высокой скоростью при повороте и узким радиусом поворота , на
+OUTLAW так просто забраться на гору , как никогда прежде!
+
+Тяга на м2 на очень высоком уровне, что означает : можно взять кайт
+меньшего размера , чем запланировано.
+
+OUTLAW включает все самые новейшие технологии Flysurfer-а и технические
+характеристики, принеся на рынок 3 новшества в дизайне кайта с открытыми
+ячейками!
+
+- Полная система депауэра предлагает больше тяги и снятия тяги по
+необходимости !
+
+создав лучший в промышленности кайт для катания по обычной и заснеженной
+поверхности
+
+- Запатентованная технология щелевых закрылок была встроена в OUTLAW , что
+в приложении к кайту увеличивает тягу и устойчивость . Щелевые
+акрылки - существенная часть при увеличении подъема и снижении скорости ,
+что обеспечивает безопасное катание', 2, 0);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('KITEBOARDING', 'All abou Kites', 2, 0);
+INSERT INTO blogs (title, text, user_id, version) VALUES ('Traveling', 'I write about travelling', 3, 0);
+
+INSERT INTO blogs_categories (blog_id, category_id) VALUES (1, 1);
+INSERT INTO blogs_categories (blog_id, category_id) VALUES (2, 1);
+INSERT INTO blogs_categories (blog_id, category_id) VALUES (3, 2);
 
 INSERT INTO comments (comment, user_id, blog_id) VALUES ('Nice blog', 4, 1);
 INSERT INTO comments (comment, user_id, blog_id) VALUES ('Keep writing', 3, 1);
