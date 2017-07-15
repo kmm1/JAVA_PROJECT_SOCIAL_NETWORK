@@ -118,7 +118,7 @@ public class FlashmobController {
 
     @GetMapping(path = "/flashmob")
     public String findEvent1(Model model) {
-        List<Event> allEvents = flashmobService.findAllEvents();
+        List<Flashmob> allEvents = flashmobService.findAll();
         model.addAttribute("allEvents", allEvents);
         return "flashmob";
     }

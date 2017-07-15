@@ -1,23 +1,56 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<th:setLocale value="${not empty sessionScope.currentLanguage ? sessionScope.currentLanguage : 'en_US'}"/>-->
-<!--<th:setBundle basename="translations"/>-->
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        BODY {
+            background: lightgoldenrodyellow; /* Цвет фона веб-страницы */
+        }
+
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            border: 2px lightgoldenrodyellow; /* Прячем рамку вокруг таблицы */
+        }
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px lightgoldenrodyellow; /* Параметры рамки */
+            text-align: left; /* Выравнивание по левому краю */
+        }
+
+        p {
+            margin-top: 0.0em; /* Отступ сверху */
+            margin-bottom: 0.0em; /* Отступ снизу */
+        }
+    </style>
+
 </head>
+
 <body>
 <div th:insert="language-control"></div>
 
-
 <center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Добро пожаловать на наш сайт!</h2>
+    <h2>Создайте свой блог!</h2>
+    <br>
+    <br>
+    <br>
     <table border="1" width="30%" cellpadding="3">
         <form th:action="@{/login}" method="post">
-            <thead>
-            <tr>
-                <th colspan="2" th:text="#{login.enter}"></th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td><label th:text="#{login.username}" th:for="username"></label></td>
@@ -29,22 +62,17 @@
                 <td><input type="password" name="password" id="password"></td>
             </tr>
             <tr>
-                <td th:text="#{login.enter}"></td>
-                <td><input type="submit" th:value="#{login.enter}"/></td>
+                <td></td>
+                <td><input type="submit" class="btn btn-link" th:value="#{login.enter}"/></td>
             </tr>
             </tbody>
         </form>
     </table>
-
-    <form th:action="@{/registration}" method="get">
-        <tr>
-            <td><input type="submit" name="prof" th:value="#{registration.registration}"/></td>
-        </tr>
-    </form>
+    <br>
+    <a th:href="@{/registration}" th:text="#{registration.registration}"></a>
 
 
 </center>
 </form>
 </body>
 </html>
-

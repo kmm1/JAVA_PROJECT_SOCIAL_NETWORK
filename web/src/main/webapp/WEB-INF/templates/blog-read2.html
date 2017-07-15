@@ -5,7 +5,6 @@
       xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
         TABLE {
@@ -25,11 +24,6 @@
 
 <center>
 
-    <a th:href="@{/saveBlog}" th:text="#{blog.create.a.new.blog}"></a>
-    <a th:href="@{/addBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{blog.edit.blog}"></a>
-    <a th:href="@{/deliteBlog/{blogId}(blogId=${myBlog.getId()})}" th:text="#{delite.blog}"></a>
-    <p></p>
-
     <p><b th:text="#{blog.name}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myBlog.getTitle()}"></textarea></p>
     <p><b th:text="#{blog.content}"></b></p>
@@ -37,7 +31,6 @@
     <p><b th:text="#{blog.date}"></b></p>
     <p><textarea rows="1" cols="20" disabled
                  th:text="${#temporals.format (myBlog.getCreationDate(), 'dd-MM-yyyy HH:mm')}"></textarea></p>
-
 
     <h3></h3>
 

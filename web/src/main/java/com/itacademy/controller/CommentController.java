@@ -79,7 +79,7 @@ public class CommentController {
         model.addAttribute("userName", userName);
         System.out.println(blogId);
         System.out.println(myBlog);
-        return "blog-read";
+        return "blog-read2";
     }
 
     @GetMapping(path = "/deliteComment/{commentId}")

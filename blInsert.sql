@@ -46,8 +46,12 @@ INSERT INTO profiles (work_country, work_city, home_country, home_city, marital_
                       year_of_birth, month_of_birth, day_of_birth, user_id)
 VALUES ('Belarus', 'Minsk', 'Belarus', 'Minsk', 'SINGLE', 1976, 08, 10, 4);
 
-INSERT INTO categories (name) VALUES ('FINANCE');
+INSERT INTO categories (name) VALUES ('BUSINESS');
+INSERT INTO categories (name) VALUES ('RELIGION');
+INSERT INTO categories (name) VALUES ('SCIENCE');
+INSERT INTO categories (name) VALUES ('CULTURE');
 INSERT INTO categories (name) VALUES ('SPORT');
+INSERT INTO categories (name) VALUES ('TRAVEL');
 INSERT INTO categories (name) VALUES ('DIFFERENT');
 
 INSERT INTO blogs (title, text, user_id, version) VALUES ('kiteboarding 1', 'Vova Blog content 1', 2, 0);

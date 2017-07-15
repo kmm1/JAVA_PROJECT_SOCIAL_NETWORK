@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
       xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -12,7 +12,7 @@
 
 <div th:insert="language-control"></div>
 
-<a th:text="#{registration.you.are.registrated.as}"><p></p></a><a th:text="${userName}"></a>
+<a th:text="#{registration.you.are.registrated.as}"></a> <a th:text="${userName}"></a>
 
 
 <li><a th:href="@{/logout}" th:text="#{logout}"></a></li>
@@ -30,5 +30,3 @@
 
 </body>
 </html>
-
-

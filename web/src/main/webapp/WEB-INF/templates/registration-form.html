@@ -5,20 +5,53 @@
       xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        BODY {
+            background: lightgoldenrodyellow; /* Цвет фона веб-страницы */
+        }
+
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            border: 2px lightgoldenrodyellow; /* Прячем рамку вокруг таблицы */
+        }
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px lightgoldenrodyellow; /* Параметры рамки */
+            text-align: left; /* Выравнивание по левому краю */
+        }
+
+        p {
+            margin-top: 0.0em; /* Отступ сверху */
+            margin-bottom: 0.0em; /* Отступ снизу */
+        }
+    </style>
+
 </head>
+
 <body>
 <div th:insert="language-control"></div>
 
 <center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h2>Регистрация пользователя</h2>
+
+    <br>
+    <br>
+    <br>
     <table border="1" width="30%" cellpadding="5">
         <form th:action="@{/registration}" method="post" th:object="${user}" th:form>
-            <thead>
-            <tr>
-                <th colspan="2" th:text="#{registration.fill.out}"></th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td><label th:text="#{login.username}" th:for="name"></label></td>
@@ -37,19 +70,18 @@
                 <td><input type="password" name="passwordRepeat" value=""/></td>
             </tr>
             <tr>
-                <td th:text="#{registration.registration }"></td>
-                <td><input type="submit" th:value="#{registration.registration}"/></td>
+                <td></td>
+                <td><input type="submit" class="btn btn-link" th:value="#{registration.registration}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a th:href="@{/enter}" th:text="#{registration.already.registrated}"></a></td>
             </tr>
             </tbody>
         </form>
     </table>
 
-    <form th:action="@{/enter}" method="get">
-        <tr>
-            <td th:text="#{registration.already.registrated}"></td>
-            <td><input type="submit" th:value="#{login.enter}"></td>
-        </tr>
-    </form>
+
 </center>
 
 </body>

@@ -120,7 +120,7 @@ public class BlogController {
         model.addAttribute("userName", userName);
         model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
         model.addAttribute("myBlog", myBlog);
-        return "blog-read";
+        return "blog-read2";
     }
 
     @GetMapping(path = "/deliteBlog/{blogId}")

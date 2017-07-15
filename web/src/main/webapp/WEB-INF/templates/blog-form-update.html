@@ -8,6 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
+        TABLE {
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
 
         p {
             margin-top: 0.0em; /* Отступ сверху */
@@ -74,7 +77,7 @@
                     </select>
                 </td>
                 <td th:if="${not allCategoriesByBlogId.empty}">
-                    <input type="submit" th:value="#{delite}"/>/>
+                    <input type="submit" th:value="#{delite}"/>
                 </td>
             </tr>
             </tbody>

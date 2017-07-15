@@ -8,6 +8,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
+        TABLE {
+            width: 70%; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
 
         p {
             margin-top: 0.0em; /* Отступ сверху */
@@ -27,9 +31,6 @@
         <p><textarea rows="1" cols="90" input type="text" th:field="*{title}"></textarea></p>
         <p><b th:text="#{blog.content}"></b></p>
         <p><textarea rows="20" cols="90" input type="text" th:field="*{text}"></textarea></p>
-        <!--<input type="hidden" th:field="*{user}" th:value="${myUser}">-->
-        <!--<p> <input type="datetime-local" th:field="*{creationDate}" > </p>-->
-        <!--<p th:text="${#temporals.formatISO(localDateTime)}"></p>-->
         <p><input type="submit" th:value="#{save}"/></p>
     </form>
 

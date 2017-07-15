@@ -10,6 +10,11 @@
     <link href="//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic" rel="stylesheet" type="text/css">
     <style type="text/css">
 
+        TABLE {
+            width: 70%; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+
         p {
             margin-top: 0.0em; /* Отступ сверху */
             margin-bottom: 0.0em; /* Отступ снизу */
@@ -24,13 +29,8 @@
     <a th:href="@{/saveBlog}" th:text="#{blog.create.a.new.blog}"></a>
     <p></p>
 
-
+    <h3 th:text="#{blog.my.blogs}"></h3>
     <table border="1" width="30%" cellpadding="5">
-        <thead>
-        <tr>
-            <th colspan="10"><p th:text="#{blog.my.blogs}"></p></th>
-        </tr>
-        </thead>
         <thead>
         <tr>
             <th colspan="1" th:text="#{blog.name}"></th>
@@ -45,7 +45,7 @@
         <tbody>
         <tr th:each="a : ${findAllBlogsByUserName}">
             <td th:text="${a.getTitle()}"></td>
-            <td th:text="${a.getCreationDate()}"></td>
+            <td th:text="${#temporals.format (a.getCreationDate(), 'dd-MM-yyyy HH:mm') }"></td>
             <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}" th:text="#{blog.read.blog}"></a></td>
             <td><a th:href="@{/addBlog/{blogId}(blogId=${a.getId()})}" th:text="#{blog.edit.blog}"></a></td>
             <td><a th:href="@{/deliteBlog/{blogId}(blogId=${a.getId()})}" th:text="#{blog.delite.blog}"></a></td>

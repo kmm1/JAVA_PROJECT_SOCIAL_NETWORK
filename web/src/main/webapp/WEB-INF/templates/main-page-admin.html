@@ -8,6 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
+        TABLE {
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
 
         p {
             margin-top: 0.0em; /* Отступ сверху */
@@ -60,7 +63,7 @@
         <tr th:each="a : ${allEvents}">
             <td th:text="${a.name}"></td>
             <td th:text="${a.holdingDate}"></td>
-            <td th:text="${a.creationDate}"></td>
+            <td th:text="${#temporals.format (a.getCreationDate(), 'dd-MM-yyyy HH:mm')}"></td>
             <td><a th:href="@{/findEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.open.event}"></a></td>
             <td><a th:href="@{/updateEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.edit.event}"></a></td>
             <td><a th:href="@{/deliteEvent/{eventId}(eventId=${a.getId()})}" th:text="#{event.delite.event}"></a></td>

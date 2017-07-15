@@ -39,7 +39,7 @@
                 <p th:text="${x.getUserSender().name}"
                    th:if="${not x.userSender.name.equals(userName)}">
                 </p>
-                <p th:text="${x.creationDate}"
+                <p th:text="${#temporals.format (x.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
                    th:if="${not x.userSender.name.equals(userName)}">
                 </p>
                 <p th:text="${x.getText()}"
@@ -49,7 +49,7 @@
                 <p th:text="${x.getUserSender().name}"
                    th:if="${not x.userSender.name.equals(name2)}">
                 </p>
-                <p th:text="${x.creationDate}"
+                <p th:text="${#temporals.format (x.getCreationDate(), 'dd-MM-yyyy HH:mm')}"
                    th:if="${not x.userSender.name.equals(name2)}">
                 </p>
                 <p th:text="${x.getText()}"

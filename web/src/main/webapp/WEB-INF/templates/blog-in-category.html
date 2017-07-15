@@ -9,6 +9,16 @@
     <title>Title</title>
     <style type="text/css">
 
+        TABLE {
+            width: 70%; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            text-align: center; /* Выравнивание по левому краю */
+        }
+
         p {
             margin-top: 0.0em; /* Отступ сверху */
             margin-bottom: 0.0em; /* Отступ снизу */
@@ -19,30 +29,25 @@
 <div th:insert="header"></div>
 
 <center>
-
-    <table border="1" width="30%" cellpadding="5">
-        <thead>
-        <tr>
-            <th colspan="6"><p th:text="#{blogs}"></p></th>
-        </tr>
-        </thead>
+    <h3 th:text="#{blogs}"></h3>
+    <table border="1" width="80%" cellpadding="5">
         <thead>
         <tr>
             <th colspan="1" th:text="#{blog.name}"></th>
             <th colspan="1" th:text="#{blog.date}"></th>
-            <th colspan="1" th:text="#{read.blog}"></th>
+            <th colspan="1" th:text="#{blog.auther}"></th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:each="a : ${allBlogsInCategory}">
-            <td th:text="${a.getTitle()}"></td>
-            <td th:text="${a.getCreationDate()}"></td>
-            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}" th:text="#{read.blog}"></a></td>
+            <td><a th:href="@{/readBlog/{blogId}(blogId=${a.getId()})}" th:text="${a.getTitle()}"></a></td>
+            <td th:text="${#temporals.format (a.getCreationDate(), 'dd-MM-yyyy HH:mm')}"></td>
+            <td><a th:text="${a.getUser().name}"></a></td>
         </tr>
         </tbody>
     </table>
 
 </center>
 </body>
-
 </html>

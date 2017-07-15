@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
+    <style type="text/css">
+        TABLE {
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+
+        p {
+            margin-top: 0.0em; /* Отступ сверху */
+            margin-bottom: 0.0em; /* Отступ снизу */
+        }
+    </style>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+<title>Title</title>
 </head>
 <body>
 <div th:insert="header"></div>
@@ -123,9 +137,10 @@
                     </select>
                 </td>
             </tr>
+
             <tr th:if="${not myFriends3.empty}">
-                <td th:text="#{friend.send.request2}"></td>
-                <td><input type="submit" th:text="#{friend.send.request2}"/></td>
+                <td th:text="#{friend.confirm.request}"></td>
+                <td><input type="submit" th:value="#{friend.confirm}"/></td>
             </tr>
             </tbody>
         </form>
@@ -157,6 +172,11 @@
             </tbody>
         </form>
     </table>
+
+    <br>
+    <br>
+    <br>
+    <br>
 
 
 </center>

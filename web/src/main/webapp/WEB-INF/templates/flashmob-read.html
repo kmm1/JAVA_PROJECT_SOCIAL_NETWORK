@@ -8,6 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
+        TABLE {
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
 
         p {
             margin-top: 0.0em; /* Отступ сверху */
@@ -26,7 +29,8 @@
     <p><b th:text="#{event.title}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.name}"></textarea></p>
     <p><b th:text="#{event.holding.date}"></b></p>
-    <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.holdingDate}"></textarea></p>
+    <p><textarea rows="1" cols="90" disabled
+                 th:text="${myFlashmob.holdingDate}"></textarea></p>
     <p><b th:text="#{event.type.event}"></b></p>
     <p><textarea rows="1" cols="90" disabled th:text="${myFlashmob.flashmobType}"></textarea></p>
     <p><b th:text="#{event.content}"></b></p>

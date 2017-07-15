@@ -23,7 +23,6 @@ public class AspectLogs {
         LOGGER.info("logAfterReturning() is running!");
         LOGGER.info("перехват : " + joinPoint.getSignature().getName());
         LOGGER.info("перехваченные аргументы : " + Arrays.toString(joinPoint.getArgs()));
-        LOGGER.info("перехваченные аргументы : " + (joinPoint.getSignature()));
         LOGGER.info("Method returned value is : " + result);
         LOGGER.info("******");
     }

@@ -76,7 +76,6 @@
             <version>${thymeleaf.version}</version>
         </dependency>
 
-        <!--added-->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-java8time</artifactId>
@@ -89,20 +88,11 @@
             <version>1.2.17</version>
         </dependency>
 
-        <!--//added delite?-->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.7</version>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0-alpha.6-1</version>
         </dependency>
-
-        <!--//added delite?-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>apache-log4j-extras</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-
     </dependencies>
 
 

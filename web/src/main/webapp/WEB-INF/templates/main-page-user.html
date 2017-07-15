@@ -8,6 +8,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
     <title>Title</title>
     <style type="text/css">
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            border: 2px lightgoldenrodyellow; /* Прячем рамку вокруг таблицы */
+        }
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px lightgoldenrodyellow; /* Параметры рамки */
+            text-align: center; /* Выравнивание по левому краю */
+        }
 
         p {
             margin-top: 0.0em; /* Отступ сверху */
@@ -20,13 +31,8 @@
 
 <center>
 
-
+    <h3 th:text="#{read.in.category}"></h3>
     <table border="1" width="30%" cellpadding="5">
-        <thead>
-        <tr>
-            <th colspan="5"><p th:text="#{read.in.category}"></p></th>
-        </tr>
-        </thead>
         <tbody>
         <tr th:each="a : ${allCategories}">
             <td>
