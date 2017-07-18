@@ -15,12 +15,10 @@ import static org.junit.Assert.assertThat;
 
 public class CategoryServiceTest extends BaseTest {
 
-
     @Autowired
     private CategoryService categoryService;
     @Autowired
     private BlogService blogService;
-
 
     @Test
     public void saveCategory() {
@@ -94,6 +92,5 @@ public class CategoryServiceTest extends BaseTest {
         List<Category> resoults = categoryService.findOneCategoryByEnumCategory(EnumCategory.SCIENCE);
         assertEquals(resoults.size(), 1);
     }
-
 }
 

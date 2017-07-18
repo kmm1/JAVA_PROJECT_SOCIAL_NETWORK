@@ -23,10 +23,11 @@ public class CommentDaoTest extends BaseTest {
     @Autowired
     private BlogDao blogDao;
 
-
     @Test
     public void testSaveComment() {
         SystemUser user = new SystemUser();
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
         userDao.save(user);
         Blog blog = new Blog();
         blogDao.save(blog);
@@ -87,10 +88,12 @@ public class CommentDaoTest extends BaseTest {
     @Test
     public void testWriteCommentToBlog() {
         SystemUser user = new SystemUser();
-        Long userId = (Long) userDao.save(user);
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
+        Long userId = userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
-        Long blogId = (Long) blogDao.save(blog);
+        Long blogId = blogDao.save(blog);
         Comment comment2 = new Comment();
         Long commentId = commentDao.writeCommentToBlog(userId, blogId,
                 "test");
@@ -98,10 +101,11 @@ public class CommentDaoTest extends BaseTest {
         assertEquals(comment.getComment(), "test");
     }
 
-
     @Test
     public void testWriteCommentToExistingComment() {
         SystemUser user = new SystemUser();
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
         Long userId = userDao.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
@@ -115,6 +119,4 @@ public class CommentDaoTest extends BaseTest {
         Comment comment = commentDao.findById(commentId);
         assertEquals(comment.getComment(), "test");
     }
-
-
 }

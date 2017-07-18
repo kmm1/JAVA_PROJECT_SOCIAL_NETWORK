@@ -77,8 +77,6 @@ public class CommentController {
         model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
         model.addAttribute("myBlog", myBlog);
         model.addAttribute("userName", userName);
-        System.out.println(blogId);
-        System.out.println(myBlog);
         return "blog-read2";
     }
 
@@ -91,15 +89,7 @@ public class CommentController {
         Comment myComment = commentService.findById(commentId);
         Blog myBlog = myComment.getBlog();
         Long blogId = myBlog.getId();
-//        if (myComment.getParentId() != null) {
-//            myComment.setComment("Коментарий удален");
-//            commentService.update(myComment);
-//            List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
-//            model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);
-//            model.addAttribute("myBlog", myBlog);
-//            model.addAttribute("userName", userName);
-//            return "blog-read";
-//        }
+
         commentService.delete(myComment);
         List<Comment> allCommentsByBlogId = commentService.findAllCommentsByBlogId(blogId);
         model.addAttribute("allCommentsByBlogId", allCommentsByBlogId);

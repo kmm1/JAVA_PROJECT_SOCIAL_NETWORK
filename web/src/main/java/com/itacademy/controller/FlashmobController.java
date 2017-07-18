@@ -51,7 +51,6 @@ public class FlashmobController {
         return userName;
     }
 
-
     @PostMapping(path = "/saveFlashmob")
     public String saveFlashmob(@RequestParam String name,
                                @RequestParam String holdingDate,
@@ -71,9 +70,7 @@ public class FlashmobController {
 
     @GetMapping(path = "/deliteEvent/{eventId}")
     public String deliteEvent(@PathVariable("eventId") Long eventId, Model model) {
-        System.out.println(eventId);
         Flashmob myFlashmob = flashmobService.findById(eventId);
-        System.out.println(myFlashmob);
         flashmobService.delete(myFlashmob);
         List<Event> allEvents = flashmobService.findAllEvents();
         model.addAttribute("allEvents", allEvents);
@@ -95,13 +92,13 @@ public class FlashmobController {
                                @RequestParam String holdingDate,
                                @RequestParam String aboutEvent,
                                @RequestParam Long version,
-                               @RequestParam EnumFlashmobType flashmobType) throws Exception {
-        Flashmob flashmob = flashmobService.findById(eventId);
-        long version1 = flashmob.getVersion();
-        if (version1 != version) {
-            return "version-error";
-        }
+                               @RequestParam EnumFlashmobType flashmobType) throws Throwable {
         try {
+            Flashmob flashmob = flashmobService.findById(eventId);
+            long version1 = flashmob.getVersion();
+            if (version1 != version) {
+                return "version-error";
+            }
             flashmob.setFlashmobType(flashmobType);
             flashmob.setHoldingDate(holdingDate);
             flashmob.setAboutEvent(aboutEvent);
@@ -125,7 +122,6 @@ public class FlashmobController {
 
     @GetMapping(path = "/findEvent/{eventId}")
     public String findEvent2(@PathVariable("eventId") Long eventId, Model model) {
-        System.out.println(eventId);
         Flashmob myFlashmob = flashmobService.findById(eventId);
         model.addAttribute("myFlashmob", myFlashmob);
         return "flashmob-read";

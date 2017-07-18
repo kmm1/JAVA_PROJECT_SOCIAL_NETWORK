@@ -23,10 +23,11 @@ public class CommentServiceTest extends BaseTest {
     @Autowired
     private BlogService blogService;
 
-
     @Test
     public void testSaveComment() {
         SystemUser user = new SystemUser();
+        user.setName("anothtterName");
+        user.setEmail("emvvatil111@gmail.com");
         userService.save(user);
         Blog blog = new Blog();
         blogService.save(blog);
@@ -87,6 +88,8 @@ public class CommentServiceTest extends BaseTest {
     @Test
     public void testWriteCommentToBlog() {
         SystemUser user = new SystemUser();
+        user.setName("hh");
+        user.setEmail("hh@gmail.com");
         Long userId = userService.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
@@ -101,6 +104,8 @@ public class CommentServiceTest extends BaseTest {
     @Test
     public void testWriteCommentToExistingComment() {
         SystemUser user = new SystemUser();
+        user.setName("cd");
+        user.setEmail("cd@gmail.com");
         Long userId = userService.save(user);
         Blog blog = new Blog();
         blog.setUser(user);
@@ -114,5 +119,4 @@ public class CommentServiceTest extends BaseTest {
         Comment comment = commentService.findById(commentId);
         assertEquals(comment.getComment(), "test");
     }
-
 }

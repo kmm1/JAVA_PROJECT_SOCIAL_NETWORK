@@ -18,7 +18,6 @@ import static org.junit.Assert.assertThat;
 
 public class BlogServiceTest extends BaseTest {
 
-
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -30,6 +29,8 @@ public class BlogServiceTest extends BaseTest {
     @Test
     public void testSaveBlog() {
         SystemUser blogger = new SystemUser();
+        blogger.setName("anotherName");
+        blogger.setEmail("emvvail111@gmail.com");
         userService.save(blogger);
         Blog blog = new Blog();
         blog.setCreationDate(LocalDateTime.now());
@@ -85,6 +86,8 @@ public class BlogServiceTest extends BaseTest {
     @Test
     public void testFindAllUsersBlogs() {
         SystemUser user = new SystemUser();
+        user.setName("aaanotherName");
+        user.setEmail("aaemvvail111@gmail.com");
         Long userId = userService.save(user);
         Blog blog1 = new Blog();
         Blog blog2 = new Blog();
@@ -126,6 +129,8 @@ public class BlogServiceTest extends BaseTest {
     @Test
     public void testCountUserBlogs() {
         SystemUser user = new SystemUser();
+        user.setName("awwnotherName");
+        user.setEmail("ewwmvvail111@gmail.com");
         Long userId = userService.save(user);
         Blog blog1 = new Blog();
         Blog blog2 = new Blog();
@@ -136,6 +141,5 @@ public class BlogServiceTest extends BaseTest {
         Integer resoult = blogService.countUserBlogs(userId);
         assertThat(resoult, notNullValue());
     }
-
 }
 

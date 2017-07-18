@@ -99,7 +99,6 @@ public class FriendController {
                 users.remove(myFriends3.get(i));
             }
         }
-        System.out.println(users);
         model.addAttribute("myFriends1", myFriends1);
         model.addAttribute("myFriends2", myFriends2);
         model.addAttribute("myFriends3", myFriends3);
@@ -129,7 +128,6 @@ public class FriendController {
         Friend friend = friendService.findOneFriendByUsersNames(userReceiver, userName);
         friend.setStatus("fri");
         friendService.update(friend);
-        System.out.println(friend);
         return "redirect:/friend";
     }
 
@@ -140,7 +138,6 @@ public class FriendController {
         String userName = ((UserDetails) principal).getUsername();
         Friend friend = friendService.findOneFriendByUsersNames2(userReceiver, userName);
         friendService.delete(friend);
-        System.out.println(friend);
         return "redirect:/friend";
     }
 }

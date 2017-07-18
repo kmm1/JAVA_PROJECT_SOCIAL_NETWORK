@@ -18,10 +18,11 @@ public class ProfileServiceTest extends BaseTest {
     @Autowired
     private ProfileService profileService;
 
-
     @Test
     public void saveProfileToUser() {
         SystemUser user = new SystemUser();
+        user.setName("bv");
+        user.setEmail("bv@gmail.com");
         Long userId = userService.save(user);
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);
@@ -62,6 +63,8 @@ public class ProfileServiceTest extends BaseTest {
     @Test
     public void testFindProfileByUserId() {
         SystemUser user1 = new SystemUser();
+        user1.setName("anotherName");
+        user1.setEmail("emvvail111@gmail.com");
         Long userId = userService.save(user1);
         Profile profile1 = new Profile();
         profile1.setUser(user1);
@@ -73,6 +76,8 @@ public class ProfileServiceTest extends BaseTest {
     @Test
     public void testFindOneProfileByUserId() {
         SystemUser user1 = new SystemUser();
+        user1.setName("aanotherName");
+        user1.setEmail("eemvvail111@gmail.com");
         Long userId = userService.save(user1);
         Profile profile1 = new Profile();
         profile1.setUser(user1);
@@ -80,5 +85,4 @@ public class ProfileServiceTest extends BaseTest {
         Profile result = profileService.findOneProfileByUserId(userId);
         assertThat(result, notNullValue());
     }
-
 }

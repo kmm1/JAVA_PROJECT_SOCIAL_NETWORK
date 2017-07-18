@@ -40,7 +40,7 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
   id                INT AUTO_INCREMENT,
-  name              VARCHAR(20)  UNIQUE,
+  name              VARCHAR(20) UNIQUE,
   email             VARCHAR(20) UNIQUE,
   password          VARCHAR(255),
   registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -60,7 +60,6 @@ CREATE TABLE blogs (
   TEXT          TEXT,
   creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   user_id       INT,
-  version       INT,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
@@ -135,9 +134,11 @@ INSERT INTO events (id, name, holding_date, version) VALUES (1, 'Я ♥ Water Ba
 INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'Все любители массовых игрищ и развлечений,
 где нужно помокнуть,повеселиться и побороться, в том числе и с оружием (умолчим, что оно водное), непременно следите
 за информацией о проведении сборищ!', 1);
-INSERT INTO events (id, name, holding_date, version) VALUES (2, 'Как насчет вокального флэшмоба?? Есть поющие??))', '15 августа', 0);
+INSERT INTO events (id, name, holding_date, version)
+VALUES (2, 'Как насчет вокального флэшмоба?? Есть поющие??))', '15 августа', 0);
 INSERT INTO flashmobs (type, about_event, event_id) VALUES ('FLASHMOB', 'Хотим снять видео с прикольным флешмобом .
-Надо будет танцевать под эту песню . Нужны девушки и парни . Все это будет на открытой территории в разных местах .', 2);
+Надо будет танцевать под эту песню . Нужны девушки и парни . Все это будет на открытой территории в разных местах .',
+                                                            2);
 
 
 INSERT INTO users (name, email, password)
@@ -192,7 +193,7 @@ INSERT INTO categories (name) VALUES ('CULTURE');
 INSERT INTO categories (name) VALUES ('DIFFERENT');
 
 
-INSERT INTO blogs (title, text, user_id, version) VALUES ('FLYSURFER KITES', 'Новый кайт от компании Флайсерфер.
+INSERT INTO blogs (title, text, user_id) VALUES ('FLYSURFER KITES', 'Новый кайт от компании Флайсерфер.
 Flysurfer порадовал своих поклонников новинкой. Чисто зимним и ленд кайтом Outlow. Этот кайт обещает посоперничатьс самыми известными собратьями по скорости и стабильности. Ну а качества ему не занимать.
 
 Короткая информация об OUTLAW
@@ -230,9 +231,9 @@ OUTLAW включает все самые новейшие технологии 
 - Запатентованная технология щелевых закрылок была встроена в OUTLAW , что
 в приложении к кайту увеличивает тягу и устойчивость . Щелевые
 акрылки - существенная часть при увеличении подъема и снижении скорости ,
-что обеспечивает безопасное катание', 2, 0);
-INSERT INTO blogs (title, text, user_id, version) VALUES ('KITEBOARDING', 'All abou Kites', 2, 0);
-INSERT INTO blogs (title, text, user_id, version) VALUES ('Traveling', 'I write about travelling', 3, 0);
+что обеспечивает безопасное катание', 2);
+INSERT INTO blogs (title, text, user_id) VALUES ('KITEBOARDING', 'All abou Kites', 2);
+INSERT INTO blogs (title, text, user_id) VALUES ('Traveling', 'I write about travelling', 3);
 
 INSERT INTO blogs_categories (blog_id, category_id) VALUES (1, 1);
 INSERT INTO blogs_categories (blog_id, category_id) VALUES (2, 1);
@@ -246,3 +247,8 @@ INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Вова,
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Как дела', 2, 4);
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Норм.', 4, 2);
 INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Hello, Nastya.', 4, 3);
+INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('привет', 1, 4);
+INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Как дела', 4, 1);
+INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Норм.', 1, 4);
+INSERT INTO messages (text, user_sender_id, user_receiver_id) VALUES ('Happy Birthday', 1, 3);
+

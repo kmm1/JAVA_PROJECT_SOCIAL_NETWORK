@@ -52,12 +52,6 @@ public class Blog extends BaseEntity {
     @OneToMany(mappedBy = "blog")
     private Set<Comment> comments = new HashSet<>();
 
-    @Column(name = "version")
-    @Version
-    @Getter
-    @Setter
-    private long version;
-
     public Blog(String title, String text) {
         this.title = title;
         this.text = text;

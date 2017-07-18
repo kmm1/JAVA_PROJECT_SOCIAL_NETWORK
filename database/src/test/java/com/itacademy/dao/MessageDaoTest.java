@@ -25,6 +25,10 @@ public class MessageDaoTest extends BaseTest {
     public void testSaveMessage() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
+        user1.setName("nickname");
+        user1.setEmail("email111@gmail.com");
+        user2.setName("nickname2");
+        user2.setEmail("email133@gmail.com");
         userDao.save(user1);
         userDao.save(user2);
         Message message = new Message();
@@ -52,6 +56,10 @@ public class MessageDaoTest extends BaseTest {
     public void testDeleteMessage() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
+        user1.setName("nickname2");
+        user1.setEmail("email1011@gmail.com");
+        user2.setName("nickname3");
+        user2.setEmail("email1115@gmail.com");
         userDao.save(user1);
         userDao.save(user2);
         Message message = new Message();
@@ -90,6 +98,10 @@ public class MessageDaoTest extends BaseTest {
     public void testChatByTwoUsers() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
+        user1.setName("nickname8");
+        user1.setEmail("email1118@gmail.com");
+        user2.setName("nickname88");
+        user2.setEmail("email11188@gmail.com");
         Long userId1 = userDao.save(user1);
         Long userId2 = userDao.save(user2);
         Message message = new Message();
@@ -105,8 +117,10 @@ public class MessageDaoTest extends BaseTest {
     public void testFindMessagesByUserName() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
-        user1.setName("firstName");
-        user2.setName("secondName");
+        user1.setName("firstName22");
+        user1.setEmail("email1111@gmail.com");
+        user2.setName("secondNa2me");
+        user2.setEmail("email1181@gmail.com");
         Long userId1 = userDao.save(user1);
         Long userId2 = userDao.save(user2);
         Message message = new Message();
@@ -122,8 +136,10 @@ public class MessageDaoTest extends BaseTest {
     public void testNames() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
-        user1.setName("firstName");
-        user2.setName("secondName");
+        user1.setName("fi3rstName");
+        user1.setEmail("em3ail111@gmail.com");
+        user2.setName("seco89ndName");
+        user2.setEmail("email45111@gmail.com");
         Long userId1 = userDao.save(user1);
         Long userId2 = userDao.save(user2);
         Message message = new Message();
@@ -131,8 +147,7 @@ public class MessageDaoTest extends BaseTest {
         message.setUserReceiver(user1);
         message.setUserSender(user2);
         Long messageId = messageDao.save(message);
-        List<String> result = messageDao.names(userId1, "firstName");
+        List<String> result = messageDao.names(userId1, "fi3rstName");
         assertThat(result, notNullValue());
     }
-
 }

@@ -17,10 +17,8 @@ import static org.junit.Assert.assertThat;
 
 public class EventServiceTest extends BaseTest {
 
-
     @Autowired
     private FlashmobService flashmobService;
-
 
     @Test
     public void testSaveFlashmob() {

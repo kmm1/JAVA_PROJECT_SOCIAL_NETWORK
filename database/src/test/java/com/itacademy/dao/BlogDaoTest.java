@@ -29,6 +29,8 @@ public class BlogDaoTest extends BaseTest {
     @Test
     public void testSaveBlog() {
         SystemUser blogger = new SystemUser();
+        blogger.setName("Name");
+        blogger.setEmail("email@gmail.com");
         userDao.save(blogger);
         Blog blog = new Blog();
         blog.setCreationDate(LocalDateTime.now());
@@ -85,6 +87,8 @@ public class BlogDaoTest extends BaseTest {
     public void testCreateBlog() {
         Blog blog = new Blog();
         SystemUser user = new SystemUser();
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
         Category category = new Category();
         Long userId = userDao.save(user);
         Long categoryId = categoryDao.save(category);
@@ -106,6 +110,8 @@ public class BlogDaoTest extends BaseTest {
     @Test
     public void testFindAllUsersBlogs() {
         SystemUser user = new SystemUser();
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
         Long userId = userDao.save(user);
         Blog blog1 = new Blog();
         Blog blog2 = new Blog();
@@ -142,12 +148,13 @@ public class BlogDaoTest extends BaseTest {
         blogDao.deliteExistingBlogFromExistingCategory(categoryId, blogId);
         List<Blog> results2 = blogDao.findAllBlogsByCategory(categoryId);
         assertEquals(results2.size(), 0);
-
     }
 
     @Test
     public void testCountUserBlogs() {
         SystemUser user = new SystemUser();
+        user.setName("Name");
+        user.setEmail("email@gmail.com");
         Long userId = userDao.save(user);
         Blog blog1 = new Blog();
         Blog blog2 = new Blog();

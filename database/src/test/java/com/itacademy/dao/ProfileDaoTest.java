@@ -19,10 +19,11 @@ public class ProfileDaoTest extends BaseTest {
     @Autowired
     private ProfileDao profileDao;
 
-
     @Test
     public void saveProfileToUser() {
         SystemUser user = new SystemUser();
+        user.setName("nicknameSmth");
+        user.setEmail("email111Smth@gmail.com");
         Long userId = userDao.save(user);
         Profile profile = new Profile();
         profile.setGender(EnumGender.MALE);
@@ -83,6 +84,8 @@ public class ProfileDaoTest extends BaseTest {
     @Test
     public void testFindProfileByUserId() {
         SystemUser user1 = new SystemUser();
+        user1.setName("ncickname");
+        user1.setEmail("ecmail111@gmail.com");
         Long userId = userDao.save(user1);
         Profile profile1 = new Profile();
         profile1.setUser(user1);
@@ -94,6 +97,8 @@ public class ProfileDaoTest extends BaseTest {
     @Test
     public void testFindOneProfileByUserId() {
         SystemUser user1 = new SystemUser();
+        user1.setName("ynickname");
+        user1.setEmail("eymail111@gmail.com");
         Long userId = userDao.save(user1);
         Profile profile1 = new Profile();
         profile1.setUser(user1);
@@ -101,5 +106,4 @@ public class ProfileDaoTest extends BaseTest {
         Profile result = profileDao.findOneProfileByUserId(userId);
         assertThat(result, notNullValue());
     }
-
 }

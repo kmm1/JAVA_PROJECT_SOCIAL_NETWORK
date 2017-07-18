@@ -16,12 +16,12 @@ import java.util.Set;
 @ToString(callSuper = true, exclude = {"profile", "roles"})
 public class SystemUser extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     @Getter
     @Setter
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     @Getter
     @Setter
     private String email;

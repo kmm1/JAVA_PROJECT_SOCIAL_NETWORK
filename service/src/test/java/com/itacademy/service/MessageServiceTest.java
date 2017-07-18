@@ -20,11 +20,14 @@ public class MessageServiceTest extends BaseTest {
     @Autowired
     private MessageService messageService;
 
-
     @Test
     public void testSaveMessage() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
+        user1.setName("zx");
+        user1.setEmail("zx@gmail.com");
+        user2.setName("zxzx");
+        user2.setEmail("zxzx@gmail.com");
         userService.save(user1);
         userService.save(user2);
         Message message = new Message();
@@ -51,7 +54,11 @@ public class MessageServiceTest extends BaseTest {
     @Test
     public void testChatByTwoUsers() {
         SystemUser user1 = new SystemUser();
+        user1.setName("t");
+        user1.setEmail("t@gmail.com");
         SystemUser user2 = new SystemUser();
+        user2.setName("tt");
+        user2.setEmail("tt@gmail.com");
         Long userId1 = userService.save(user1);
         Long userId2 = userService.save(user2);
         Message message = new Message();
@@ -66,15 +73,16 @@ public class MessageServiceTest extends BaseTest {
     public void testNames() {
         SystemUser user1 = new SystemUser();
         SystemUser user2 = new SystemUser();
-        user1.setName("firstName");
-        user2.setName("secondName");
+        user1.setName("u");
+        user1.setEmail("u@gmail.com");
+        user2.setName("uu");
+        user1.setEmail("uu@gmail.com");
         Long userId1 = userService.save(user1);
         Message message = new Message();
         message.setText("Hello!");
         message.setUserReceiver(user1);
         message.setUserSender(user2);
-        List<String> result = messageService.names(userId1, "firstName");
+        List<String> result = messageService.names(userId1, "u");
         assertThat(result, notNullValue());
     }
-
 }

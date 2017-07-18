@@ -12,5 +12,4 @@ import javax.transaction.Transactional;
 @ContextConfiguration(classes = TestConfig.class)
 @Transactional
 public abstract class BaseTest {
-
 }

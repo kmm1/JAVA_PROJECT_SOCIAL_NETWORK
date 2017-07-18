@@ -17,7 +17,6 @@ import static org.junit.Assert.assertThat;
 
 public class EventDaoTest extends BaseTest {
 
-
     @Autowired
     private FlashmobDao flashmobDao;
 
@@ -73,5 +72,4 @@ public class EventDaoTest extends BaseTest {
         Flashmob flashmob1 = flashmobDao.findById(flashmobId);
         assertThat(flashmob1, nullValue());
     }
-
 }
